@@ -580,7 +580,7 @@ observer.observe(document.getElementById('MapContainer'), {
 });
 
 $.ajax({
-	url:'https://jf.jollycomp.com/ajax/public.php',
+	url:'https://test.jollycomp.com/ajax/realtime_public.php',
 	data: {action: "ks_kab_terkini"},
 	method: "POST",
 	dataType: "json",
@@ -692,7 +692,7 @@ $.each(data.dt_kab, function(k,v) {
 		SelKonfMen = v.konf.men[0]-v.konf.men[1];
 		if(SelKonfTun-SelKonfMen!=0) arrTuntBaru.push([SelKonfTun-SelKonfMen, v.nama]);
 		if(SelKonfMen) arrMengBaru.push([SelKonfMen, v.nama]);
-		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0]-v.konf.men[0], v.konf.men[0], v.nama]);
+		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0], v.nama]);
 	} else {
 		if(SelKonfTun) arrTuntBaru.push([SelKonfTun,v.nama]);
 		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0], v.nama]);
