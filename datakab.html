@@ -16,12 +16,13 @@
 	<title>JFP – Data Per Wilayah</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" onload="if(media!='all')media='all'">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" onload="if(media!='all')media='all'">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167603452-2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
 </script>
 	<style>
-body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-3.5rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday{padding-left:1.25rem;margin-bottom:0}.fw-500{font-weight:500}
+body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-3.5rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday, #SembCasesToday{padding-left:1.25rem;margin-bottom:0}.fw-500{font-weight:500}
 #TambahanInfo {z-index: 1079; position: sticky; bottom: 0; max-height: 20vh; overflow-y: auto; margin-bottom: 0;}
 #MapContainer{height:500px;max-height:75vh}
 #MapContainer svg{overflow:auto;width:100%}
@@ -38,6 +39,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}*/
 .chart-container{position:relative; min-width:100%; max-width:100%; margin-bottom:1rem;}
 .chart-container div{position:absolute;width:100%;height:100%;text-align:center;display:flex;align-items:center;justify-content:center;background: var(--light)}
+.outline-white {text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;}
 @media (max-width: 991.98px) {
 	#MapLegend{bottom:3rem}
 }
@@ -288,17 +290,20 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 				<div class="pb-1 w-50" style="background:#C00000"></div>
 			</div>
 			<div class="card-body">
-				<h5 class="card-title mb-1">Pertambahan kasus tuntas</h5>
-				<p class="mb-1 text-muted">Kasus sembuh/meninggal baru per <span class="LastData">Memuat...</span>.</p>
+				<h5 class="card-title mb-1">Pertambahan kasus <span id="h_tuntas">tuntas (gabungan)</span></h5>
+				<p class="mb-1 text-muted"><span id="sub_tuntas">Gabungan ks. tuntas baru</span> per <span class="LastData">Memuat...</span>.</p>
 				<hr class="my-2"/>
 				<div class="font-weight-bold flbet" style="color:#002060">Nusa Tenggara Timur <span id="SembIncNTT"></span></div>
+				<div id="SembCasesWrapper" style="display: none">
+					<ul id="SembCasesToday" class="mb-2"><div class="bg-light rounded py-2 px-3 text-center">Memuat...</div></ul>
+				</div>
 				<div class="font-weight-bold flbet" style="color:#C00000">Nusa Tenggara Timur <span id="MengIncNTT"></span></div>
-				<ul id="ClosedCasesToday"><div class="bg-light rounded py-4 px-3 text-center">Memuat...</div></ul>
+				<ul id="ClosedCasesToday"><div class="bg-light rounded py-2 px-3 text-center">Memuat...</div></ul>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="small pb-3 text-muted text-center">Data kasus tuntas yang ditampilkan di halaman ini adalah <strong>gabungan kasus sembuh dan meninggal</strong> (tidak disebutkan jumlah sembuh/meninggal, hanya disebutkan jumlah pasien yang sudah tidak lagi menjalani perawatan). Untuk informasi mengenai jumlah sembuh atau meninggal berdasarkan Kabupaten/Kota, kunjungi <a href="http://covid19.nttprov.go.id/home/data">situs resmi COVID-19 NTT</a> kemudian memilih Kabupaten/Kota sesuai keinginan Anda.</div>
+<div class="small pb-3 text-muted text-center" id="disclaimer_tuntas">Data kasus tuntas yang ditampilkan di halaman ini adalah <strong>gabungan kasus sembuh dan meninggal</strong> (tidak disebutkan jumlah sembuh/meninggal, hanya disebutkan jumlah pasien yang sudah tidak lagi menjalani perawatan). Untuk informasi mengenai jumlah sembuh atau meninggal berdasarkan Kabupaten/Kota, kunjungi <a href="http://covid19.nttprov.go.id/home/data">situs resmi COVID-19 NTT</a> kemudian memilih Kabupaten/Kota sesuai keinginan Anda.</div>
 
 <div id="Bg3_Grafik" class="anchor"></div>
 <h2 class="border-bottom"><small>3.</small> Grafik Perbandingan</h2>
@@ -331,113 +336,183 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 	</div>
 </div>
 
+<div id="Bg4_Kasus" class="anchor"></div>
 <h2 class="border-bottom"><small>4.</small> Rekapitulasi Kasus Per Wilayah</h2>
-<section id="SectWil"><div class="bg-light rounded py-4 px-3 text-center">Memuat...</div></section>
-
-<section id="TemplateWilayah" class="d-none">
-<div class="anchor" id="$Anchor$"></div>
-<div class="card mb-4 overflow-hidden">
-	<div class="pb-1 bg-secondary"></div>
-	<div class="card-body">
-		<h4 class="card-title mb-0 text-center">$NamaWil$</h4>
-		<div class="chart-container pb-2 border-bottom mb-3" style="height:300px;width:600px;">
-			<canvas id="c_all_$Key$"></canvas>
+<div class="p-3 p-md-4 rounded mb-4 shadow d-block d-sm-flex align-items-center justify-content-between bg-white">
+	<div class="text-center text-sm-left">
+		<div class="display-2 text-secondary d-block d-sm-none mb-3"><i class="fas fa-map-marked-alt"></i></div>
+		<h2 class="display-4 mb-3" style="font-size: 2.65rem">Rincian wilayah</h2>
+		<div class="input-group mx-auto mx-sm-0" style="max-width: 400px">
+			<select class="custom-select" id="selDati2">
+				<option value="" selected disabled>Pilih Kab/Kota...</option>
+			</select>
+			<div class="input-group-append">
+				<button id="selDati2_show" class="btn btn-dark">Tampilkan</button>
+			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-6 col-lg-3 mb-2">
-				<h6 class="mb-1" style="color:#BF9000">Jumlah kasus positif:</h6>
-				<p class="display-4 mb-1" style="height:calc(100% - 3rem);display:flex;align-items:center;">$TotKonf$</p>
-				<hr class="my-1"/>
-				<p class="mb-0"><strong>$PerKsNTT$</strong> kasus di NTT</p>
-			</div>
-			<div class="col-sm-6 col-lg-3 mb-2">
-				<h6 class="mb-1">Rincian</h6>
-				<div class="text-muted small">Jumlah kasus selama ini</div>
-				<hr class="my-1"/>
-				<div class="flbet mb-1">
-					<div class="info-kasus"><small>KONFIRMASI:</small> <strong>$TotKonf$</strong></div>
-					<span class="$TotKonfInd$">$TotKonfInc$</span>
+	</div>
+	<div class="d-none d-sm-block overflow-hidden my-n3 my-md-n4 mr-n3 mr-md-n4 position-relative" style="line-height: 0">
+		<div class="my-n3" style="transform: rotate(15deg); font-size: 17rem; color: #c6c8ca"><i class="fas fa-shield-virus"></i></div>
+	</div>
+</div>
+<section id="iD2_wrapper" class="shadow bg-white rounded position-relative overflow-hidden" style="display: none">
+<div class="position-absolute bg-light align-items-center justify-content-center text-secondary" id="iD2_loader" style="z-index: 1100; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: flex">
+	<div class="spinner-border" role="status">
+		<span class="sr-only">Memuat...</span>
+	</div>
+</div>
+<div class="p-3 position-relative overflow-hidden">
+	<div style="position: absolute; top: 1rem; right: 1rem; opacity: .5; pointer-events: none; user-select: none;">
+		<img id="iD2_logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Lambang_Kabupaten_Belu.jpg/200px-Lambang_Kabupaten_Belu.jpg" style="width: 200px; max-width: 40vw" />
+	</div>
+	<div style="position: absolute; bottom: -2rem; right: -1rem; font-size: 8rem; line-height: 0; color: #c6c8ca">
+		<i class="fas fa-virus"></i>
+	</div>
+	<div class="small text-muted fw-500 outline-white position-relative">MENAMPILKAN STATISTIK UNTUK</div>
+	<h4 id="iD2_kab" class="position-relative outline-white">&ndash;</h4>
+	<div class="form-row">
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="p-3 shadow rounded position-relative overflow-hidden h-100 bg-white" style="border-left: .25rem solid #BF9000">
+				<h6 class="mb-1">Jumlah kasus positif</h6>
+				<div class="display-4 mb-1 flbet">
+					<span id="iD2_konf_juml">&ndash;</span>
+					<i class="fas fa-user-plus small" style="color: #c6c8ca"></i>
 				</div>
-				<a class="d-block small" type="button" data-toggle="collapse" href="#InfoPSKTot_$Key$" draggable="false">
-					Probable, Suspek, dan Kont. Erat <strong>[KLIK]</strong>
-				</a>
-				<div id="InfoPSKTot_$Key$" class="collapse pt-1">
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>PROBABLE:</small> <strong>$TotProb$</strong></div>
-						<span class="$TotProbInd$">$TotProbInc$</span>
-					</div>
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>SUSPEK:</small> <strong>$TotSusp$</strong></div>
-						<span class="$TotSuspInd$">$TotSuspInc$</span>
-					</div>
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>KONT. ERAT:</small> <strong>$TotKont$</strong></div>
-						<span class="$TotKontInd$">$TotKontInc$</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-lg-3 mb-2">
-				<h6 class="mb-1">Kasus aktif</h6>
-				<div class="text-muted small">Kasus yang masih ditangani</div>
-				<hr class="my-1"/>
 				<div class="flbet">
-					<div class="info-kasus"><small>KONFIRMASI:</small> <strong>$AktKonf$</strong></div>
-					<span class="$AktKonfInd$">$AktKonfInc$</span>
+					<span><strong id="iD2_per_ks">&ndash;</strong> kasus di NTT</span>
+					<div class="fw-500 diff-ks" id="iD2_konf_diff"> <i></i> <span></span> </div>
 				</div>
-				<div class="flbet mb-1">
-					<small>Persentase Kasus Aktif:</small>
-					<strong>$AktKonfPerc$</strong>
+				<div class="small">Kasus aktif: <strong id="iD2_per_ks_akt"></strong></div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="rounded shadow -sm d-flex overflow-hidden align-items-center mb-3 bg-white" style="height: calc(50% - .5rem)">
+				<div class="position-relative h-100" style="width: .25rem">
+					<div style="position: absolute; top: 0; width: .25rem;" id="iD2_box1clr1"></div>
+					<div style="position: absolute; bottom: 0; width: .25rem;" id="iD2_box1clr2"></div>
 				</div>
-				<a class="d-block small" type="button" data-toggle="collapse" href="#InfoPSKAkt_$Key$" draggable="false">
-					Probable, Suspek, dan Kont. Erat <strong>[KLIK]</strong>
-				</a>
-				<div id="InfoPSKAkt_$Key$" class="collapse pt-1">
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>PROBABLE:</small> <strong>$AktProb$</strong></div>
-						<span class="$AktProbInd$">$AktProbInc$</span>
+				<div class="px-2 px-sm-3 py-2 flbet w-100">
+					<div class="flbet w-100 align-items-end mr-2">
+						<div style="line-height: 1">
+							<span class="lead" style="font-size: 2.5rem" id="iD2_box1num">&ndash;</span>
+							<span id="iD2_box1txt">&ndash;</span>
+						</div>
+						<div class="fw-500 diff-ks" id="iD2_box1diff"> <i></i> <span></span> </div>
 					</div>
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>SUSPEK:</small> <strong>$AktSusp$</strong></div>
-						<span class="$AktSuspInd$">$AktSuspInc$</span>
-					</div>
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>KONT. ERAT:</small> <strong>$AktKont$</strong></div>
-						<span class="$AktKontInd$">$AktKontInc$</span>
-					</div>
+					<i class="h3 mb-0" id="iD2_box1icon" style="color: #c6c8ca"></i>
 				</div>
 			</div>
-			<div class="col-sm-6 col-lg-3 mb-2">
-				<h6 class="mb-1">Kasus tuntas</h6>
-				<div class="text-muted small">Kasus sembuh/meninggal</div>
-				<hr class="my-1"/>
-				<div class="flbet mb-1">
-					<div class="info-kasus"><small>KONFIRMASI:</small> <strong>$TunKonf$</strong></div>
-					<span class="$TunKonfInd$">$TunKonfInc$</span>
+			<div class="rounded shadow -sm d-flex overflow-hidden align-items-center bg-white" style="height: calc(50% - .5rem)">
+				<div class="position-relative h-100" style="width: .25rem">
+					<div style="position: absolute; bottom: 0; width: .25rem; height:100%" id="iD2_box2clr"></div>
 				</div>
-				<a class="d-block small" type="button" data-toggle="collapse" href="#InfoPSKTun_$Key$" draggable="false">
-					Probable, Suspek, dan Kont. Erat <strong>[KLIK]</strong>
-				</a>
-				<div id="InfoPSKTun_$Key$" class="collapse pt-1">
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>PROBABLE:</small> <strong>$TunProb$</strong></div>
-						<span class="$TunProbInd$">$TunProbInc$</span>
+				<div class="px-2 px-sm-3 py-2 flbet w-100">
+					<div class="flbet w-100 align-items-end mr-2">
+						<div style="line-height: 1">
+							<span class="lead" style="font-size: 2.5rem" id="iD2_box2num">&ndash;</span>
+							<span id="iD2_box2txt">&ndash;</span>
+						</div>
+						<div class="fw-500 diff-ks" id="iD2_box2diff"> <i></i> <span></span> </div>
 					</div>
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>SUSPEK:</small> <strong>$TunSusp$</strong></div>
-						<span class="$TunSuspInd$">$TunSuspInc$</span>
+					<i class="h3 mb-0" id="iD2_box2icon" style="color: #c6c8ca"></i>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 mb-3" id="iD2_col3">
+			<div class="d-block d-md-flex d-lg-block h-100 flex-row-reverse">
+<style>
+.box3_1 {height: calc(50% - .5rem); margin-bottom: 1rem}
+.box3_2 {height: calc(50% - .5rem)}
+@media (min-width: 768px) and (max-width: 991.98px) {
+	.box3_1 {height: 100%; margin-bottom: 0}
+	.box3_2 {height: 100%; margin-right: .75rem}
+}
+</style>
+				<div class="rounded shadow -sm d-flex overflow-hidden align-items-center bg-white w-100 box3_1">
+					<div class="position-relative h-100" style="width: .25rem">
+						<div style="position: absolute; bottom: 0; width: .25rem; background: #00B050; height:100%" id="iD2_box3clr"></div>
 					</div>
-					<div class="flbet mb-1 text-muted">
-						<div class="info-kasus"><small>KONT. ERAT:</small> <strong>$TunKont$</strong></div>
-						<span class="$TunKontInd$">$TunKontInc$</span>
+					<div class="px-2 px-sm-3 py-2 flbet w-100">
+						<div class="flbet w-100 align-items-end mr-2">
+							<div style="line-height: 1">
+								<span class="lead" style="font-size: 2.5rem" id="iD2_box3num">&ndash;</span>
+								<span id="iD2_box3txt">&ndash;</span>
+							</div>
+							<div class="fw-500 diff-ks" id="iD2_box3diff"> <i></i> <span></span> </div>
+						</div>
+						<i class="h3 mb-0" id="iD2_box3icon" style="color: #c6c8ca"></i>
+					</div>
+				</div>
+				<div class="rounded shadow -sm d-flex overflow-hidden align-items-center bg-white w-100 box3_2">
+					<div class="position-relative h-100" style="width: .25rem">
+						<div class="bg-primary" style="position: absolute; bottom: 0; width: .25rem; height:100%"></div>
+					</div>
+					<div class="px-2 px-sm-3 py-2 w-100">
+						<div class="flbet"><div class="small">Tingk. kesembuhan:</div><strong id="iD2_CRR">&ndash;</strong></div>
+						<div class="flbet"><div class="small">Tingk. kematian:</div><strong id="iD2_CFR">&ndash;</strong></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<h6 class="mt-2 text-center text-md-left">KASUS KONTAK ERAT, SUSPEK, DAN PROBABLE</h6>
+	<div class="form-row">
+		<div class="col-md-4 mb-3">
+			<div class="rounded shadow overflow-hidden p-3 bg-white h-100" style="border-left: .25rem solid var(--blue)">
+				<h6 class="mb-1">Kontak Erat</h6>
+				<div class="flbet align-items-end mb-1">
+					<div style="font-size: 2.5rem" class="display-4" id="iD2_kont_juml">&ndash;</div>
+					<div class="fw-500 diff-ks" id="iD2_kont_diff"> <i></i> <span></span> </div>
+				</div>
+				<div class="flbet align-items-end mb-1">
+					<span><strong id="iD2_kont_b1num">&ndash;</strong> dalam pengawasan</span>
+					<div class="fw-500 diff-ks text-nowrap" id="iD2_kont_b1diff"> <i></i> <span></span> </div>
+				</div>
+				<div class="flbet align-items-end">
+					<span><strong id="iD2_kont_b2num">&ndash;</strong> selesai pengawasan</span>
+					<div class="fw-500 diff-ks text-nowrap" id="iD2_kont_b2diff"> <i></i> <span></span> </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 mb-3">
+			<div class="rounded shadow overflow-hidden p-3 bg-white h-100" style="border-left: .25rem solid var(--green)">
+				<h6 class="mb-1">Suspek</h6>
+				<div class="flbet align-items-end mb-1">
+					<div style="font-size: 2.5rem" class="display-4" id="iD2_susp_juml">&ndash;</div>
+					<div class="fw-500 diff-ks" id="iD2_susp_diff"> <i></i> <span></span> </div>
+				</div>
+				<div class="flbet align-items-end mb-1">
+					<span><strong id="iD2_susp_b1num">&ndash;</strong> dalam pemantauan</span>
+					<div class="fw-500 diff-ks text-nowrap" id="iD2_susp_b1diff"> <i></i> <span></span> </div>
+				</div>
+				<div class="flbet align-items-end">
+					<span><strong id="iD2_susp_b2num">&ndash;</strong> selesai/meninggal</span>
+					<div class="fw-500 diff-ks text-nowrap" id="iD2_susp_b2diff"> <i></i> <span></span> </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 mb-3">
+			<div class="rounded shadow overflow-hidden p-3 bg-white h-100" style="border-left: .25rem solid var(--orange)">
+				<h6 class="mb-1">Probable</h6>
+				<div class="flbet align-items-end mb-1">
+					<div style="font-size: 2.5rem" class="display-4" id="iD2_prob_juml">&ndash;</div>
+					<div class="fw-500 diff-ks" id="iD2_prob_diff"> <i></i> <span></span> </div>
+				</div>
+				<div class="flbet align-items-end mb-1">
+					<span><strong id="iD2_prob_b1num">&ndash;</strong> dalam pengawasan</span>
+					<div class="fw-500 diff-ks text-nowrap" id="iD2_prob_b1diff"> <i></i> <span></span> </div>
+				</div>
+				<div class="flbet align-items-end">
+					<span><strong id="iD2_prob_b2num">&ndash;</strong> selesai/meninggal</span>
+					<div class="fw-500 diff-ks text-nowrap" id="iD2_prob_b2diff"> <i></i> <span></span> </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="position-relative outline-white text-muted font-italic">
+		* Jumlah kasus kontak erat, suspek, dan probable kemungkinan tidak merepresentasikan kondisi terkini.
+	</div>
 </div>
-</section>
-<section id="TemplateTOC" class="d-none">
-	<li><a href="$Anchor$">$NamaWil$</a></li>
 </section>
 
 <div id="TambahanInfo" class="alert"><h6 class="mb-1" id="TI_header"></h6><p class="mb-0 small" id="TI_text"></p></div>
@@ -515,16 +590,17 @@ $.ajax({
 			var t = new Date(data.last_update);
 			$(".LastMod").text(DateIndo(t)+", "+NolAwal(t.getHours(),2)+"."+NolAwal(t.getMinutes(),2)+"."+NolAwal(t.getSeconds(),2)+" WITA");
 			$(".LastData").text(DateIndo(data.last_data));
-			$("#KonfIncNTT").text("+"+numFormat.format(data.new_konf)+" ks. baru");
-			$("#SembIncNTT").text("+"+numFormat.format(data.new_semb)+" sembuh");
-			$("#MengIncNTT").text("+"+numFormat.format(data.new_meng)+" meninggal");
+			$("#KonfIncNTT").text("+"+numFormat.format(data.ntt.konf.new)+" ks. baru");
+			$("#SembIncNTT").text("+"+numFormat.format(data.ntt.semb.new)+" sembuh");
+			$("#MengIncNTT").text("+"+numFormat.format(data.ntt.meng.new)+" meninggal");
 			//$("#spinner_loader").fadeOut(); // Pindah ke: SHORT__SPINNER_PETA
-			AJAX_Complete(data.dt_kab);
+			AJAX_Complete(data);
 			if(data.peng.show) {
 				$("#TI_header").html(data.peng.header);
 				$("#TI_text").html(data.peng.text);
 				$("#TambahanInfo").addClass("alert-"+(data.peng.type ?? "info")).show();
 			}
+			
 		}
 		if(data.error) alert("[!] Data tidak dapat diambil:\n\nAlasan: "+data.text+"\n\nHubungi jollyfrankle3@gmail.com apabila Anda yakin ini kesalahan.");
 	},
@@ -534,7 +610,28 @@ $.ajax({
 });
 
 async function AJAX_Complete(data){
-const NamaKab=data.kab, TodTot=data.tod.tot, TodAkt=data.tod.akt, TodTun=data.tod.tun, YesTot=data.yest.tot, YesTun=data.yest.tun, YesAkt=data.yest.akt;
+function indSelKs(x,y,mode)
+{
+	var status=false, num=x-y, icon="fas fa-minus", color="muted";
+	if(num!= 0) status = true;
+	if(num < 0) icon = "fas fa-angle-double-down";
+	if(num > 0) icon = "fas fa-angle-double-up";
+
+	if(mode==1) {
+		if(num < 0) color="success";
+		if(num > 0) color="danger";
+	}
+	if(mode==2) {
+		if(num < 0) color="danger";
+		if(num > 0) color="success";
+	}
+	return [status, Math.abs(num), icon, color];
+}
+function compare(a,b) {
+	if (a[0] > b[0]) return -1;
+	if (a[0] < b[0]) return 1;
+	return 0;
+}
 function getMinMax(arr) {
 	let min = arr[0];
 	let max = arr[0];
@@ -552,12 +649,185 @@ function rgba2rgb(background, color) {
 	Math.floor((1 - alpha) * background[2] + alpha * color[2] + 0.5)+")";
 }
 
+// Konfigurasi dasar iD2 (info Dati 2)
+var show_meng = data.show_meng;
+if(show_meng) {
+	$("#SembCasesWrapper").show();
+	$("#h_tuntas").text("tuntas (terpisah)");
+	$("#sub_tuntas").text("Kasus sembuh dan meninggal baru");
+	// info Dati 2
+	$("#iD2_box1clr1").css({"background":"#002060", "height":"100%"});
+	$("#iD2_box1clr2").css({"height":0});
+	$("#iD2_box1txt").text("sembuh");
+	$("#iD2_box1icon").addClass("fas fa-user-check");
+
+	$("#iD2_box2clr").css({"background":"#C00000"});
+	$("#iD2_box2txt").text("meninggal");
+	$("#iD2_box2icon").addClass("fas fa-user-minus");
+
+	$("#iD2_box3clr").css({"background":"#00B050"});
+	$("#iD2_box3txt").text("aktif");
+	$("#iD2_box3icon").addClass("fas fa-user-tag");
+} else {
+	$("#iD2_box1clr1").css({"background":"#002060", "height":"50%"});
+	$("#iD2_box1clr2").css({"background":"#C00000", "height":"50%"});
+	$("#iD2_box1txt").text("tuntas");
+	$("#iD2_box1icon").addClass("fas fa-user-check");
+
+	$("#iD2_box2clr").css({"background":"#00B050"});
+	$("#iD2_box2txt").text("aktif");
+	$("#iD2_box2icon").addClass("fas fa-user-tag");
+}
+
+var arrKonfBaru=[], arrTuntBaru=[], arrMengBaru=[], H_KonfInc=0, H_KonfJlh=0, H_PerAkt=0, H_TuntInc=0, H_AktfJlh=0, preFiltered={"konf":[],"prob":[],"susp":[],"kont":[]}, list_kab=[];
+$.each(data.dt_kab, function(k,v) {
+	$("#selDati2").append('<option value="'+k+'">'+v.nama+'</option>');
+	list_kab.push(v.nama);
+	var SelKonfTot=v.konf.tot[0]-v.konf.tot[1], SelKonfTun=v.konf.tun[0]-v.konf.tun[1], SelKonfMen=0, ks_aktif=v.konf.tot[0]-v.konf.tun[0];
+	if(v.konf.tot[0]-v.konf.tot[1] != 0)
+
+	if(SelKonfTot) arrKonfBaru.push([SelKonfTot,v.nama]);
+
+	if(show_meng) {
+		SelKonfMen = v.konf.men[0]-v.konf.men[1];
+		if(SelKonfTun-SelKonfMen!=0) arrTuntBaru.push([SelKonfTun-SelKonfMen, v.nama]);
+		if(SelKonfMen) arrMengBaru.push([SelKonfMen, v.nama]);
+		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0]-v.konf.men[0], v.konf.men[0], v.nama]);
+	} else {
+		if(SelKonfTun) arrTuntBaru.push([SelKonfTun,v.nama]);
+		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0], v.nama]);
+	}
+
+	preFiltered["prob"].push([v.prob.tot[0], v.prob.tot[0]-v.prob.tun[0], v.prob.tun[0], v.nama]);
+	preFiltered["susp"].push([v.susp.tot[0], v.susp.tot[0]-v.susp.tun[0], v.susp.tun[0], v.nama]);
+	preFiltered["kont"].push([v.kont.tot[0], v.kont.tot[0]-v.kont.tun[0], v.kont.tun[0], v.nama]);
+
+	H_KonfInc = SelKonfTot < H_KonfInc ? H_KonfInc : SelKonfTot;
+	H_TuntInc = SelKonfTun < H_TuntInc ? H_TuntInc : SelKonfTun;
+	H_KonfJlh = v.konf.tot[0] < H_KonfJlh ? H_KonfJlh : v.konf.tot[0];
+	H_PerAkt = (ks_aktif/v.konf.tot[0]) < H_PerAkt ? H_PerAkt : (ks_aktif/v.konf.tot[0]);
+	H_AktfJlh = ks_aktif < H_AktfJlh ? H_AktfJlh : ks_aktif;
+});
+
+arrKonfBaru.sort(compare); arrTuntBaru.sort(compare);
+$("#NewCasesToday, #ClosedCasesToday, #SembCasesToday").html("");
+if(show_meng) {
+	arrMengBaru.sort(compare);
+	$.each(arrMengBaru,function(key,val) {
+		val0 = val[0] < 0 ? val[0] : "+"+val[0];
+		$("#ClosedCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
+	});
+	$.each(arrTuntBaru,function(key,val) {
+		val0 = val[0] < 0 ? val[0] : "+"+val[0];
+		$("#SembCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
+	});
+}
+$.each(arrKonfBaru,function(key,val) {
+	val0 = val[0] < 0 ? val[0] : "+"+val[0];
+	$("#NewCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
+});
+
+
+$("#selDati2_show").on("click", function(){
+	var kab_id = $("#selDati2").val();
+	console.log(kab_id);
+	if(kab_id=="" || kab_id===null || kab_id<0 || kab_id>21) {
+		$("#iD2_wrapper").slideUp();
+		return false;
+	}
+	const dt=data.dt_kab[kab_id], dt_ntt=data.ntt;
+	// Inisialisasi
+	$("#iD2_kab").text(dt.nama);
+	$(".diff-ks>i").prop("class", "");
+	$(".diff-ks>span").text("");
+	$("#iD2_loader").show();
+	$("#iD2_logo").prop("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/"+dt.logo);
+	$("#iD2_logo").on("load", function(){$("#iD2_loader").fadeOut(); $("#iD2_logo").css("display", "block")});
+	$("#iD2_logo").on("error", function(){$("#iD2_loader").fadeOut(); $("#iD2_logo").css("display", "none")});
+
+	// Kasus Positif
+	$("#iD2_konf_juml").text(numFormat.format(dt.konf.tot[0]));
+	$("#iD2_per_ks").text(numFormat.format((dt.konf.tot[0]/dt_ntt.konf.tot)*100)+"%");
+	$("#iD2_per_ks_akt").text(numFormat.format(((dt.konf.tot[0]-dt.konf.tun[0])/dt.konf.tot[0])*100)+"%");
+	var ind = indSelKs(dt.konf.tot[0], dt.konf.tot[1], 1);
+	if(ind[0]==true) {
+		$("#iD2_konf_diff").addClass("text-"+ind[3]);
+		$("#iD2_konf_diff>i").addClass(ind[2]); $("#iD2_konf_diff>span").text(ind[1]);
+	}
+
+	if(show_meng) {
+		// Box 1 (sembuh)
+		$("#iD2_box1num").text(numFormat.format(dt.konf.tun[0]-dt.konf.men[0]));
+		var ind = indSelKs(dt.konf.tun[0]-dt.konf.men[0], dt.konf.tun[1]-dt.konf.men[1], 2);
+		if(ind[0]==true) {
+			$("#iD2_box1diff").addClass("text-"+ind[3]);
+			$("#iD2_box1diff>i").addClass(ind[2]); $("#iD2_box1diff>span").text(ind[1]);
+		}
+		// Box 2 (meninggal)
+		$("#iD2_box2num").text(numFormat.format(dt.konf.men[0]));
+		var ind = indSelKs(dt.konf.men[0], dt.konf.men[1], 1);
+		if(ind[0]==true) {
+			$("#iD2_box2diff").addClass("text-"+ind[3]);
+			$("#iD2_box2diff>i").addClass(ind[2]); $("#iD2_box2diff>span").text(ind[1]);
+		}
+		// Box 3 (aktif)
+		$("#iD2_box3num").text(numFormat.format(dt.konf.tot[0]-dt.konf.tun[0]));
+		var ind = indSelKs(dt.konf.tot[0]-dt.konf.tun[0], dt.konf.tot[1]-dt.konf.tun[1], 1);
+		if(ind[0]==true) {
+			$("#iD2_box3diff").addClass("text-"+ind[3]);
+			$("#iD2_box3diff>i").addClass(ind[2]); $("#iD2_box3diff>span").text(ind[1]);
+		}
+		// CFR dan CRR
+		$("#iD2_CRR").text(numFormat.format(((dt.konf.tun[0]-dt.konf.men[0])/dt.konf.tot[0])*100)+"%");
+		$("#iD2_CFR").text(numFormat.format((dt.konf.men[0]/dt.konf.tot[0])*100)+"%");
+	} else {
+		// Box 1
+		$("#iD2_box1num").text(numFormat.format(dt.konf.tun[0]));
+		var ind = indSelKs(dt.konf.tun[0], dt.konf.tun[1], 1);
+		if(ind[0]==true) {
+			$("#iD2_box1diff").addClass("text-"+ind[3]);
+			$("#iD2_box1diff>i").addClass(ind[2]); $("#iD2_box1diff>span").text(ind[1]);
+		}
+		// Box 2
+		$("#iD2_box2num").text(numFormat.format(dt.konf.tot[0]-dt.konf.tun[0]));
+		var ind = indSelKs(dt.konf.tot[0]-dt.konf.tun[0], dt.konf.tot[1]-dt.konf.tun[1], 1);
+		if(ind[0]==true) {
+			$("#iD2_box2diff").addClass("text-"+ind[3]);
+			$("#iD2_box2diff>i").addClass(ind[2]); $("#iD2_box2diff>span").text(ind[1]);
+		}
+		// Box 3 & CFR-CRR --> disable
+		$("#iD2_col3").css("display", "none");
+	}
+	// KONTAK ERAT, SUSPEK, PROBABLE
+	$.each(["kont", "susp", "prob"], function(k,v) {
+		$("#iD2_"+v+"_juml").text(numFormat.format(dt[v].tot[0]));
+		var ind = indSelKs(dt[v].tot[0], dt[v].tot[1], 1);
+		if(ind[0]==true) {
+			$("#iD2_"+v+"_diff").addClass("text-"+ind[3]);
+			$("#iD2_"+v+"_diff>i").addClass(ind[2]); $("#iD2_"+v+"_diff>span").text(ind[1]);
+		}
+		$("#iD2_"+v+"_b1num").text(numFormat.format(dt[v].tot[0]-dt[v].tun[0]));
+		var ind = indSelKs(dt[v].tot[0]-dt[v].tun[0], dt[v].tot[1]-dt[v].tun[1], 1);
+		if(ind[0]==true) {
+			$("#iD2_"+v+"_b2diff").addClass("text-"+ind[3]);
+			$("#iD2_"+v+"_b2diff>i").addClass(ind[2]); $("#iD2_"+v+"_b2diff>span").text(ind[1]);
+		}
+		$("#iD2_"+v+"_b2num").text(numFormat.format(dt[v].tun[0]));
+		var ind = indSelKs(dt[v].tun[0], dt[v].tun[1], 2);
+		if(ind[0]==true) {
+			$("#iD2_"+v+"_b2diff").addClass("text-"+ind[3]);
+			$("#iD2_"+v+"_b2diff>i").addClass(ind[2]); $("#iD2_"+v+"_b2diff>span").text(ind[1]);
+		}
+	});
+	$("#iD2_wrapper").slideDown();
+});
+
+var cdt2_opt={indexAxis: 'y', tooltips: {enabled: true, mode: 'index', intersect: false}, hover: {mode: "nearest", intersect: true}, scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks:{beginAtZero: true}}]},
+indexAxis: 'y', maintainAspectRatio: false};
+
+await delay(500);
 //console.log(rgba2rgb([255, 255, 255], [255, 0, 0, 0.5])) // [ 255, 128, 128 ]
 
-var KonfJuml=null;
-$.each(TodTot,function(key,val){
-	KonfJuml+=val[3];
-});
 function ChInd(x,mode)
 {
 	o1 = x != 0 ? x : "";
@@ -571,53 +841,9 @@ function compare(a,b) {
 	return 0;
 }
 	
-var KonfBaru=[], TuntBaru=[], H_KonfInc=0, H_KonfJlh=0, H_PerAkt=0, H_TuntInc=0, H_AktfJlh=0, preFiltered={"konf":[],"prob":[],"susp":[],"kont":[]};
-var cdt2_opt={indexAxis: 'y', tooltips: {enabled: true, mode: 'index', intersect: false}, hover: {mode: "nearest", intersect: true}, scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks:{beginAtZero: true}}]},
-indexAxis: 'y', maintainAspectRatio: false};
 
-await delay(500);
-$("#SectWil").html("");
+/*$("#SectWil").html("");
 $.each(NamaKab,function(key,val) {
-	//val=val.substr(0,4)!="Kota"?"Kab. "+val:val;
-	var SelKonfTot=TodTot[key][3]-YesTot[key][3], SelKonfAkt=TodAkt[key][3]-YesAkt[key][3], SelKonfTun=TodTun[key][3]-YesTun[key][3],
-	SelProbTot=TodTot[key][2]-YesTot[key][2], SelProbAkt=TodAkt[key][2]-YesAkt[key][2], SelProbTun=TodTun[key][2]-YesTun[key][2],
-	SelSuspTot=TodTot[key][1]-YesTot[key][1], SelSuspAkt=TodAkt[key][1]-YesAkt[key][1], SelSuspTun=TodTun[key][1]-YesTun[key][1],
-	SelKontTot=TodTot[key][0]-YesTot[key][0], SelKontAkt=TodAkt[key][0]-YesAkt[key][0], SelKontTun=TodTun[key][0]-YesTun[key][0],
-	Input=$("#TemplateWilayah").html()
-	.replaceAll("$Key$",key).replaceAll("$NamaWil$",val).replace("$Anchor$","Dati2"+key)
-	.replaceAll("$TotKonf$",numFormat.format(TodTot[key][3])).replaceAll("$TotProb$",numFormat.format(TodTot[key][2])).replaceAll("$TotSusp$",numFormat.format(TodTot[key][1])).replaceAll("$TotKont$",numFormat.format(TodTot[key][0]))
-	.replaceAll("$AktKonf$",numFormat.format(TodAkt[key][3])).replaceAll("$AktProb$",numFormat.format(TodAkt[key][2])).replaceAll("$AktSusp$",numFormat.format(TodAkt[key][1])).replaceAll("$AktKont$",numFormat.format(TodAkt[key][0]))
-	.replaceAll("$TunKonf$",numFormat.format(TodTun[key][3])).replaceAll("$TunProb$",numFormat.format(TodTun[key][2])).replaceAll("$TunSusp$",numFormat.format(TodTun[key][1])).replaceAll("$TunKont$",numFormat.format(TodTun[key][0]))
-	.replace("$TotKonfInc$",ChInd(SelKonfTot,1)[0]).replace("$TotKonfInd$",ChInd(SelKonfTot,1)[1])
-	.replace("$AktKonfInc$",ChInd(SelKonfAkt,1)[0]).replace("$AktKonfInd$",ChInd(SelKonfAkt,1)[1])
-	.replace("$TunKonfInc$",ChInd(SelKonfTun,2)[0]).replace("$TunKonfInd$",ChInd(SelKonfTun,2)[1])
-	.replace("$TotProbInc$",ChInd(SelProbTot,1)[0]).replace("$TotProbInd$",ChInd(SelProbTot,1)[1])
-	.replace("$AktProbInc$",ChInd(SelProbAkt,1)[0]).replace("$AktProbInd$",ChInd(SelProbAkt,1)[1])
-	.replace("$TunProbInc$",ChInd(SelProbTun,2)[0]).replace("$TunProbInd$",ChInd(SelProbTun,2)[1])
-	.replace("$TotSuspInc$",ChInd(SelSuspTot,1)[0]).replace("$TotSuspInd$",ChInd(SelSuspTot,1)[1])
-	.replace("$AktSuspInc$",ChInd(SelSuspAkt,1)[0]).replace("$AktSuspInd$",ChInd(SelSuspAkt,1)[1])
-	.replace("$TunSuspInc$",ChInd(SelSuspTun,2)[0]).replace("$TunSuspInd$",ChInd(SelSuspTun,2)[1])
-	.replace("$TotKontInc$",ChInd(SelKontTot,1)[0]).replace("$TotKontInd$",ChInd(SelKontTot,1)[1])
-	.replace("$AktKontInc$",ChInd(SelKontAkt,1)[0]).replace("$AktKontInd$",ChInd(SelKontAkt,1)[1])
-	.replace("$TunKontInc$",ChInd(SelKontTun,2)[0]).replace("$TunKontInd$",ChInd(SelKontTun,2)[1])
-	.replaceAll("$PerKsNTT$",numFormat.format((TodTot[key][3]/KonfJuml)*100)+"%")
-	.replace("$AktKonfPerc$",numFormat.format((TodAkt[key][3]/TodTot[key][3])*100)+"%");
-
-	if(SelKonfTot) KonfBaru.push([SelKonfTot,val]);
-	if(SelKonfTun) TuntBaru.push([SelKonfTun,val]);
-	preFiltered["konf"].push([TodTot[key][3], TodAkt[key][3], TodTun[key][3], val]);
-	preFiltered["prob"].push([TodTot[key][2], TodAkt[key][2], TodTun[key][2], val]);
-	preFiltered["susp"].push([TodTot[key][1], TodAkt[key][1], TodTun[key][1], val]);
-	preFiltered["kont"].push([TodTot[key][0], TodAkt[key][0], TodTun[key][0], val]);
-
-	H_KonfInc = SelKonfTot < H_KonfInc ? H_KonfInc : SelKonfTot;
-	H_TuntInc = SelKonfTun < H_TuntInc ? H_TuntInc : SelKonfTun;
-	H_KonfJlh = TodTot[key][3] < H_KonfJlh ? H_KonfJlh : TodTot[key][3];
-	H_PerAkt = (TodAkt[key][3]/TodTot[key][3]) < H_PerAkt ? H_PerAkt : TodAkt[key][3]/TodTot[key][3];
-	H_AktfJlh = TodAkt[key][3] < H_AktfJlh ? H_AktfJlh : TodAkt[key][3];
-	TOC=$("#TemplateTOC").html().replace("$Anchor$","#Dati2"+key).replace("$NamaWil$",val);
-	$("#SectWil").append(Input); $("#TOC").append(TOC);
-
 	// new: grafik horisontal
 	new Chart(document.getElementById("c_all_"+key).getContext("2d"), {
 	type: 'horizontalBar',
@@ -631,7 +857,7 @@ $.each(NamaKab,function(key,val) {
 			borderColor: "rgba(0,0,0,0)",
 			type: 'line',
 			pointRadius: 0,
-		},*/
+		},*
 		{
 			label: "Tuntas",
 			data: [TodTun[key][3], TodTun[key][2], TodTun[key][1], TodTun[key][0]],
@@ -650,8 +876,7 @@ $.each(NamaKab,function(key,val) {
 	},
 	options: cdt2_opt
 });
-});
-
+}); */
 await delay(500);
 preFiltered.konf.sort(compare); preFiltered.prob.sort(compare); preFiltered.susp.sort(compare); preFiltered.kont.sort(compare);
 var ur_dati2={"konf":[[],[],[],[]],"prob":[[],[],[],[]],"susp":[[],[],[],[]],"kont":[[],[],[],[]]};
@@ -683,17 +908,6 @@ console.log(ur_dati2);
 var c_options={tooltips: {enabled: true, mode: 'index', intersect: false}, hover: {mode: "nearest", intersect: true}, scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks:{beginAtZero: true}}]}, maintainAspectRatio: false, aspectRatio: 1.5, defaultFontFamily: "Roboto", defaultFontSize: 14};
 
 await delay(500);
-KonfBaru.sort(compare); TuntBaru.sort(compare);
-$("#NewCasesToday, #ClosedCasesToday").html("");
-$.each(KonfBaru,function(key,val) {
-	val0 = val[0] < 0 ? val[0] : "+"+val[0];
-	$("#NewCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
-});
-$.each(TuntBaru,function(key,val) {
-	val0 = val[0] < 0 ? val[0] : "+"+val[0];
-	$("#ClosedCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
-});
-
 function TmplDataPeta(mode){
 	var title, min=0, mid=50, max=100, col="black";
 	$("#map_style").html("");
@@ -705,10 +919,10 @@ function TmplDataPeta(mode){
 		mid = (H_KonfInc/2).toFixed(0); 
 		max = H_KonfInc;
 		col = "rgba(191,144,0)";
-		$.each(NamaKab,function(key,val){
-			per=(TodTot[key][3]-YesTot[key][3])/H_KonfInc;
-			$("#map_style").append("#MapContainer path._data"+key+"{fill:"+rgba2rgb([255, 255, 255],[191, 144, 0, per])+"!important}");
-			$("#MapContainer path._data"+key).data("kode",key);
+		$.each(data.dt_kab,function(k,v){
+			per=(v.konf.tot[0]-v.konf.tot[1])/H_KonfInc;
+			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[191, 144, 0, per])+"!important}");
+			$("#MapContainer path._data"+k).data("kode",k);
 		});
 	}
 	if(mode===2) {
@@ -717,10 +931,10 @@ function TmplDataPeta(mode){
 		mid = (H_KonfJlh/2).toFixed(0); 
 		max = H_KonfJlh;
 		col = "rgba(191, 144, 0)";
-		$.each(NamaKab,function(key,val){
-			per=TodTot[key][3]/H_KonfJlh;
-			$("#map_style").append("#MapContainer path._data"+key+"{fill:"+rgba2rgb([255, 255, 255],[191, 144, 0,per])+"!important}");
-			$("#MapContainer path._data"+key).data("kode",key);
+		$.each(data.dt_kab,function(k,v){
+			per=v.konf.tot[0]/H_KonfJlh;
+			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[191, 144, 0,per])+"!important}");
+			$("#MapContainer path._data"+k).data("kode",k);
 		});
 	}
 	if(mode===3) {
@@ -729,10 +943,10 @@ function TmplDataPeta(mode){
 		mid = numFormat.format((H_PerAkt/2)*100)+"%"; 
 		max = numFormat.format(H_PerAkt*100)+"%";
 		col = "rgba(192,0,0)";
-		$.each(NamaKab,function(key,val){
-			per=(TodAkt[key][3]/TodTot[key][3])/H_PerAkt;
-			$("#map_style").append("#MapContainer path._data"+key+"{fill:"+rgba2rgb([255, 255, 255],[192,0,0,per])+"!important}");
-			$("#MapContainer path._data"+key).data("kode",key);
+		$.each(data.dt_kab,function(k,v){
+			per=((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])/H_PerAkt;
+			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[192,0,0,per])+"!important}");
+			$("#MapContainer path._data"+k).data("kode",k);
 		});
 	}
 	if(mode===4) {
@@ -741,10 +955,10 @@ function TmplDataPeta(mode){
 		mid = (H_TuntInc/2).toFixed(0); 
 		max = H_TuntInc;
 		col = "rgba(0,32,96)";
-		$.each(NamaKab,function(key,val){
-			per=(TodTun[key][3]-YesTun[key][3])/H_TuntInc;
-			$("#map_style").append("#MapContainer path._data"+key+"{fill:"+rgba2rgb([255, 255, 255],[0,32,96,per])+"!important}");
-			$("#MapContainer path._data"+key).data("kode",key);
+		$.each(data.dt_kab,function(k,v){
+			per=(v.konf.tot[0]-v.konf.tot[1])/H_TuntInc;
+			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[0,32,96,per])+"!important}");
+			$("#MapContainer path._data"+k).data("kode",k);
 		});
 	}
 	if(mode===5) {
@@ -753,10 +967,10 @@ function TmplDataPeta(mode){
 		mid = numFormat.format((((1-H_PerAkt)/2)+0.5)*100)+"%"; 
 		max = "100%"
 		col = "rgba(0,32,96)";
-		$.each(NamaKab,function(key,val){
-			per=1-((TodAkt[key][3]/TodTot[key][3])/H_PerAkt);
-			$("#map_style").append("#MapContainer path._data"+key+"{fill:"+rgba2rgb([255, 255, 255],[0,32,96,per])+"!important}");
-			$("#MapContainer path._data"+key).data("kode",key);
+		$.each(data.dt_kab,function(k,v){
+			per=1-(((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])/H_PerAkt);
+			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[0,32,96,per])+"!important}");
+			$("#MapContainer path._data"+k).data("kode",k);
 		});
 	}
 	if(mode===6) {
@@ -765,10 +979,10 @@ function TmplDataPeta(mode){
 		mid = (H_AktfJlh/2).toFixed(0);
 		max = H_AktfJlh
 		col = "rgba(192,0,0)";
-		$.each(NamaKab,function(key,val){
-			per=TodAkt[key][3]/H_AktfJlh;
-			$("#map_style").append("#MapContainer path._data"+key+"{fill:"+rgba2rgb([255, 255, 255],[192,0,0,per])+"!important}");
-			$("#MapContainer path._data"+key).data("kode",key);
+		$.each(data.dt_kab,function(k,v){
+			per=(v.konf.tot[0]-v.konf.tun[0])/H_AktfJlh;
+			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[192,0,0,per])+"!important}");
+			$("#MapContainer path._data"+k).data("kode",k);
 		});
 	}
 	$("#MapIndLeg>div>span:nth-child(1)").text(min);
@@ -789,18 +1003,19 @@ $(document).on("click","#MapContainer svg path[class*=_data]",function(e){
 	if(cldata.slice(5)) {
 		kode = cldata.slice(5);
 		$("#activewil").html("#MapContainer svg ."+cldata+"{filter: drop-shadow(0px 0px 4px black)}");
-		val = NamaKab[kode];
+		var dt=data.dt_kab[kode];
+		//val = list_kab[kode];
 		//val = val.substr(0,4)!="Kota"?"Kab. "+val : val;
-		JlhKasus = TodTot[kode][3];
-		PerKs = numFormat.format((JlhKasus/KonfJuml)*100);
-		KsAktif = TodAkt[kode][3];
-		KsBaru = TodTot[kode][3]-YesTot[kode][3];
+		JlhKasus = dt.konf.tot[0];
+		PerKs = numFormat.format((JlhKasus/data.ntt.konf.tot)*100);
+		KsAktif = dt.konf.tot[0]-dt.konf.tun[0];
+		KsBaru = dt.konf.tot[0]-dt.konf.tot[1];
 		KsBaru = KsBaru < 0 ? KsBaru : "+"+KsBaru;
-		TunBaru = TodTun[kode][3]-YesTun[kode][3];
+		TunBaru = dt.konf.tun[0]-dt.konf.tun[0];
 		TunBaru = TunBaru < 0 ? TunBaru : "+"+TunBaru;
 		PerAkt = numFormat.format((KsAktif/JlhKasus)*100);
 		PerTun = numFormat.format((1-(KsAktif/JlhKasus))*100);
-		$("#LegIn_Kab").text(val);
+		$("#LegIn_Kab").text(dt.nama);
 		$("#LegIn_PerKs").text(PerKs+"% kasus di NTT");
 		$("#LegIn_Jlh").text(numFormat.format(JlhKasus));
 		$("#LegIn_Akt").text(numFormat.format(KsAktif));
@@ -808,7 +1023,7 @@ $(document).on("click","#MapContainer svg path[class*=_data]",function(e){
 		$("#LegIn_PerTun").text(PerTun+"%");
 		$("#LegIn_Tun").text(TunBaru+" kasus");
 		$("#LegIn_Num").text(KsBaru+" kasus");
-		$("#LegIn_DatiAnchor").prop("href","#Dati2"+kode);
+		$("#LegIn_DatiAnchor").prop("href","#Bg4_Kasus");
 	}
 });
 
