@@ -22,14 +22,16 @@
 window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
 </script>
 	<style>
-body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-3.5rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday, #SembCasesToday{padding-left:1.25rem;margin-bottom:0}.fw-500{font-weight:500}
+body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-3.5rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday, #SembCasesToday{padding-left:1.25rem;margin-bottom:0;list-style-type:square}.fw-500{font-weight:500}
 #TambahanInfo {z-index: 1079; position: sticky; bottom: 0; max-height: 20vh; overflow-y: auto; margin-bottom: 0;}
-#MapContainer{height:500px;max-height:75vh}
-#MapContainer svg{overflow:auto;width:100%}
+#MapContainer{height:500px; max-height:75vh; cursor: grab} #MapContainer:active {cursor: grabbing;}
+#MapContainer svg{overflow:auto; width:100%}
 #MapContainer svg path{cursor:pointer}
 #MapLegend{z-index:1;position:absolute;left:.5rem;bottom:.5rem;width:250px}
-#MapNav{position:absolute;bottom:.5rem;right:.5rem;width:670px;z-index:0;white-space:nowrap;display:flex}
-#MapHeader{position:absolute;top:.5rem;left:.5rem;right:.5rem;margin-bottom:0;z-index: 1;text-align: center;text-shadow: 2px 2px 2px white;line-height:1.25}
+#MapNav .dropdown-item { padding: .2rem .75rem; font-size: .875rem; }
+#MapNav .dropdown-header { padding: .3rem .75rem }
+#MapNav{position:absolute;bottom:.5rem;right:.5rem;width:300px;z-index:0;white-space:nowrap;display:flex}
+#MapHeader{position:absolute;top:.5rem;left:.5rem;right:.5rem;margin-bottom:0;z-index: 1;text-align: center;line-height:1.25}
 #MapIndLeg{position: absolute;bottom: 3rem;right: .5rem;width:300px;user-select:none}
 #MapIndLeg>div {line-height:1;display:flex;justify-content:space-between;position:relative;font-size:80%}
 #MapIndLeg>div span:nth-child(2){position:absolute;width:100%;text-align:center}
@@ -40,17 +42,13 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 .chart-container{position:relative; min-width:100%; max-width:100%; margin-bottom:1rem;}
 .chart-container div{position:absolute;width:100%;height:100%;text-align:center;display:flex;align-items:center;justify-content:center;background: var(--light)}
 .outline-white {text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;}
-@media (max-width: 991.98px) {
-	#MapLegend{bottom:3rem}
-}
 @media (max-width: 767.98px) {
 	#MapLegend{position:static;border-radius:0;width:calc(100% + 2px);margin:0 -1px;overflow:hidden}
 	#MapContainer{max-height:275px;height:50vh}
-	#MapIndLeg {position:static;width:calc(100% - 1rem);margin:-1.5rem .5rem .5rem}
-	#MapNav>.btn-group{width:100%}
-	#MapNav{position:static;width:100%;border-radius:0;display:block;white-space:normal}
-	#MapNav .input-group{display:none}
-	#MapMobileNav{display:block;position:absolute;right:.5rem;bottom:320px;width:60px;text-align:right}
+	#MapIndLeg {position:static;width:calc(100% - 9rem);margin:-1.5rem .5rem .5rem 8.5rem}
+	#MapNav{position:static;width:100%;margin: -2.5rem .5rem 1rem}
+	#MapMobileNav{display:block;position:absolute;right:.5rem;bottom:276px;width:54px;text-align:right}
+	#MapNav .input-group{display: none}
 }
 #MapContainer::-webkit-scrollbar{display: none;}
 @media (max-width:576px) {.chart-container{max-height:45vh;}}
@@ -111,7 +109,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 		<h4 class="border-bottom">Informasi</h4>
 		<ul class="pl-4 mb-3">
 			<li>Halaman ini memuat daftar kasus per Kabupaten/Kota dari Briefing Satuan Tugas Penanganan COVID-19 Nusa Tenggara Timur. Data mungkin tidak 100% akurat, informasi pada situs Satgas mungkin diperbarui setelah pembaruan data di sistem ini.</li>
-			<li>Data kasus tuntas yang ditampilkan di halaman ini adalah <strong>gabungan kasus sembuh dan meninggal</strong> (tidak disebutkan jumlah sembuh/meninggal, hanya disebutkan jumlah pasien yang sudah tidak lagi menjalani perawatan). Untuk informasi mengenai jumlah sembuh atau meninggal berdasarkan Kabupaten/Kota, kunjungi <a href="http://covid19.nttprov.go.id/home/data">situs resmi COVID-19 NTT</a> kemudian memilih Kabupaten/Kota sesuai keinginan Anda.</li>
+			<li>"Jumlah kasus tuntas" yang ditampilkan di halaman ini adalah <strong>gabungan kasus sembuh dan meninggal</strong> (tidak disebutkan jumlah sembuh/meninggal, hanya disebutkan jumlah pasien yang sudah tidak lagi menjalani perawatan). Untuk informasi mengenai jumlah sembuh atau meninggal berdasarkan Kabupaten/Kota, kunjungi <a href="http://covid19.nttprov.go.id/home/data">situs resmi COVID-19 NTT</a> kemudian memilih Kabupaten/Kota sesuai keinginan Anda.</li>
 		</ul>
 		<h4 class="border-bottom">Daftar isi</h4>
 		<div class="pl-4 mb-2">
@@ -124,16 +122,16 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 		<div class="pl-4 mb-2">
 			<div class="d-flex align-items-baseline" style="margin-left:-1.5rem">
 				<div style="width:1.5rem">2.1</div>
-				<a class="h5 mb-1" href="#Bg21_Baru">Pertambahan Kasus Baru</a>
+				<a class="h5 mb-1" href="#Bg21_Baru">Penambahan Kasus Baru</a>
 			</div>
-			Pertambahan kasus baru per <span class="LastData"></span> di wilayah Nusa Tenggara Timur.
+			Penambahan kasus baru per <span class="LastData"></span> di wilayah Nusa Tenggara Timur.
 		</div>
 		<div class="pl-4 mb-2">
 			<div class="d-flex align-items-baseline" style="margin-left:-1.5rem">
 				<div style="width:1.5rem">2.2</div>
-				<a class="h5 mb-1" href="#Bg22_Tuntas">Pertambahan Kasus Tuntas</a>
+				<a class="h5 mb-1" href="#Bg22_Tuntas">Penambahan Kasus Tuntas</a>
 			</div>
-			Pertambahan kasus tuntas (sembuh dan meninggal, tanpa dispesifikasi sembuh atau meninggal) per <span class="LastData"></span> di wilayah Nusa Tenggara Timur.
+			Penambahan kasus tuntas (sembuh dan meninggal, tanpa dispesifikasi sembuh atau meninggal) per <span class="LastData"></span> di wilayah Nusa Tenggara Timur.
 		</div>
 		<div class="pl-4 mb-2">
 			<div class="d-flex align-items-baseline" style="margin-left:-1.5rem">
@@ -183,7 +181,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 <div id="Bg1_Peta" class="anchor"></div>
 <h2 class="border-bottom"><small>1.</small> Peta Sebaran</h2>
 <div class="position-relative rounded border mb-3">
-	<h6 id="MapHeader">
+	<h6 id="MapHeader" class="outline-white">
 		<div id="MapTitle">Memuat Peta...</div>
 		<div class="small text-muted">Perhatikan skala di bawah peta untuk konteks</div>
 	</h6>
@@ -203,20 +201,24 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 		<button class="btn btn-sm btn-secondary" type="button" onclick="svgPanZoomContainer.resetScale(document.getElementById('MapContainer'))">Reset</button>
 	</div>
 	<div id="MapNav">
-		<div class="btn-group mr-1 mb-1 mb-md-0">
-			<button class="btn btn-sm btn-info" data-mapdata="6">Jlh. Ks. Aktif</button>
-			<button class="btn btn-sm btn-info" data-mapdata="4">Ks. Tuntas Baru</button>
-			<button class="btn btn-sm btn-info" data-mapdata="5">% Tuntas</button>
-		</div>
-		<div class="btn-group mr-1 mb-1 mb-md-0">
-			<button class="btn btn-sm btn-info" data-mapdata="2">Jlh. Kasus</button>
-			<button class="btn btn-sm btn-info" data-mapdata="1">Ks. Baru</button>
-			<button class="btn btn-sm btn-info" data-mapdata="3">% Aktif</button>
+		<div class="btn-group dropup">
+			<button type="button" class="btn btn-dark btn-sm dropdown-toggle mr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tampilan Data</button>
+			<div class="dropdown-menu">
+				<h6 class="dropdown-header flbet">Jumlah Kasus<i class="small fas fa-user-plus"></i></h6>
+				<button class="dropdown-item" data-mapdata="2">Jumlah kasus per wilayah</button>
+				<button class="dropdown-item" data-mapdata="1">Penambahan kasus baru</button>
+				<div class="dropdown-divider my-1"></div>
+				<h6 class="dropdown-header flbet">Kasus Aktif<i class="small fas fa-user-tag"></i></h6>
+				<button class="dropdown-item" data-mapdata="4">Jumlah kasus aktif</button>
+				<button class="dropdown-item" data-mapdata="3">Persentase kasus aktif</button>
+				<div class="dropdown-divider my-1"></div>
+				<h6 class="dropdown-header flbet">Kasus Tuntas<i class="small fas fa-user-check"></i></h6>
+			</div>
 		</div>
 		<div class="input-group-sm input-group">
 			<div class="btn-group input-group-prepend">
-				<button class="btn btn-sm btn-secondary map-zoom px-1" data-zoom="in">+</button>
-				<button class="btn btn-sm btn-secondary map-zoom px-1" data-zoom="out">–</button>
+				<button class="btn btn-sm btn-secondary map-zoom px-2" data-zoom="in">+</button>
+				<button class="btn btn-sm btn-secondary map-zoom px-2" data-zoom="out">–</button>
 			</div>
 			<input type="number" class="form-control" id="MapScale" value="100" min="100" step="1.00" max="" oninput="window.inputting=true;svgPanZoomContainer.setScale(document.getElementById('MapContainer'),+this.value/100)"/>
 			<div class="input-group-append">
@@ -257,7 +259,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 				<strong id="LegIn_Tun">...</strong>
 			</div>
 			<hr class="my-1"/>
-			<a class="d-block" href="#Dati20" id="LegIn_DatiAnchor">Selengkapnya...</a>
+			<a class="d-block" href="#Bg4_Kasus" id="LegIn_DatiAnchor">Selengkapnya...</a>
 		</div>
 	</div>
 </div>
@@ -274,7 +276,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 		<div class="card h-100">
 			<div class="pb-1" style="background:#BF9000"></div>
 			<div class="card-body">
-				<h5 class="card-title mb-1">Pertambahan kasus positif</h5>
+				<h5 class="card-title mb-1">Penambahan kasus positif</h5>
 				<p class="mb-1 text-muted">Kasus terkonfirmasi baru per <span class="LastData">Memuat...</span>.</p>
 				<hr class="my-2"/>
 				<div class="font-weight-bold flbet" style="color:#BF9000">Nusa Tenggara Timur <span id="KonfIncNTT"></span></div>
@@ -290,7 +292,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 				<div class="pb-1 w-50" style="background:#C00000"></div>
 			</div>
 			<div class="card-body">
-				<h5 class="card-title mb-1">Pertambahan kasus <span id="h_tuntas">tuntas (gabungan)</span></h5>
+				<h5 class="card-title mb-1">Penambahan kasus <span id="h_tuntas">tuntas (gabungan)</span></h5>
 				<p class="mb-1 text-muted"><span id="sub_tuntas">Gabungan ks. tuntas baru</span> per <span class="LastData">Memuat...</span>.</p>
 				<hr class="my-2"/>
 				<div class="font-weight-bold flbet" style="color:#002060">Nusa Tenggara Timur <span id="SembIncNTT"></span></div>
@@ -513,9 +515,13 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 		* Jumlah kasus kontak erat, suspek, dan probable kemungkinan tidak merepresentasikan kondisi terkini.
 	</div>
 </div>
+<div class="bg-light px-3 py-2 small">
+	<p class="mb-0"><span class="fw-500">Sumber data</span>:</p>
+	<ul id="iD2_src" style="list-style-type:square; padding-left:1rem; margin-bottom:0"></ul>
+</div>
 </section>
 
-<div id="TambahanInfo" class="alert"><h6 class="mb-1" id="TI_header"></h6><p class="mb-0 small" id="TI_text"></p></div>
+<div id="TambahanInfo" class="alert mt-4"><h6 class="mb-1" id="TI_header"></h6><p class="mb-0 small" id="TI_text"></p></div>
 
 </main>
 <footer class="bg-dark text-light">
@@ -528,7 +534,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom-container@0.5.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
 <script>
 const delay = ms => new Promise(res=>setTimeout(res,ms));
 const NamaBulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
@@ -548,10 +554,11 @@ $.ajax({
 		$("#MapContainer").prepend(data);
 		var MapCon=document.getElementById('MapContainer');
 		$(".map-zoom").on("click",function() {
+			scale = svgPanZoomContainer.getScale(MapCon);
 			if($(this).data("zoom")=="in")
-				svgPanZoomContainer.setScale(MapCon, (svgPanZoomContainer.getScale(MapCon))+0.1);
+				svgPanZoomContainer.setScale(MapCon, scale+(0.15*scale));
 			if($(this).data("zoom")=="out")
-				svgPanZoomContainer.setScale(MapCon, (svgPanZoomContainer.getScale(MapCon))-0.1);
+				svgPanZoomContainer.setScale(MapCon, scale-(0.15*scale));
 		});
 new MutationObserver(function (mutations) {
 	if (window.inputting) {
@@ -652,9 +659,17 @@ function rgba2rgb(background, color) {
 // Konfigurasi dasar iD2 (info Dati 2)
 var show_meng = data.show_meng;
 if(show_meng) {
+	// Map layer
+	$("#MapNav .dropdown-menu").append('<button class="dropdown-item" data-mapdata="5">Penambahan kasus sembuh</button>');
+	$("#MapNav .dropdown-menu").append('<button class="dropdown-item" data-mapdata="6">Penambahan kasus meninggal</button>');
+	$("#MapNav .dropdown-menu").append('<button class="dropdown-item" data-mapdata="7">Tingkat kesembuhan (CRR)</button>');
+	$("#MapNav .dropdown-menu").append('<button class="dropdown-item" data-mapdata="8">Tingkat kematian (CFR)</button>');
+
+	// Info penambahan kasus
 	$("#SembCasesWrapper").show();
 	$("#h_tuntas").text("tuntas (terpisah)");
 	$("#sub_tuntas").text("Kasus sembuh dan meninggal baru");
+	$("#disclaimer_tuntas").html('<strong>Jumlah kasus meninggal</strong> yang ditampilkan pada halaman ini berumber dari data Satgas Kabupaten/Kota, atau data Satgas Provinsi. Info sumber data dapat dilihat pada disclaimer di bawah kotak rincial data wilayah.');
 	// info Dati 2
 	$("#iD2_box1clr1").css({"background":"#002060", "height":"100%"});
 	$("#iD2_box1clr2").css({"height":0});
@@ -669,6 +684,7 @@ if(show_meng) {
 	$("#iD2_box3txt").text("aktif");
 	$("#iD2_box3icon").addClass("fas fa-user-tag");
 } else {
+	$("#MapNav .dropdown-menu").append('<button class="dropdown-item" data-mapdata="5">Penambahan kasus tuntas</button>');
 	$("#iD2_box1clr1").css({"background":"#002060", "height":"50%"});
 	$("#iD2_box1clr2").css({"background":"#C00000", "height":"50%"});
 	$("#iD2_box1txt").text("tuntas");
@@ -679,7 +695,7 @@ if(show_meng) {
 	$("#iD2_box2icon").addClass("fas fa-user-tag");
 }
 
-var arrKonfBaru=[], arrTuntBaru=[], arrMengBaru=[], H_KonfInc=0, H_KonfJlh=0, H_PerAkt=0, H_TuntInc=0, H_AktfJlh=0, preFiltered={"konf":[],"prob":[],"susp":[],"kont":[]}, list_kab=[];
+var arrKonfBaru=[], arrTuntBaru=[], arrMengBaru=[], H_KonfInc=0, H_KonfJlh=0, H_PerAkt=0, H_TuntInc=0, H_AktfJlh=0, preFiltered={"konf":[],"prob":[],"susp":[],"kont":[]}, list_kab=[], H_MengInc=0, H_CRR=0, H_CFR=0;
 $.each(data.dt_kab, function(k,v) {
 	$("#selDati2").append('<option value="'+k+'">'+v.nama+'</option>');
 	list_kab.push(v.nama);
@@ -692,7 +708,12 @@ $.each(data.dt_kab, function(k,v) {
 		SelKonfMen = v.konf.men[0]-v.konf.men[1];
 		if(SelKonfTun-SelKonfMen!=0) arrTuntBaru.push([SelKonfTun-SelKonfMen, v.nama]);
 		if(SelKonfMen) arrMengBaru.push([SelKonfMen, v.nama]);
-		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0], v.nama]);
+		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0]-v.konf.men[0], v.nama, v.konf.men[0]]);
+		H_MengInc = SelKonfMen < H_MengInc ? H_MengInc : SelKonfMen;
+		var crr = (v.konf.tun[0]-v.konf.men[0])/v.konf.tot[0];
+		H_CRR = crr < H_CRR ? H_CRR : crr;
+		var cfr = v.konf.men[0]/v.konf.tot[0];
+		H_CFR = cfr < H_CFR ? H_CFR : cfr;
 	} else {
 		if(SelKonfTun) arrTuntBaru.push([SelKonfTun,v.nama]);
 		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0], v.nama]);
@@ -715,27 +736,32 @@ if(show_meng) {
 	arrMengBaru.sort(compare);
 	$.each(arrMengBaru,function(key,val) {
 		val0 = val[0] < 0 ? val[0] : "+"+val[0];
-		$("#ClosedCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
+		$("#ClosedCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 	});
 	$.each(arrTuntBaru,function(key,val) {
 		val0 = val[0] < 0 ? val[0] : "+"+val[0];
-		$("#SembCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
+		$("#SembCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 	});
 } else {
 	$.each(arrTuntBaru,function(key,val) {
 		val0 = val[0] < 0 ? val[0] : "+"+val[0];
-		$("#ClosedCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
+		$("#ClosedCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 	});
 }
 $.each(arrKonfBaru,function(key,val) {
 	val0 = val[0] < 0 ? val[0] : "+"+val[0];
-	$("#NewCasesToday").append("<li style='list-style-type:square'><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
+	$("#NewCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 });
 
-
+const data_src = [
+	"Situs Resmi Satgas Provinsi melalui website (covid19.nttprov.go.id)",
+	"Rilis Satgas Kabupaten/Kota melalui Dinas Kominfo atau lembaga resmi lain",
+	"Rilis Resmi Satgas Kabupaten/Kota (melalui akun atau website Satgas)",
+	"Rilis Resni Satgas Provinsi melalui Juru Bicara Marius Ardu Jelamu"
+];
 $("#selDati2_show").on("click", function(){
 	var kab_id = $("#selDati2").val();
-	console.log(kab_id);
+	//console.log(kab_id);
 	if(kab_id=="" || kab_id===null || kab_id<0 || kab_id>21) {
 		$("#iD2_wrapper").slideUp();
 		return false;
@@ -743,12 +769,14 @@ $("#selDati2_show").on("click", function(){
 	const dt=data.dt_kab[kab_id], dt_ntt=data.ntt;
 	// Inisialisasi
 	$("#iD2_kab").text(dt.nama);
+	$(".diff-ks").removeClass("text-danger text-success");
 	$(".diff-ks>i").prop("class", "");
 	$(".diff-ks>span").text("");
 	$("#iD2_loader").show();
 	$("#iD2_logo").prop("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/"+dt.logo);
 	$("#iD2_logo").on("load", function(){$("#iD2_loader").fadeOut(); $("#iD2_logo").css("display", "block")});
 	$("#iD2_logo").on("error", function(){$("#iD2_loader").fadeOut(); $("#iD2_logo").css("display", "none")});
+	$("#iD2_src").html("");
 
 	// Kasus Positif
 	$("#iD2_konf_juml").text(numFormat.format(dt.konf.tot[0]));
@@ -814,8 +842,8 @@ $("#selDati2_show").on("click", function(){
 		$("#iD2_"+v+"_b1num").text(numFormat.format(dt[v].tot[0]-dt[v].tun[0]));
 		var ind = indSelKs(dt[v].tot[0]-dt[v].tun[0], dt[v].tot[1]-dt[v].tun[1], 1);
 		if(ind[0]==true) {
-			$("#iD2_"+v+"_b2diff").addClass("text-"+ind[3]);
-			$("#iD2_"+v+"_b2diff>i").addClass(ind[2]); $("#iD2_"+v+"_b2diff>span").text(ind[1]);
+			$("#iD2_"+v+"_b1diff").addClass("text-"+ind[3]);
+			$("#iD2_"+v+"_b1diff>i").addClass(ind[2]); $("#iD2_"+v+"_b1diff>span").text(ind[1]);
 		}
 		$("#iD2_"+v+"_b2num").text(numFormat.format(dt[v].tun[0]));
 		var ind = indSelKs(dt[v].tun[0], dt[v].tun[1], 2);
@@ -824,28 +852,17 @@ $("#selDati2_show").on("click", function(){
 			$("#iD2_"+v+"_b2diff>i").addClass(ind[2]); $("#iD2_"+v+"_b2diff>span").text(ind[1]);
 		}
 	});
+	$.each(dt.src, function(k,v) {
+		$("#iD2_src").append('<li>'+data_src[v]+'</li>');
+	});
 	$("#iD2_wrapper").slideDown();
 });
 
-var cdt2_opt={indexAxis: 'y', tooltips: {enabled: true, mode: 'index', intersect: false}, hover: {mode: "nearest", intersect: true}, scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks:{beginAtZero: true}}]},
+var cdt2_opt={indexAxis: 'y', tooltips: {enabled: true, mode: 'index', intersect: false}, hover: {mode: "nearest", intersect: true}, scales: {x: {stacked: true}, y: {stacked: true}},
 indexAxis: 'y', maintainAspectRatio: false};
 
-await delay(500);
+//await delay(500);
 //console.log(rgba2rgb([255, 255, 255], [255, 0, 0, 0.5])) // [ 255, 128, 128 ]
-
-function ChInd(x,mode)
-{
-	o1 = x != 0 ? x : "";
-	if(mode==1) o2 = x > 0 ? "logoinc text-danger" : x < 0 ? "logodec text-success" : "";
-	if(mode==2) o2 = x > 0 ? "logoinc text-success" : x < 0 ? "logodec text-danger" : "";
-	return [o1, o2];
-}
-function compare(a,b) {
-	if (a[0] > b[0]) return -1;
-	if (a[0] < b[0]) return 1;
-	return 0;
-}
-	
 
 /*$("#SectWil").html("");
 $.each(NamaKab,function(key,val) {
@@ -882,39 +899,38 @@ $.each(NamaKab,function(key,val) {
 	options: cdt2_opt
 });
 }); */
-await delay(500);
+//await delay(500);
 preFiltered.konf.sort(compare); preFiltered.prob.sort(compare); preFiltered.susp.sort(compare); preFiltered.kont.sort(compare);
 var ur_dati2={"konf":[[],[],[],[]],"prob":[[],[],[],[]],"susp":[[],[],[],[]],"kont":[[],[],[],[]]};
-$.each(preFiltered.konf, function(k,v) {
-	ur_dati2.konf[0].push(v[3]);
-	ur_dati2.konf[1].push(v[0]);
-	ur_dati2.konf[2].push(v[1]);
-	ur_dati2.konf[3].push(v[2]);
+$.each(["konf", "prob", "susp", "kont"], function(k1,v1) {
+	$.each(preFiltered[v1], function(k,v) {
+		ur_dati2[v1][0].push(v[3]); // Kabupaten 
+		ur_dati2[v1][1].push(v[1]); // Aktif
+		ur_dati2[v1][2].push(v[2]); // Tuntas
+		if(v1=="konf" && show_meng) ur_dati2[v1][3].push(v[4]); // data meng jika boleh
+	});
 });
-$.each(preFiltered.prob, function(k,v) {
-	ur_dati2.prob[0].push(v[3]);
-	ur_dati2.prob[1].push(v[0]);
-	ur_dati2.prob[2].push(v[1]);
-	ur_dati2.prob[3].push(v[2]);
-});
-$.each(preFiltered.susp, function(k,v) {
-	ur_dati2.susp[0].push(v[3]);
-	ur_dati2.susp[1].push(v[0]);
-	ur_dati2.susp[2].push(v[1]);
-	ur_dati2.susp[3].push(v[2]);
-});
-$.each(preFiltered.kont, function(k,v) {
-	ur_dati2.kont[0].push(v[3]);
-	ur_dati2.kont[1].push(v[0]);
-	ur_dati2.kont[2].push(v[1]);
-	ur_dati2.kont[3].push(v[2]);
-});
-console.log(ur_dati2);
-var c_options={tooltips: {enabled: true, mode: 'index', intersect: false}, hover: {mode: "nearest", intersect: true}, scales: {xAxes: [{stacked: true}], yAxes: [{stacked: true, ticks:{beginAtZero: true}}]}, maintainAspectRatio: false, aspectRatio: 1.5, defaultFontFamily: "Roboto", defaultFontSize: 14};
+//console.log(ur_dati2);
+const footer = (tooltipItems) => {
+	let sum = 0;
+	tooltipItems.forEach(function(tooltipItem) {sum += tooltipItem.parsed.y});
+	return 'Jumlah: ' + numFormat.format(sum);
+}
+const c_label = function(context) {
+	var label = context.dataset.label || '';
+	if (label) { label += ': '; }
+	if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y); }
+	return label;
+}
+var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {footer: footer, label: c_label}}}, scales: {x: {stacked: true}, y: {stacked: true, ticks:{beginAtZero: true}}}, maintainAspectRatio: false, aspectRatio: 1.5};
 
 await delay(500);
+function showDataPerWil(id, perc, col) {
+	$("#map_style").append("#MapContainer path._data"+id+"{fill:"+rgba2rgb([255, 255, 255],[col[0], col[1], col[2], perc])+"!important}");
+	$("#MapContainer path._data"+id).data("kode",id);
+}
 function TmplDataPeta(mode){
-	var title, min=0, mid=50, max=100, col="black";
+	var title, min=0, mid=50, max=100, col=[0,0,0];
 	$("#map_style").html("");
 	$("[data-mapdata]").removeClass("active");
 	$("[data-mapdata='"+mode+"']").addClass("active");
@@ -923,11 +939,10 @@ function TmplDataPeta(mode){
 		min = 0;
 		mid = (H_KonfInc/2).toFixed(0); 
 		max = H_KonfInc;
-		col = "rgba(191,144,0)";
+		col = [191,144,0];
 		$.each(data.dt_kab,function(k,v){
 			per=(v.konf.tot[0]-v.konf.tot[1])/H_KonfInc;
-			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[191, 144, 0, per])+"!important}");
-			$("#MapContainer path._data"+k).data("kode",k);
+			showDataPerWil(k, per, col);
 		});
 	}
 	if(mode===2) {
@@ -935,11 +950,10 @@ function TmplDataPeta(mode){
 		min = 0;
 		mid = (H_KonfJlh/2).toFixed(0); 
 		max = H_KonfJlh;
-		col = "rgba(191, 144, 0)";
+		col = [191, 144, 0];
 		$.each(data.dt_kab,function(k,v){
 			per=v.konf.tot[0]/H_KonfJlh;
-			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[191, 144, 0,per])+"!important}");
-			$("#MapContainer path._data"+k).data("kode",k);
+			showDataPerWil(k, per, col);
 		});
 	}
 	if(mode===3) {
@@ -947,56 +961,97 @@ function TmplDataPeta(mode){
 		min = "0%";
 		mid = numFormat.format((H_PerAkt/2)*100)+"%"; 
 		max = numFormat.format(H_PerAkt*100)+"%";
-		col = "rgba(192,0,0)";
+		col = [192,0,0];
 		$.each(data.dt_kab,function(k,v){
 			per=((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])/H_PerAkt;
-			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[192,0,0,per])+"!important}");
-			$("#MapContainer path._data"+k).data("kode",k);
+			showDataPerWil(k, per, col);
 		});
 	}
-	if(mode===4) {
-		title="Jumlah Penambahan Kasus Tuntas";
-		min = 0;
-		mid = (H_TuntInc/2).toFixed(0); 
-		max = H_TuntInc;
-		col = "rgba(0,32,96)";
-		$.each(data.dt_kab,function(k,v){
-			per=(v.konf.tot[0]-v.konf.tot[1])/H_TuntInc;
-			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[0,32,96,per])+"!important}");
-			$("#MapContainer path._data"+k).data("kode",k);
-		});
-	}
-	if(mode===5) {
+	/*if(mode===5) {
 		title="Persentase Kasus Tuntas";
 		min = numFormat.format((1-H_PerAkt)*100)+"%";
 		mid = numFormat.format((((1-H_PerAkt)/2)+0.5)*100)+"%"; 
 		max = "100%"
-		col = "rgba(0,32,96)";
+		col = [0,32,96];
 		$.each(data.dt_kab,function(k,v){
 			per=1-(((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])/H_PerAkt);
 			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[0,32,96,per])+"!important}");
 			$("#MapContainer path._data"+k).data("kode",k);
 		});
-	}
-	if(mode===6) {
+	}*/
+	if(mode===4) {
 		title="Jumlah Kasus Aktif";
 		min = 0;
 		mid = (H_AktfJlh/2).toFixed(0);
 		max = H_AktfJlh
-		col = "rgba(192,0,0)";
+		col = [192,0,0];
 		$.each(data.dt_kab,function(k,v){
 			per=(v.konf.tot[0]-v.konf.tun[0])/H_AktfJlh;
-			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[192,0,0,per])+"!important}");
-			$("#MapContainer path._data"+k).data("kode",k);
+			showDataPerWil(k, per, col);
+		});
+	}
+	if(!show_meng && mode===5) {
+		title="Jumlah Penambahan Kasus Tuntas";
+		min = 0;
+		mid = (H_TuntInc/2).toFixed(0); 
+		max = H_TuntInc;
+		col = [0,32,96];
+		$.each(data.dt_kab,function(k,v){
+			per=(v.konf.tun[0]-v.konf.tun[1])/H_TuntInc;
+			showDataPerWil(k, per, col);
+		});
+	}
+	if(show_meng && mode===5) {
+		title="Jumlah Penambahan Kasus Sembuh";
+		min = 0;
+		mid = ((H_TuntInc-H_MengInc)/2).toFixed(0); 
+		max = H_TuntInc-H_MengInc;
+		col = [40,167,69];
+		$.each(data.dt_kab,function(k,v){
+			per=((v.konf.tun[0]-v.konf.tun[1])-(v.konf.men[0]-v.konf.men[1]))/(H_TuntInc-H_MengInc);
+			showDataPerWil(k, per, col);
+		});
+	}
+	if(show_meng && mode===6) {
+		title="Jumlah Penambahan Kasus Meninggal";
+		min = 0;
+		mid = (H_MengInc/2).toFixed(0); 
+		max = H_MengInc;
+		col = [220,53,69];
+		$.each(data.dt_kab,function(k,v){
+			per=(v.konf.men[0]-v.konf.men[1])/H_MengInc;
+			showDataPerWil(k, per, col);
+		});
+	}
+	if(show_meng && mode===7) {
+		title="Tingkat Kesembuhan (Case Recovery Rate)";
+		min = "0%";
+		mid = numFormat.format((H_CRR/2)*100)+"%"; 
+		max = numFormat.format(H_CRR*100)+"%";
+		col = [40,167,69];
+		$.each(data.dt_kab,function(k,v){
+			per=((v.konf.tun[0]-v.konf.men[0])/v.konf.tot[0])/H_CRR;
+			showDataPerWil(k, per, col);
+		});
+	}
+	if(show_meng && mode===8) {
+		title="Tingkat Kematian (Case Fatality Rate)";
+		min = "0%";
+		mid = numFormat.format((H_CFR/2)*100)+"%"; 
+		max = numFormat.format(H_CFR*100)+"%";
+		col = [220,53,69];
+		$.each(data.dt_kab,function(k,v){
+			per=((v.konf.men[0])/v.konf.tot[0])/H_CFR;
+			showDataPerWil(k, per, col);
 		});
 	}
 	$("#MapIndLeg>div>span:nth-child(1)").text(min);
 	$("#MapIndLeg>div>span:nth-child(2)").text(mid);
 	$("#MapIndLeg>div>span:nth-child(3)").text(max);
-	$("#MapIndCol").css("background-image","linear-gradient(90deg, white, "+col+")");
+	$("#MapIndCol").css("background-image","linear-gradient(90deg, white, rgba("+col+"))");
 	$("#MapTitle").text(title);
 }
-TmplDataPeta(6); // Default untuk peta = mode 3
+TmplDataPeta(4); // Default untuk peta = mode 3
 $("[data-mapdata]").on("click",function(){
 	TmplDataPeta($(this).data("mapdata"));
 });
@@ -1007,7 +1062,7 @@ $(document).on("click","#MapContainer svg path[class*=_data]",function(e){
 	cldata = $(this).attr("class").match(/(_data)[0-9]*\w/g)[0];
 	if(cldata.slice(5)) {
 		kode = cldata.slice(5);
-		$("#activewil").html("#MapContainer svg ."+cldata+"{filter: drop-shadow(0px 0px 4px black)}");
+		$("#activewil").html("#MapContainer svg ."+cldata+"{filter: drop-shadow(2px 2px 0px var(--warning)) drop-shadow(-2px -2px 0 var(--warning)) drop-shadow(0 6px 0px var(--warning))}");
 		var dt=data.dt_kab[kode];
 		//val = list_kab[kode];
 		//val = val.substr(0,4)!="Kota"?"Kab. "+val : val;
@@ -1016,7 +1071,7 @@ $(document).on("click","#MapContainer svg path[class*=_data]",function(e){
 		KsAktif = dt.konf.tot[0]-dt.konf.tun[0];
 		KsBaru = dt.konf.tot[0]-dt.konf.tot[1];
 		KsBaru = KsBaru < 0 ? KsBaru : "+"+KsBaru;
-		TunBaru = dt.konf.tun[0]-dt.konf.tun[0];
+		TunBaru = dt.konf.tun[0]-dt.konf.tun[1];
 		TunBaru = TunBaru < 0 ? TunBaru : "+"+TunBaru;
 		PerAkt = numFormat.format((KsAktif/JlhKasus)*100);
 		PerTun = numFormat.format((1-(KsAktif/JlhKasus))*100);
@@ -1034,35 +1089,22 @@ $(document).on("click","#MapContainer svg path[class*=_data]",function(e){
 
 await delay(1500);
 $("#c_konf").siblings("div").remove();
+var data_konf = [];
+if(show_meng) {
+	data_konf = [
+		{label: "Meninggal", data: ur_dati2.konf[3], backgroundColor: 'rgba(192,0,0,.7)', borderWidth: 0, categoryPercentage: .9},
+		{label: "Sembuh", data: ur_dati2.konf[2], backgroundColor: 'rgba(0,32,96,.7)', borderWidth: 0, categoryPercentage: .9},
+		{label: "Aktif", data: ur_dati2.konf[1], backgroundColor: 'rgba(0,176,80,.7)', borderWidth: 0, categoryPercentage: .9}
+	];
+} else {
+	data_konf = [
+		{label: "Sembuh", data: ur_dati2.konf[2], backgroundColor: 'rgba(0,32,96,.7)', borderWidth: 0, categoryPercentage: .9},
+		{label: "Aktif", data: ur_dati2.konf[1], backgroundColor: 'rgba(0,176,80,.7)', borderWidth: 0, categoryPercentage: .9}
+	];
+}
 var c_konf = new Chart(document.getElementById("c_konf").getContext("2d"), {
 	type: 'bar',
-	data: {
-		labels: ur_dati2.konf[0],
-		datasets: [{
-			label: "Jumlah",
-			data: ur_dati2.konf[1],
-			borderWidth: 0,
-			backgroundColor: "rgba(0,0,0,0)",
-			borderColor: "rgba(0,0,0,0)",
-			type: 'line',
-			pointRadius: 0,
-		},
-		{
-			label: "Tuntas",
-			data: ur_dati2.konf[3],
-			backgroundColor: 'rgba(0,32,96,.7)',
-			borderWidth: 0,
-			categoryPercentage: .9,
-		},
-		{
-			label: "Aktif",
-			data: ur_dati2.konf[2],
-			backgroundColor: "rgba(0,176,80,.7)",
-			borderWidth: 0,
-			categoryPercentage: .9,
-			//barPercentage: 1.0
-		}]
-	},
+	data: {labels: ur_dati2.konf[0], datasets: data_konf},
 	options: c_options
 });
 
@@ -1073,24 +1115,15 @@ var c_prob = new Chart(document.getElementById("c_prob").getContext("2d"), {
 	data: {
 		labels: ur_dati2.prob[0],
 		datasets: [{
-			label: "Jumlah",
-			data: ur_dati2.prob[1],
-			borderWidth: 0,
-			backgroundColor: "rgba(0,0,0,0)",
-			borderColor: "rgba(0,0,0,0)",
-			type: 'line',
-			pointRadius: 0,
-		},
-		{
 			label: "Tuntas",
-			data: ur_dati2.prob[3],
+			data: ur_dati2.prob[2],
 			backgroundColor: 'rgba(0,32,96,.7)',
 			borderWidth: 0,
 			categoryPercentage: .9,
 		},
 		{
 			label: "Aktif",
-			data: ur_dati2.prob[2],
+			data: ur_dati2.prob[1],
 			backgroundColor: "rgba(0,176,80,.7)",
 			borderWidth: 0,
 			categoryPercentage: .9,
@@ -1107,24 +1140,15 @@ var c_susp = new Chart(document.getElementById("c_susp").getContext("2d"), {
 	data: {
 		labels: ur_dati2.susp[0],
 		datasets: [{
-			label: "Jumlah",
-			data: ur_dati2.susp[1],
-			borderWidth: 0,
-			backgroundColor: "rgba(0,0,0,0)",
-			borderColor: "rgba(0,0,0,0)",
-			type: 'line',
-			pointRadius: 0,
-		},
-		{
 			label: "Tuntas",
-			data: ur_dati2.susp[3],
+			data: ur_dati2.susp[2],
 			backgroundColor: 'rgba(0,32,96,.7)',
 			borderWidth: 0,
 			categoryPercentage: .9,
 		},
 		{
 			label: "Aktif",
-			data: ur_dati2.susp[2],
+			data: ur_dati2.susp[1],
 			backgroundColor: "rgba(0,176,80,.7)",
 			borderWidth: 0,
 			categoryPercentage: .9,
@@ -1141,24 +1165,15 @@ var c_kont = new Chart(document.getElementById("c_kont").getContext("2d"), {
 	data: {
 		labels: ur_dati2.kont[0],
 		datasets: [{
-			label: "Jumlah",
-			data: ur_dati2.kont[1],
-			borderWidth: 0,
-			backgroundColor: "rgba(0,0,0,0)",
-			borderColor: "rgba(0,0,0,0)",
-			type: 'line',
-			pointRadius: 0,
-		},
-		{
 			label: "Tuntas",
-			data: ur_dati2.kont[3],
+			data: ur_dati2.kont[2],
 			backgroundColor: 'rgba(0,32,96,.7)',
 			borderWidth: 0,
 			categoryPercentage: .9,
 		},
 		{
 			label: "Aktif",
-			data: ur_dati2.kont[2],
+			data: ur_dati2.kont[1],
 			backgroundColor: "rgba(0,176,80,.7)",
 			borderWidth: 0,
 			categoryPercentage: .9,
