@@ -549,7 +549,6 @@ var url = new URL(window.location.href);
 var tgl = url.searchParams.get("tgl");
 val_tgl = moment(tgl, 'YYYY-MM-DD', true).isValid();
 tgl_c = (val_tgl && moment(tgl).isSameOrAfter('2021-02-15')) ? tgl : "terkini";
-console.log(tgl_c, val_tgl);
 
 function NolAwal(num, padlen) {
 	var pad_char = '0';
@@ -597,7 +596,7 @@ observer.observe(document.getElementById('MapContainer'), {
 });
 
 $.ajax({
-	url:'https://jf.jollycomp.com/ajax/public_test.php',
+	url:'https://jf.jollycomp.com/ajax/public.php',
 	data: {action: "datakab", tgl: tgl_c},
 	method: "POST",
 	dataType: "json",
