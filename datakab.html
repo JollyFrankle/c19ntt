@@ -24,15 +24,15 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 	<style>
 body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-3.5rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday, #SembCasesToday{padding-left:1.25rem;margin-bottom:0;list-style-type:square}.fw-500{font-weight:500}
 #TambahanInfo {z-index: 1079; position: sticky; bottom: 0; max-height: 20vh; overflow-y: auto; margin-bottom: 0;}
-#MapContainer{height:500px; max-height:75vh; cursor: grab} #MapContainer:active {cursor: grabbing;}
+#MapContainer{height:500px; max-height:75vh; cursor: grab; scrollbar-width: none} #MapContainer:active {cursor: grabbing;}
 #MapContainer svg{overflow:auto; width:100%}
 #MapContainer svg path{cursor:pointer}
 #MapLegend{z-index:1;position:absolute;left:.5rem;bottom:.5rem;width:250px}
 #MapNav .dropdown-item { padding: .2rem .75rem; font-size: .875rem; }
 #MapNav .dropdown-header { padding: .3rem .75rem }
-#MapNav{position:absolute;bottom:.5rem;right:.5rem;width:300px;z-index:0;white-space:nowrap;display:flex}
+#MapNav{position:absolute;bottom:.5rem;right:.5rem;width:316px;z-index:0;white-space:nowrap;display:flex}
 #MapHeader{position:absolute;top:.5rem;left:.5rem;right:.5rem;margin-bottom:0;z-index: 1;text-align: center;line-height:1.25}
-#MapIndLeg{position: absolute;bottom: 3rem;right: .5rem;width:300px;user-select:none}
+#MapIndLeg{position: absolute;bottom: 3rem;right: .5rem;width:316px;user-select:none}
 #MapIndLeg>div {line-height:1;display:flex;justify-content:space-between;position:relative;font-size:80%}
 #MapIndLeg>div span:nth-child(2){position:absolute;width:100%;text-align:center}
 #MapIndCol{height:.5rem;border-radius:.25rem}
@@ -47,11 +47,18 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 	#MapContainer{max-height:275px;height:50vh}
 	#MapIndLeg {position:static;width:calc(100% - 9rem);margin:-1.5rem .5rem .5rem 8.5rem}
 	#MapNav{position:static;width:100%;margin: -2.5rem .5rem 1rem}
-	#MapMobileNav{display:block;position:absolute;right:.5rem;bottom:276px;width:54px;text-align:right}
+	#MapMobileNav{display:block;position:absolute;right:.5rem;bottom:126px;width:54px;text-align:right}
 	#MapNav .input-group{display: none}
 }
 #MapContainer::-webkit-scrollbar{display: none;}
 @media (max-width:576px) {.chart-container{max-height:45vh;}}
+
+/* Full screen peta */
+#peta_supercont.map-fs {position: fixed!important; left: 0; right: 0; top: 0; bottom: 0; width: 100vw; height: 100vh; z-index: 1991}
+.map-fs #MapContainer {max-height: 100vh; height: 100vh}
+@media (max-width: 767.98px) {
+	.map-fs #MapContainer {height: calc(100vh - 93px);}
+}
 </style>
 </head>
 <body>
@@ -184,16 +191,17 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 </div>
 
 <div id="Bg1_Peta" class="anchor"></div>
-<div class="position-relative rounded overflow-hidden shadow mb-3">
+<div id="peta_supercont" data-fs="false" class="bg-white position-relative rounded overflow-hidden shadow mb-3">
+	<button type="button" class="map-fs-toggle btn btn-light py-1 px-2" style="position: absolute; right: .5rem; top: .5rem; z-index: 2"><i class="fas fa-expand"></i></button>
 	<h6 id="MapHeader" class="outline-white">
 		<div id="MapTitle">Memuat Peta...</div>
 		<div class="small text-muted">Perhatikan skala di bawah peta untuk konteks</div>
 	</h6>
-	<div id="MapContainer" style="background:#C6ECFF" data-zoom-on-wheel="zoom-amount: 0.002; min-scale: 1; max-scale: 5;" data-pan-on-drag >
+	<div id="MapContainer" class="user-select-none" style="background:#C6ECFF" data-zoom-on-wheel="zoom-amount: 0.002; min-scale: 1; max-scale: 5;" data-pan-on-drag >
 	</div>
 	<div id="MapIndLeg">
 		<div>
-			<span>0</span> <span>50</span> <span>100</span>
+			<span>0</span><span>50</span><span>100</span>
 		</div>
 		<div id="MapIndCol"></div>
 	</div>
@@ -230,7 +238,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 			</div>
 		</div>
 	</div>
-	<div id="MapLegend" class="card">
+	<!-- <div id="MapLegend" class="card">
 		<div class="pb-1 bg-secondary"></div>
 		<div class="card-body small py-2 px-3">
 			<h6 class="mb-0" id="LegIn_Kab">Klik pada salah satu Kab/Kota</h6>
@@ -265,6 +273,13 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 			<hr class="my-1"/>
 			<a class="d-block" href="#Bg4_Kasus" id="LegIn_DatiAnchor">Selengkapnya...</a>
 		</div>
+	</div> -->
+	<div id="MapLegend" class="shadow bg-white rounded overflow-hidden">
+		<div class="p-2 border-bottom">
+			<div class="small">Anda memilih:</div>
+			<div id="ml_kab" class="h6 mb-0 text-truncate">Belum ada Kab/Kota. Klik peta.</div>
+		</div>
+		<a class="d-flex justify-content-between small align-items-center px-2 py-1 bg-light" style="text-decoration: none" href="#Bg4_Kasus" id="ml_anchor" data-kab="-1">Lihat statistik lengkap <i class="fas fa-arrow-right"></i></a>
 	</div>
 </div>
 
@@ -938,9 +953,23 @@ const c_label = function(context) {
 var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {footer: footer, label: c_label}}}, scales: {x: {stacked: true}, y: {stacked: true, ticks:{beginAtZero: true}}}, maintainAspectRatio: false, aspectRatio: 1.5};
 
 await delay(500);
-function showDataPerWil(id, perc, col) {
+$(".map-fs-toggle").on("click", function() {
+	if($("#peta_supercont").data("fs")==true) {
+		$("body").css("overflow", "auto");
+		$("#peta_supercont").removeClass("map-fs").data("fs", false);
+	} else {
+		$("body").css("overflow", "hidden");
+		$("#peta_supercont").addClass("map-fs").data("fs", true);
+	}
+});
+function showDataPerWil(id, perc, col, text=null) {
+	var special_len = (text.match(/[,.]/g)||[]).length;
+	var rect_w = (text.length - special_len)*8 + special_len*4 + 8;
 	$("#map_style").append("#MapContainer path._data"+id+"{fill:"+rgba2rgb([255, 255, 255],[col[0], col[1], col[2], perc])+"!important}");
 	$("#MapContainer path._data"+id).data("kode",id);
+	$("#MapContainer .label_data"+id+">text").text(text);
+	$("#MapContainer .label_data"+id+">rect").css({width: rect_w+"px"});
+	delete special_len; delete rect_w;
 }
 function TmplDataPeta(mode){
 	var title, min=0, mid=50, max=100, col=[0,0,0];
@@ -954,8 +983,8 @@ function TmplDataPeta(mode){
 		max = H_KonfInc;
 		col = [191,144,0];
 		$.each(data.dt_kab,function(k,v){
-			per=(v.konf.tot[0]-v.konf.tot[1])/H_KonfInc;
-			showDataPerWil(k, per, col);
+			per=(v.konf.tot[0]-v.konf.tot[1])/H_KonfInc, text = numFormat.format(v.konf.tot[0]-v.konf.tot[1]);
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	if(mode===2) {
@@ -965,8 +994,8 @@ function TmplDataPeta(mode){
 		max = H_KonfJlh;
 		col = [191, 144, 0];
 		$.each(data.dt_kab,function(k,v){
-			per=v.konf.tot[0]/H_KonfJlh;
-			showDataPerWil(k, per, col);
+			per=v.konf.tot[0]/H_KonfJlh, text = numFormat.format(v.konf.tot[0]);
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	if(mode===3) {
@@ -976,8 +1005,8 @@ function TmplDataPeta(mode){
 		max = numFormat.format(H_PerAkt*100)+"%";
 		col = [192,0,0];
 		$.each(data.dt_kab,function(k,v){
-			per=((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])/H_PerAkt;
-			showDataPerWil(k, per, col);
+			per=((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])/H_PerAkt, text = numFormat.format(((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])*100)+"%";
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	/*if(mode===5) {
@@ -999,8 +1028,8 @@ function TmplDataPeta(mode){
 		max = H_AktfJlh
 		col = [192,0,0];
 		$.each(data.dt_kab,function(k,v){
-			per=(v.konf.tot[0]-v.konf.tun[0])/H_AktfJlh;
-			showDataPerWil(k, per, col);
+			var per = (v.konf.tot[0]-v.konf.tun[0])/H_AktfJlh, text = numFormat.format(v.konf.tot[0]-v.konf.tun[0]);
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	if(!show_meng && mode===5) {
@@ -1010,8 +1039,8 @@ function TmplDataPeta(mode){
 		max = H_TuntInc;
 		col = [0,32,96];
 		$.each(data.dt_kab,function(k,v){
-			per=(v.konf.tun[0]-v.konf.tun[1])/H_TuntInc;
-			showDataPerWil(k, per, col);
+			per=(v.konf.tun[0]-v.konf.tun[1])/H_TuntInc, text = numFormat.format(v.konf.tun[0]-v.konf.tun[1]);
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	if(show_meng && mode===5) {
@@ -1021,8 +1050,8 @@ function TmplDataPeta(mode){
 		max = H_TuntInc-H_MengInc;
 		col = [40,167,69];
 		$.each(data.dt_kab,function(k,v){
-			per=((v.konf.tun[0]-v.konf.tun[1])-(v.konf.men[0]-v.konf.men[1]))/(H_TuntInc-H_MengInc);
-			showDataPerWil(k, per, col);
+			per=((v.konf.tun[0]-v.konf.tun[1])-(v.konf.men[0]-v.konf.men[1]))/(H_TuntInc-H_MengInc), text = numFormat.format((v.konf.tun[0]-v.konf.tun[1])-(v.konf.men[0]-v.konf.men[1]));
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	if(show_meng && mode===6) {
@@ -1032,8 +1061,8 @@ function TmplDataPeta(mode){
 		max = H_MengInc;
 		col = [220,53,69];
 		$.each(data.dt_kab,function(k,v){
-			per=(v.konf.men[0]-v.konf.men[1])/H_MengInc;
-			showDataPerWil(k, per, col);
+			per=(v.konf.men[0]-v.konf.men[1])/H_MengInc, text = numFormat.format(v.konf.men[0]-v.konf.men[1]);
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	if(show_meng && mode===7) {
@@ -1043,8 +1072,8 @@ function TmplDataPeta(mode){
 		max = numFormat.format(H_CRR*100)+"%";
 		col = [40,167,69];
 		$.each(data.dt_kab,function(k,v){
-			per=((v.konf.tun[0]-v.konf.men[0])/v.konf.tot[0])/H_CRR;
-			showDataPerWil(k, per, col);
+			per=((v.konf.tun[0]-v.konf.men[0])/v.konf.tot[0])/H_CRR, text = numFormat.format(((v.konf.tun[0]-v.konf.men[0])/v.konf.tot[0])*100)+"%";
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	if(show_meng && mode===8) {
@@ -1054,8 +1083,8 @@ function TmplDataPeta(mode){
 		max = numFormat.format(H_CFR*100)+"%";
 		col = [220,53,69];
 		$.each(data.dt_kab,function(k,v){
-			per=((v.konf.men[0])/v.konf.tot[0])/H_CFR;
-			showDataPerWil(k, per, col);
+			per=(v.konf.men[0]/v.konf.tot[0])/H_CFR, text = numFormat.format((v.konf.men[0]/v.konf.tot[0])*100)+"%";
+			showDataPerWil(k, per, col, text);
 		});
 	}
 	$("#MapIndLeg>div>span:nth-child(1)").text(min);
@@ -1072,31 +1101,26 @@ $("[data-mapdata]").on("click",function(){
 $("#spinner_loader").fadeOut();
 
 $(document).on("click","#MapContainer svg path[class*=_data]",function(e){
-	cldata = $(this).attr("class").match(/(_data)[0-9]*\w/g)[0];
+	var cldata = $(this).attr("class").match(/(_data)[0-9]*\w/g)[0];
 	if(cldata.slice(5)) {
-		kode = cldata.slice(5);
+		//$("#MapContainer #peta_utama>#tmp_kab_selected").remove();
+		//$("#MapContainer #peta_utama").prepend('<g id="tmp_kab_selected">'+($('#MapContainer svg .'+cldata).prop("outerHTML"))+'</g>');
+		var kode = cldata.slice(5);
 		$("#activewil").html("#MapContainer svg ."+cldata+"{filter: drop-shadow(2px 2px 0px var(--warning)) drop-shadow(-2px -2px 0 var(--warning)) drop-shadow(0 6px 0px var(--warning))}");
 		var dt=data.dt_kab[kode];
-		//val = list_kab[kode];
-		//val = val.substr(0,4)!="Kota"?"Kab. "+val : val;
-		JlhKasus = dt.konf.tot[0];
-		PerKs = numFormat.format((JlhKasus/data.ntt.konf.tot)*100);
-		KsAktif = dt.konf.tot[0]-dt.konf.tun[0];
-		KsBaru = dt.konf.tot[0]-dt.konf.tot[1];
-		KsBaru = KsBaru < 0 ? KsBaru : "+"+KsBaru;
-		TunBaru = dt.konf.tun[0]-dt.konf.tun[1];
-		TunBaru = TunBaru < 0 ? TunBaru : "+"+TunBaru;
-		PerAkt = numFormat.format((KsAktif/JlhKasus)*100);
-		PerTun = numFormat.format((1-(KsAktif/JlhKasus))*100);
-		$("#LegIn_Kab").text(dt.nama);
-		$("#LegIn_PerKs").text(PerKs+"% kasus di NTT");
-		$("#LegIn_Jlh").text(numFormat.format(JlhKasus));
-		$("#LegIn_Akt").text(numFormat.format(KsAktif));
-		$("#LegIn_PerAkt").text(PerAkt+"%");
-		$("#LegIn_PerTun").text(PerTun+"%");
-		$("#LegIn_Tun").text(TunBaru+" kasus");
-		$("#LegIn_Num").text(KsBaru+" kasus");
-		$("#LegIn_DatiAnchor").prop("href","#Bg4_Kasus");
+		$("#ml_kab").text(dt.nama);
+		$("#ml_anchor").data("kab", kode);
+	}
+});
+$("#ml_anchor").on("click", function(e){
+	e.preventDefault();
+	$("#peta_supercont").removeClass("map-fs").data("fs", false);
+	$("body").css("overflow", "auto");
+	$('html,body').animate({scrollTop: $("#Bg4_Kasus").offset().top}, 1000);
+	var kode = $(this).data("kab");
+	if(kode>=0 && kode<=21) {
+		$("#selDati2").val(kode);
+		$("#selDati2_show").click();
 	}
 });
 
