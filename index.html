@@ -14,9 +14,9 @@
 	<meta http-equiv='expires' content='0'>
 	<meta http-equiv='pragma' content='no-cache'>
 	<title>JFP – COVID-19 NTT Tracker</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" onload="if(media!='all')media='all'">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" onload="if(media!='all')media='all'">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.css" onload="if(media!='all')media='all'"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167603452-2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
@@ -24,7 +24,6 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 <style>
 body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-width:100%; max-width:100%; margin-bottom:1rem;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:4px}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.card{overflow:hidden}#TP_Tabel td{vertical-align:middle;text-align:center}#TP_Tabel td:first-child{text-align:left}.chart-container div{position:absolute;width:100%;height:100%;text-align:center;display:flex;align-items:center;justify-content:center;background: var(--light);border-radius: .25rem;}.anchor{position:absolute;margin-top:-.5rem;}#TP_Tabel td:nth-child(2),#TP_Tabel td:nth-child(5),#TP_Tabel td:nth-child(8) {border-left:1px solid #dee2e6}.fw-500{font-weight:500;}
 @media (max-width:576px) {.chart-container{max-height:45vh;}}
-.container_rekap {padding: 1rem;margin: -1rem;}
 #TambahanInfo {z-index: 1079; position: sticky; bottom: 0; max-height: 20vh; overflow-y: auto; margin-bottom: 0;}
 </style>
 <noscript><style>body{overflow:hidden;}</style></noscript>
@@ -174,27 +173,35 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 </div>
 
 <div id="Bg1_Rekap" class="anchor"></div>
-<h2 class="border-bottom"><small>1.</small> Kasus Hari Ini</h2>
-<div class="container_rekap">
-	<div class="alert alert-info text-center" style="position:sticky;top:0;z-index:9">
-		<div class="d-inline-block">Data harian <strong class="LastData">Memuat...</strong>,</div>
-		<div class="d-inline-block">Terakhir diperbarui <strong class="LastMod">Memuat...</strong></div>
+<h2 class="border-bottom mb-3"><small>1.</small> Kasus Hari Ini</h2>
+<div class="m-n2 p-2">
+	<div class="alert alert-info py-2 px-3 d-block text-center d-md-flex justify-content-between align-items-center" style="position:sticky;top:0;z-index:9;font-size:14px;line-height:1.25;">
+		<div class="text-md-left">
+			<div>Data per tanggal <strong class="LastData">Memuat...</strong></div>
+			<div>Pembaruan <strong class="LastMod">Memuat...</strong></div>
+		</div>
+		<div class="text-md-right">
+			Status data: <span id="status_data" class="fw-500 badge badge-light" style="font-size: 1rem">• • •</span>
+		</div>
 	</div>
 	<div class="form-row">
-		<div class="col-sm-6 col-lg-3 mb-3">
-			<div class="card">
+		<div class="col-sm-6 col-lg-3 mb-3 mb-lg-0">
+			<div class="rounded overflow-hidden shadow bg-white position-relative">
 				<div style="background:#BF9000" class="pb-1"></div>
-				<div class="card-body">
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
 					<h5 class="card-title mb-1 text-truncate" style="color:#BF9000">Jumlah kasus positif</h5>
-					<p class="display-4 mb-1" id="TB_JlhKonf">...</p>
+					<div class="d-flex align-items-center justify-content-between mb-1 display-4">
+						<span id="TB_JlhKonf">• • •</span>
+						<i class="fas fa-user-plus d-sm-none d-md-block d-lg-none d-xl-block small" style="color: #c6c8ca; font-size: 2rem"></i>
+					</div>
 					<hr class="my-1"/>
 					<div class="d-flex justify-content-between text-muted">
-						<span id="TB_JlhKonfYest">Memuat</span>
-						<span class="logoinc" id="TB_JlhKonfInc">Memuat</span>
+						<span id="TB_JlhKonfYest">Kemarin: • • •</span>
+						<span id="TB_JlhKonfInc"><i class="fas fa-angle-double-up"></i> <span>• • •</span></span>
 					</div>
 				</div>
 				<div class="bg-secondary pb-1"></div>
-				<div class="card-body">
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
 					Penambahan tertinggi <span class="GET_day-html"></span>:
 					<div class="d-flex justify-content-between mb-2">
 						<strong id="TBA_KonfHighest">...</strong>
@@ -205,29 +212,29 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 						<strong id="TBA_KonfLowest">...</strong>
 						<small id="TBA_KonfLowestDate">Memuat</small>
 					</div>
-					<div class="d-flex">
-						<div class="">
-							Tren 7 hari:
-							<strong class="d-block" id="TBA_KonfTrend">Memuat</strong>
-						</div>
+					<div>
+						Tren 7 hari: <strong class="d-block" id="TBA_KonfTrend"><i class="fas"></i> <span>• • •</span></strong>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 col-lg-3 mb-3">
-			<div class="card">
+		<div class="col-sm-6 col-lg-3 mb-3 mb-lg-0">
+			<div class="rounded overflow-hidden shadow bg-white position-relative">
 				<div style="background:#002060" class="pb-1"></div>
-				<div class="card-body">
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
 					<h5 class="card-title mb-1 text-truncate" style="color:#002060">Jumlah sembuh</h5>
-					<p class="display-4 mb-1" id="TB_JlhSemb">...</p>
+					<div class="d-flex align-items-center justify-content-between mb-1 display-4">
+						<span id="TB_JlhSemb">• • •</span>
+						<i class="fas fa-user-check d-sm-none d-md-block d-lg-none d-xl-block small" style="color: #c6c8ca; font-size: 2rem"></i>
+					</div>
 					<hr class="my-1"/>
 					<div class="d-flex justify-content-between text-muted">
-						<span id="TB_JlhSembYest">Memuat</span>
-						<span class="logoinc" id="TB_JlhSembInc">Memuat</span>
+						<span id="TB_JlhSembYest">Kemarin: • • •</span>
+						<span id="TB_JlhSembInc"><i class="fas fa-angle-double-up"></i> <span>• • •</span></span>
 					</div>
 				</div>
 				<div class="bg-secondary pb-1"></div>
-				<div class="card-body">
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
 					Penambahan tertinggi <span class="GET_day-html"></span>:
 					<div class="d-flex justify-content-between mb-2">
 						<strong id="TBA_SembHighest">...</strong>
@@ -241,7 +248,7 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 					<div class="d-flex justify-content-between">
 						<div class="mr-1">
 							Tren 7 hari:
-							<strong class="d-block" id="TBA_SembTrend">Memuat</strong>
+							<strong class="d-block" id="TBA_SembTrend"><i class="fas"></i> <span>• • •</span></strong>
 						</div>
 						<div class="ml-1 text-right">
 							<abbr title="Tingkat kesembuhan/Case recovery rate">CRR:</abbr>
@@ -251,20 +258,23 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 col-lg-3 mb-3">
-			<div class="card">
+		<div class="col-sm-6 col-lg-3 mb-3 mb-lg-0">
+			<div class="rounded overflow-hidden shadow bg-white position-relative">
 				<div style="background:#C00000" class="pb-1"></div>
-				<div class="card-body">
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
 					<h5 class="card-title mb-1 text-truncate" style="color:#C00000">Jumlah meninggal</h5>
-					<p class="display-4 mb-1" id="TB_JlhMeng">...</p>
+					<div class="d-flex align-items-center justify-content-between mb-1 display-4">
+						<span id="TB_JlhMeng">• • •</span>
+						<i class="fas fa-user-minus d-sm-none d-md-block d-lg-none d-xl-block small" style="color: #c6c8ca; font-size: 2rem"></i>
+					</div>
 					<hr class="my-1"/>
 					<div class="d-flex justify-content-between text-muted">
-						<span id="TB_JlhMengYest">Memuat</span>
-						<span class="logoinc" id="TB_JlhMengInc">Memuat</span>
+						<span id="TB_JlhMengYest">Kemarin: • • •</span>
+						<span id="TB_JlhMengInc"><i class="fas fa-angle-double-up"></i> <span>• • •</span></span>
 					</div>
 				</div>
 				<div class="bg-secondary pb-1"></div>
-				<div class="card-body">
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
 					Penambahan tertinggi <span class="GET_day-html"></span>:
 					<div class="d-flex justify-content-between mb-2">
 						<strong id="TBA_MengHighest">...</strong>
@@ -278,7 +288,7 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 					<div class="d-flex justify-content-between">
 						<div class="mr-1">
 							Tren 7 hari:
-							<strong class="d-block" id="TBA_MengTrend">Memuat</strong>
+							<strong class="d-block" id="TBA_MengTrend"><i class="fas"></i> <span>• • •</span></strong>
 						</div>
 						<div class="ml-1 text-right">
 							<abbr title="Tingkat kematian/Case fatality rate">CFR:</abbr>
@@ -288,44 +298,50 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 col-lg-3 mb-3">
-			<div class="card">
+		<div class="col-sm-6 col-lg-3 mb-3 mb-lg-0">
+			<div class="rounded overflow-hidden shadow bg-white position-relative">
 				<div style="background:#00B050" class="pb-1"></div>
-				<div class="card-body">
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
 					<h5 class="card-title mb-1 text-truncate" style="color:#00B050">Kasus aktif</h5>
-					<p class="display-4 mb-1" id="TB_JlhAktif">...</p>
+					<div class="d-flex align-items-center justify-content-between mb-1 display-4">
+						<span id="TB_JlhAktif">• • •</span>
+						<i class="fas fa-user-tag d-sm-none d-md-block d-lg-none d-xl-block small" style="color: #c6c8ca; font-size: 2rem"></i>
+					</div>
 					<hr class="my-1"/>
 					<div class="d-flex justify-content-between text-muted">
-						<span id="TB_JlhAktifYest">Memuat</span>
-						<span id="TB_JlhAktifSelisih">Memuat</span>
+						<span id="TB_JlhAktifYest">Kemarin: • • •</span>
+						<span id="TB_JlhAktifSelisih"><i class="fas"></i> <span>• • •</span></span>
 					</div>
 				</div>
 				<div class="bg-secondary pb-1"></div>
-				<div class="card-body">
-					Persentase tertinggi <span class="GET_day-html"></span>:
+				<div class="p-4 p-sm-3 p-md-4 p-lg-3">
+					Jumlah tertinggi <span class="GET_day-html"></span>:
 					<div class="d-flex justify-content-between mb-2">
 						<strong id="TBA_AktfHighest">...</strong>
 						<small id="TBA_AktfHighestDate">Memuat</small>
 					</div>
-					Persentase terendah <span class="GET_day-html"></span>:
+					Jumlah terendah <span class="GET_day-html"></span>:
 					<div class="d-flex justify-content-between mb-2">
 						<strong id="TBA_AktfLowest">...</strong>
 						<small id="TBA_AktfLowestDate">Memuat</small>
 					</div>
-					Persentase saat ini:
+					Persentase ks. aktif saat ini:
 					<div><strong id="TBA_AktfPersen">...</strong></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="text-center mb-3">
-		<a class="btn btn-primary btn-sm" href="harian.html">Rincian data harian
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
-		</a>
-		<a class="btn btn-info btn-sm" href="datakab.html">Data hari ini per Kab/Kota
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
-		</a>
+	<div class="border-top mt-2 px-2 py-1 small mx-n2 mb-n2 bg-dark text-light" id="ffss_footer" style="display: none">
+		<div class="d-flex align-items-center justify-content-between">
+			<strong><i class="fas fa-globe"></i> jollyfrankle.github.io</strong>
+			<span><i class="fab fa-twitter"></i> <i class="fab fa-github"></i> @JollyFrankle</span>
+		</div>
 	</div>
+</div>
+
+<div class="text-center my-3">
+	<a class="btn btn-primary btn-sm" href="./harian.html">Perkembangan harian <i class="fas fa-chart-line"></i></a>
+	<a class="btn btn-info btn-sm" href="./datakab.html">Data per Kab/Kota <i class="fa fa-map-marked-alt"></i></a>
 </div>
 
 <div id="Bg2_Grafik" class="anchor"></div>
@@ -419,7 +435,7 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
 <script>
 const delay = ms => new Promise(res=>setTimeout(res,ms));
 const NamaBulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
@@ -435,6 +451,11 @@ var url = new URL(window.location.href);
 var day = url.searchParams.get("day");
 var GET_day_plain = 0;
 if(day<=0) GET_day_plain=90; else GET_day_plain = day;
+
+if(url.searchParams.get("ffss")=="true") {
+	$("#ffss_footer").show();
+	$("#TambahanInfo").remove();
+}
 
 $("#RangeSel").val(GET_day_plain);
 function DateIndo(d) {var t=new Date(d); return t.getDate()+" "+NamaBulan[t.getMonth()]+" "+t.getFullYear();}
@@ -457,6 +478,7 @@ $.ajax({
 				$("#TI_text").html(data.peng.text);
 				$("#TambahanInfo").addClass("alert-"+(data.peng.type ?? "info")).show();
 			}
+			$("#status_data").text(data.status_data.text).addClass("badge-"+data.status_data.color).removeClass("badge-light");
 		}
 		if(data.error) alert("[!] Data tidak dapat diambil:\n\nAlasan: "+data.text+"\n\nHubungi jollyfrankle3@gmail.com apabila Anda yakin ini kesalahan.");
 	},
@@ -473,8 +495,36 @@ if(day>Tanggal.length) GET_day_plain=Tanggal.length;
 
 $(".GET_day-html").text(GET_day_plain+" hari");
 
-Chart.defaults.global.defaultFontFamily="Roboto,serif";
-var DefChartOpt={tooltips:{enabled:1,mode:"index",intersect:0,callbacks:{title:function(e,t){return DateIndo(e[0].xLabel)}}},hover:{mode:"nearest",intersect:1},elements:{point:{radius:1}},maintainAspectRatio:0};
+Chart.defaults.font.family="Roboto";
+const ct_label = function(context) {
+	var label = context.dataset.label || '';
+	if (label) { label += ': '; }
+	if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y); }
+	return label;
+}
+const ct_label_perc = function(context) {
+	var label = context.dataset.label || '';
+	if (label) { label += ': '; }
+	if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y); }
+	return label+"%";
+}
+const ct_title = function(ttI, data) {
+	return DateIndo(ttI[0].label);
+}
+const ct_y = function(v) {
+	return numFormat.format(v);
+}
+var bln = "";
+const ct_xtgl = function(val, ind) {
+	var tgl = new Date(data.tgl[ind]), opt="";
+	var bln_new = NamaBulan[tgl.getMonth()]+" "+tgl.getFullYear();
+	if(bln!=bln_new) opt=bln_new;
+	bln = bln_new;
+	if(opt!="") return opt;
+}
+var c_stdopt = {interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {title: ct_title, label: ct_label}}}, scales: {x: {stacked: true, ticks: {callback: ct_xtgl}}, y: {ticks:{callback: ct_y, beginAtZero: true}}}, elements: {point: {radius:1}, line: {tension: .5}}, maintainAspectRatio: false, aspectRatio: 1.5};
+
+//var c_stdopt={tooltips:{enabled:1,mode:"index",intersect:0,callbacks:{title:function(e,t){return DateIndo(e[0].xLabel)}}},hover:{mode:"nearest",intersect:1},elements:{point:{radius:1}},maintainAspectRatio:0};
 function getMinMax(arr) {
 	let min = arr[0];
 	let max = arr[0];
@@ -513,12 +563,12 @@ function TrendInd(mode,val1,val2) {
 		var selisih = val1 - val2;
 		var perc = selisih / val2;
 		if(perc > 0) {
-			i="Meningkat "; l="logoinc";
+			i="Meningkat "; l="fa-chevron-circle-up";
 		}
 		if(perc < 0) {
-			i="Menurun "; l="logodec";
+			i="Menurun "; l="fa-chevron-circle-down";
 		}
-		if(perc===0) {i="Tidak ada perubahan";c="muted";l="logonet"}
+		if(perc===0) {i="Tidak ada perubahan";c="muted";l="fa-minus-circle"}
 	}
 	if(mode==1) {
 		if(perc > 0.5) {i+="tajam";c="danger"}
@@ -565,24 +615,28 @@ $(document).ready(async function(){
 		}*/
 	});
 	var JlhYestPre = "Kemarin: ", TanggalLen=Tanggal.length;
-	//await delay(500);
+	//await delay(500); 
 	$("#TB_JlhKonf").text(numFormat.format(KonfJuml[TanggalLen-1]));
 	$("#TB_JlhKonfYest").text(JlhYestPre+numFormat.format(KonfJuml[TanggalLen-2]));
-	$("#TB_JlhKonfInc").text(numFormat.format(KonfBaru[TanggalLen-1]));
+	$("#TB_JlhKonfInc>span").text(numFormat.format(KonfBaru[TanggalLen-1]));
+	$("#TB_JlhKonfInc").addClass(KonfBaru[TanggalLen-1]>(0.001*KonfJuml[TanggalLen-1]) ? "text-danger" : "");
 
 	$("#TB_JlhSemb").text(numFormat.format(SembJuml[TanggalLen-1]));
 	$("#TB_JlhSembYest").text(JlhYestPre+numFormat.format(SembJuml[TanggalLen-2]));
-	$("#TB_JlhSembInc").text(numFormat.format(SembBaru[TanggalLen-1]));
+	$("#TB_JlhSembInc>span").text(numFormat.format(SembBaru[TanggalLen-1]));
+	$("#TB_JlhSembInc").addClass(SembBaru[TanggalLen-1]>(0.001*SembJuml[TanggalLen-1]) ? "text-danger" : "");
 
 	$("#TB_JlhMeng").text(numFormat.format(MengJuml[TanggalLen-1]));
 	$("#TB_JlhMengYest").text(JlhYestPre+numFormat.format(MengJuml[TanggalLen-2]));
-	$("#TB_JlhMengInc").text(numFormat.format(MengBaru[TanggalLen-1]));
+	$("#TB_JlhMengInc>span").text(numFormat.format(MengBaru[TanggalLen-1]));
+	$("#TB_JlhMengInc").addClass(MengBaru[TanggalLen-1]>(0.001*MengJuml[TanggalLen-1]) ? "text-danger" : "");
 
 	var SelisihAktif = AktifJuml[AktifJuml.length-1]-AktifJuml[AktifJuml.length-2];
-	SelAkInd = (SelisihAktif<0) ? "logodec text-success" : "logoinc text-danger";
 	$("#TB_JlhAktif").text(numFormat.format(AktifJuml[AktifJuml.length-1]));
 	$("#TB_JlhAktifYest").text(JlhYestPre+numFormat.format((AktifJuml[AktifJuml.length-2])));
-	$("#TB_JlhAktifSelisih").text(numFormat.format(SelisihAktif)).addClass(SelAkInd);
+	$("#TB_JlhAktifSelisih").addClass(SelisihAktif<0 ? "text-success" : "text-danger");
+	$("#TB_JlhAktifSelisih>span").text(numFormat.format(SelisihAktif));
+	$("#TB_JlhAktifSelisih>i").addClass(SelisihAktif<0 ? "fa-angle-double-down" : "fa-angle-double-up");
 
 	await delay(500);
 	/*$.each(["Konf", "Semb", "Meng"], function(k,v) {
@@ -605,7 +659,9 @@ $(document).ready(async function(){
 	$("#TBA_KonfHighestDate").text(DateIndo(Tanggal[IndexH]));
 	$("#TBA_KonfLowest").text(numFormat.format($Arr_day[IndexL]));
 	$("#TBA_KonfLowestDate").text(DateIndo(Tanggal[IndexL]));
-	$("#TBA_KonfTrend").text($Trend[0]).addClass("text-"+$Trend[1]);
+	$("#TBA_KonfTrend").addClass("text-"+$Trend[1]);
+	$("#TBA_KonfTrend>span").text($Trend[0]);
+	$("#TBA_KonfTrend>i").addClass($Trend[2]);
 
 	var $Arr_day=SembBaru,
 	IndexH=Object.keys($Arr_day).reduce((a, b) => $Arr_day[a] > $Arr_day[b] ? a : b),
@@ -615,7 +671,9 @@ $(document).ready(async function(){
 	$("#TBA_SembHighestDate").text(DateIndo(Tanggal[IndexH]));
 	$("#TBA_SembLowest").text(numFormat.format($Arr_day[IndexL]));
 	$("#TBA_SembLowestDate").text(DateIndo(Tanggal[IndexL]));
-	$("#TBA_SembTrend").text($Trend[0]).addClass("text-"+$Trend[1]);
+	$("#TBA_SembTrend").addClass("text-"+$Trend[1]);
+	$("#TBA_SembTrend>span").text($Trend[0]);
+	$("#TBA_SembTrend>i").addClass($Trend[2]);
 	$("#TBA_CRR").text(numFormat.format(TingkSemb[TingkSemb.length-1])+"%");
 
 	var $Arr_day=MengBaru,
@@ -626,15 +684,17 @@ $(document).ready(async function(){
 	$("#TBA_MengHighestDate").text(DateIndo(Tanggal[IndexH]));
 	$("#TBA_MengLowest").text(numFormat.format($Arr_day[IndexL]));
 	$("#TBA_MengLowestDate").text(DateIndo(Tanggal[IndexL]));
-	$("#TBA_MengTrend").text($Trend[0]).addClass("text-"+$Trend[1]);
+	$("#TBA_MengTrend").addClass("text-"+$Trend[1]);
+	$("#TBA_MengTrend>span").text($Trend[0]);
+	$("#TBA_MengTrend>i").addClass($Trend[2]);
 	$("#TBA_CFR").text(numFormat.format(TingkMeng[TingkMeng.length-1])+"%");
 
-	var $Arr_day=TingkAktf,
+	var $Arr_day=AktifJuml,
 	IndexH=Object.keys($Arr_day).reduce((a, b) => Number($Arr_day[a]) > Number($Arr_day[b]) ? a : b),
 	IndexL=Object.keys($Arr_day).reduce((a, b) => Number($Arr_day[a]) < Number($Arr_day[b]) && $Arr_day[a]!==null ? a : b);
-	$("#TBA_AktfHighest").text(numFormat.format($Arr_day[IndexH])+"%");
+	$("#TBA_AktfHighest").text(numFormat.format($Arr_day[IndexH]));
 	$("#TBA_AktfHighestDate").text(DateIndo(Tanggal[IndexH]));
-	$("#TBA_AktfLowest").text($Arr_day[IndexL]===null?"0%" : numFormat.format($Arr_day[IndexL])+"%");
+	$("#TBA_AktfLowest").text(numFormat.format($Arr_day[IndexL]));
 	$("#TBA_AktfLowestDate").text(DateIndo(Tanggal[IndexL]));
 	$("#TBA_AktfPersen").text(numFormat.format(TingkAktf[TingkAktf.length-1])+"%");
 
@@ -656,7 +716,7 @@ var ChartStacked = new Chart(C_Stacked, {
 			data: KonfJuml,
 			borderWidth: 3,
 			borderColor: "#BF9000",
-			backgroundColor: "rgba(0,0,0,0)",
+			backgroundColor: 'rgba(0,0,0,0)',
 			type: 'line',
 			pointRadius: 0
 		},
@@ -665,51 +725,27 @@ var ChartStacked = new Chart(C_Stacked, {
 			data: MengJuml,
 			backgroundColor: 'rgba(192,0,0,.7)',
 			borderWidth: 0,
-			categoryPercentage: 1.0,
-			barPercentage: 1.0
+			categoryPercentage: 1,
+			barPercentage: 1
 		},
 		{
 			label: "Sembuh",
 			data: SembJuml,
 			backgroundColor: 'rgba(0,32,96,.7)',
 			borderWidth: 0,
-			categoryPercentage: 1.0,
-			barPercentage: 1.0
+			categoryPercentage: 1,
+			barPercentage: 1
 		},
 		{
 			label: "Aktif",
 			data: AktifJuml,
 			backgroundColor: "rgba(0,176,80,.7)",
 			borderWidth: 0,
-			categoryPercentage: 1.0,
-			barPercentage: 1.0
+			categoryPercentage: 1,
+			barPercentage: 1
 		}]
 	},
-	options: {
-		tooltips: {
-			enabled: true,
-			mode: 'index',
-			intersect: false,
-			callbacks: {
-				title: function(tooltipItems, data) {
-					var tgl=new Date(tooltipItems[0].xLabel);
-					return tgl.getDate()+" "+NamaBulan[tgl.getMonth()]+" "+tgl.getFullYear()+':';
-				}
-			}
-		},
-		hover: {
-			mode: "nearest",
-			intersect: true
-		},
-		scales: {
-			xAxes: [{stacked: true}],
-			yAxes: [{stacked: true}]
-		},
-		maintainAspectRatio: false,
-		aspectRatio: 1.5,
-		defaultFontFamily: "Roboto",
-		defaultFontSize: 14,
-	}
+	options: {interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {title: ct_title, label: ct_label}}}, scales: {x: {stacked: true, ticks: {callback: ct_xtgl}}, y: {stacked: true, ticks:{callback: ct_y, beginAtZero: true}}}, elements: {line: {tension: .5}}, maintainAspectRatio: false, aspectRatio: 1.5}
 });
 
 await delay(1500);
@@ -719,28 +755,28 @@ var ChartDRRate = new Chart(C_RateDR, {
 	data: {
 		labels: Tanggal,
 		datasets: [{
-			label: 'Sembuh (%)',
+			label: 'Sembuh',
 			data: TingkSemb,
 			backgroundColor: 'rgba(0,0,0,0)',
 			borderColor: '#002060',
 			borderWidth: 2
 		},
 		{
-			label: 'Meninggal (%)',
+			label: 'Meninggal',
 			data: TingkMeng,
 			backgroundColor: 'rgba(0,0,0,0)',
 			borderColor: '#C00000',
 			borderWidth: 2
 		},
 		{
-			label: "Kasus aktif (%)",
+			label: "Kasus aktif",
 			data: TingkAktf,
 			backgroundColor: 'rgba(0,0,0,0)',
 			borderColor: '#00B050',
 			borderWidth: 2
 		}]
 	},
-	options: DefChartOpt 
+	options: {interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {title: ct_title, label: ct_label_perc}}}, scales: {x: {stacked: true, ticks: {callback: ct_xtgl}}, y: {ticks:{callback: ct_y, beginAtZero: true}}}, elements: {point: {radius: 1}, line: {tension: .5}}, maintainAspectRatio: false, aspectRatio: 1.5} 
 });
 
 await delay(1500);
@@ -771,7 +807,7 @@ var ChartNewAll = new Chart(C_konf, {
 			borderWidth: 1
 		}]
 	},
-	options: DefChartOpt 
+	options: c_stdopt 
 });
 
 await delay(1500);
@@ -795,7 +831,7 @@ var ChartNewKonf = new Chart(C_NewKonf, {
 			borderWidth: 1
 		}]
 	},
-	options: DefChartOpt 
+	options: c_stdopt 
 });
 await delay(1500);
 $("#ChartNewSemb").siblings("div").remove();
@@ -818,7 +854,7 @@ var ChartNewSemb = new Chart(C_NewSemb, {
 			borderWidth: 1
 		}]
 	},
-	options: DefChartOpt 
+	options: c_stdopt 
 });
 await delay(1500);
 $("#ChartNewMeng").siblings("div").remove();
@@ -841,7 +877,7 @@ var ChartNewMeng = new Chart(C_NewMeng, {
 			borderWidth: 1
 		}]
 	},
-	options: DefChartOpt 
+	options: c_stdopt 
 });
 
 await delay(500);
@@ -878,7 +914,7 @@ $.each(Tanggal, function(k,v) {
 			col.push(DateIndo(new Date(start_tgl))+"<div class='small'>s.d.</div>"+DateIndo(new Date(tgl)));
 			$.each(["konf", "semb", "meng"], function(k,v) {
 				var perc_selisih = ((data[0][v].total-data[1][v].total)/data[1][v].total)*100;
-				var ind_html="<span class='text-"+ind[k][1]+" "+ind[k][2]+"'>"+numFormat.format(perc_selisih)+"%</span>";
+				var ind_html="<span class='text-"+ind[k][1]+" text-nowrap'><i class='fas "+ind[k][2]+"'></i> "+numFormat.format(perc_selisih)+"%</span>";
 				// Kolom 1 - Rata-rata
 				col.push(numFormat.format(data[0][v].total/7)+$PostMean);
 				// Kolom 2 - Indikator
