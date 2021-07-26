@@ -624,7 +624,7 @@ $(document).ready(async function(){
 	$("#TB_JlhSemb").text(numFormat.format(SembJuml[TanggalLen-1]));
 	$("#TB_JlhSembYest").text(JlhYestPre+numFormat.format(SembJuml[TanggalLen-2]));
 	$("#TB_JlhSembInc>span").text(numFormat.format(SembBaru[TanggalLen-1]));
-	$("#TB_JlhSembInc").addClass(SembBaru[TanggalLen-1]>(0.001*SembJuml[TanggalLen-1]) ? "text-danger" : "");
+	$("#TB_JlhSembInc").addClass(SembBaru[TanggalLen-1]>(0.001*SembJuml[TanggalLen-1]) ? "text-success" : "");
 
 	$("#TB_JlhMeng").text(numFormat.format(MengJuml[TanggalLen-1]));
 	$("#TB_JlhMengYest").text(JlhYestPre+numFormat.format(MengJuml[TanggalLen-2]));
