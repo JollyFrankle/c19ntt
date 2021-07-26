@@ -14,8 +14,9 @@
 	<meta http-equiv='expires' content='0'>
 	<meta http-equiv='pragma' content='no-cache'>
 	<title>JFP – Data Harian COVID-19 NTT</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" onload="if(media!='all')media='all'">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" onload="if(media!='all')media='all'">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167603452-2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
@@ -28,10 +29,12 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 	position: fixed;
 	left: 0;
 	right: 0;
-	top: 3.5rem;
+	top: 0;
 	bottom: 0;
 	background: #fff;
-	z-index: 10;
+	z-index: 1080;
+	width: 100vw;
+	height: 100vh;
 }
 #ToggleFS.fs-true {
 	position: fixed;
@@ -116,19 +119,12 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 			<li>Halaman ini memuat daftar kasus harian dari Briefing Satuan Tugas Penanganan COVID-19 Nusa Tenggara Timur. Data mungkin tidak 100% akurat, informasi pada situs Satgas mungkin diperbarui setelah pembaruan data di sistem ini.</li>
 		</ul>
 		<h4 class="border-bottom">Daftar isi</h4>
-		<div class="pl-4 mb-2">
+		<div class="pl-4 mb-3">
 			<div class="d-flex align-items-baseline" style="margin-left:-1.5rem">
 				<div style="width:1.5rem">1.</div>
 				<a class="h5 mb-1" href="#Bg1_Harian">Data Historis Provinsi NTT</a>
 			</div>
 			Perkembangan kasus COVID-19 harian untuk seluruh Nusa Tenggara Timur selama <span class="GET_day-html">...</span> terakhir. Terdapat pula jumlah pertambahan kasus selama satu pekan tersebut.
-		</div>
-		<div class="pl-4 mb-3">
-			<div class="d-flex align-items-baseline" style="margin-left:-1.5rem">
-				<div style="width:1.5rem">2.</div>
-				<a class="h5 mb-1" href="#Bg2_Excel">Data Historis Per Wilayah</a>
-			</div>
-			Salinan dari situs resmi COVID-19 NTT sejak April 2020 hingga saat ini.
 		</div>
 		<h4 class="border-bottom">Halaman lain</h4>
 		<div class="pl-4">
@@ -167,8 +163,8 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 	<p>Lambang warna yang ditampilkan di sebelah kanan indikator penambahan kasus merupakan indikator seberapa tingginya peningkatan kasus pada hari itu dibandingkan penambahan kasus terbanyak sepanjang <span class="GET_day-html">...</span> terakhir. Semakin gelap/<em>solid</em> warna, semakin tinggi peningkatan.</p>
 	<p>Perubahan 7 hari (Prb. 7 hari) dihitung dari rata-rata kasus 7 hari terakhir dan 7 hari terdahulu.</p>
 	<p class="mb-0"><strong>Tips:</strong> Tabel ini cukup panjang ke samping, gunakan arah panah (pada keyboard) untuk menavigasi atau masuk ke mode layar penuh.</p>
-	<p class="small">Untuk keluar mode layar penuh, klik pada tombol "Layar Penuh" yang akan ada di kanan atas layar.</p>
-	<button class="btn btn-sm btn-light fs-false" id="ToggleFS">Layar Penuh</button>
+	<p class="small">Untuk keluar mode layar penuh, klik pada tombol "Keluar Layar Penuh" pada layar bagian kanan atas.</p>
+	<button class="btn btn-sm btn-light fs-false" id="ToggleFS">Masuk Layar Penuh</button>
 </div>
 <div class="table-responsive mb-3" id="TblHarianWrapper">
 	<table class="table table-hover mb-0" id="TP_TblHarian" style="min-width:1250px">
@@ -198,58 +194,6 @@ body{font-family:"Roboto",sans-serif;}.chart-container{position:relative; min-wi
 			<tr><td colspan=10 class="text-center">Memuat data...</td></tr>
 		</tbody>
 	</table>
-</div>
-
-<div id="Bg2_Excel" class="anchor"></div>
-<h2 class="border-bottom"><small>2.</small> Data Historis Per Wilayah</h2>
-<div class="alert alert-info">
-	<p>Di bawah ini merupakan data historis per wilayah (Kabupaten/Kota) di NTT. Gunakan berbagai tab di bawah untuk melihat data historis yang dapat direkam selama bulan tersebut.</p>
-	<p class="mb-0">Data mulai konsisten direkam sejak 19 November 2020. Data April - Oktober 2020 hanya direkam sebagian. Daftar tanggal yang direkam selama April-Oktober 2020 adalah:</p>
-	<ul style="column-width:170px;margin-left:-1.25rem">
-		<li>27 April 2020</li>
-		<li>15 Mei 2020</li>
-		<li>1 Juni 2020</li>
-		<li>5 Juni 2020</li>
-		<li>20 Juni 2020</li>
-		<li>2 Juli 2020</li>
-		<li>15 Juli 2020</li>
-		<li>1 Agustus 2020</li>
-		<li>3 Agustus 2020</li>
-		<li>11 Agustus 2020</li>
-		<li>12 September 2020</li>
-		<li>30 September 2020</li>
-		<li>20 Oktober 2020</li>
-		<li>21 Oktober 2020</li>
-		<li>30 Oktober 2020</li>
-	</ul>
-	<p class="mb-0">Data sejak 19 November 2020 yang tidak dapat direkam karena tidak ada update dari situs resmi atau beberapa kendala adalah:</p>
-	<ul style="column-width:170px;margin-left:-1.25rem" class="mb-0">
-		<li>23 November 2020</li>
-		<li>27 November 2020</li>
-		<li>14 Desember 2020</li>
-		<li>20 Desember 2020</li>
-		<li>24 Desember 2020</li>
-		<li>25 Desember 2020</li>
-		<li>28 Desember 2020</li>
-		<li>14 Maret 2021</li>
-		<li>4-6 April 2021</li>
-		<li>8-13 April 2021</li>
-	</ul>
-</div>
-<ul class="nav nav-pills mb-3" id="NavDataExcel" style="flex-wrap:nowrap; overflow-x:auto; white-space:nowrap"></ul>
-<div style="width:100%;height:600px" class="position-relative">
-	<div class="d-flex align-items-center justify-content-center h-100 text-center">
-		<div>
-			<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="currentColor" class="mb-4" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/></svg>
-			<h6 class="mb-0">Klik pada salah satu bulan di atas untuk menampilkan data.</h6>
-			<p class="mb-1">Silakan tunggu beberapa saat hingga data selesai dimuat.</p>
-			<div class="small">Apabila halaman tidak dapat dimuat, berarti permintaan Anda ditolak oleh penyedia.</div>
-		</div>
-	</div>
-	<iframe style="width:100%;height:600px; position:absolute; top:0" frameborder="0" scrolling="no" id="DataExcel"></iframe>
-</div>
-<div class="bg-dark py-1 px-3 small text-light position-relative" style="margin-top:calc(-26px)">
-	Layanan Excel Online
 </div>
 
 <div id="TambahanInfo" class="alert"><h6 class="mb-1" id="TI_header"></h6><p class="mb-0 small" id="TI_text"></p></div>
@@ -301,11 +245,11 @@ Date.prototype.getWeekYear = function() {
 $("#ToggleFS").on("click",function(){
 	if($(this).hasClass("fs-true")) {
 		$("#TblHarianWrapper").removeClass("tbl-fs");
-		$("#ToggleFS").addClass("fs-false").removeClass("fs-true");
+		$("#ToggleFS").text("Masuk Layar Penuh").addClass("fs-false").removeClass("fs-true btn-dark");
 		$("body").css("overflow","auto");
 	} else {
 		$("#TblHarianWrapper").addClass("tbl-fs");
-		$("#ToggleFS").addClass("fs-true").removeClass("fs-false");
+		$("#ToggleFS").text("Keluar Layar Penuh").addClass("fs-true btn-dark").removeClass("fs-false");
 		$("body").css("overflow","hidden");
 	}
 });
@@ -376,12 +320,12 @@ function TrendInd(mode,val1,val2) {
 		var selisih = val1 - val2;
 		var perc = selisih / val2;
 		if(perc > 0) {
-			i="Meningkat "; l="logoinc";
+			i="Meningkat "; l="fa-chevron-circle-up";
 		}
 		if(perc < 0) {
-			i="Menurun "; l="logodec";
+			i="Menurun "; l="fa-chevron-circle-down";
 		}
-		if(perc===0) {i="Tidak ada perubahan";c="muted";l="logonet"}
+		if(perc===0) {i="Tidak ada perubahan";c="muted";l="fa-minus-circle"}
 	}
 	if(mode==1) {
 		if(perc > 0.5) {i+="tajam";c="danger"}
@@ -419,7 +363,7 @@ $ArrSB=SembBaru, $ArrSJ=SembJuml, $ArrS7=Semb7day,
 $ArrMB=MengBaru, $ArrMJ=MengJuml, $ArrM7=Meng7day,
 HL_KB = getMinMax($ArrKB), HL_SB = getMinMax($ArrSB), HL_MB = getMinMax($ArrMB),
 HL_K7 = getMinMax($ArrK7), HL_S7 = getMinMax($ArrS7), HL_M7 = getMinMax($ArrM7);
-var BulanTahun=[];
+/*var BulanTahun=[];
 $.each(Tanggal, function(key,val){
 	if(!BulanTahun.includes(val.substr(0,7))) {
 		BulanTahun.push(val.substr(0,7));
@@ -433,7 +377,7 @@ $(document).on("click", "#NavDataExcel a", function(){
 		$("#NavDataExcel a").removeClass("active");
 		$(this).addClass("active");
 	}
-});
+});*/
 $.each(Tanggal,function(key,val){
 	var PersAktf=(($ArrKJ[key]-($ArrSJ[key]+$ArrMJ[key]))/$ArrKJ[key])*100,
 	PAind = TrendInd(1, PersAktf, PersAktfYest);
@@ -449,18 +393,18 @@ $.each(Tanggal,function(key,val){
 	Col1="<td>"+DateIndo(val,2)+"</td>";
 
 	ColK1="<td><div class='flbet'><strong>"+numFormat.format($ArrKB[key]<0?$ArrKB[key]:"+"+$ArrKB[key])+"</strong><div class='rounded tbl-iti' style='background:"+HL_KBind+"'></div></div></td>";
-	ColK2="<td><div class='flbet'><div>+"+($ArrK7[key]!=null ? numFormat.format($ArrK7[key]) : " –")+"</div><div class='logoright text-"+K7dind[1]+" "+K7dind[2]+"'></div></div></td>";
+	ColK2="<td><div class='flbet'>+"+($ArrK7[key]!=null ? numFormat.format($ArrK7[key]) : " –")+"<i class='text-"+K7dind[1]+" fas "+K7dind[2]+"'></i></div></td>";
 	ColK3="<td>"+numFormat.format($ArrKJ[key])+"</td>";
 
 	ColS1="<td><div class='flbet'><strong>"+numFormat.format($ArrSB[key]<0?$ArrSB[key]:"+"+$ArrSB[key])+"</strong><div class='rounded tbl-iti' style='background:"+HL_SBind+"'></div></div></td>";
-	ColS2="<td><div class='flbet'><div>+"+($ArrS7[key]!=null ? numFormat.format($ArrS7[key]) : " –")+"</div><div class='logoright text-"+S7dind[1]+" "+S7dind[2]+"'></div></div></td>";
+	ColS2="<td><div class='flbet'>+"+($ArrS7[key]!=null ? numFormat.format($ArrS7[key]) : " –")+"<i class='text-"+S7dind[1]+" fas "+S7dind[2]+"'></i></div></td>";
 	ColS3="<td>"+numFormat.format($ArrSJ[key])+"</td>";
 
 	ColM1="<td><div class='flbet'><strong>"+numFormat.format($ArrMB[key]<0?$ArrMB[key]:"+"+$ArrMB[key])+"</strong><div class='rounded tbl-iti' style='background:"+HL_MBind+"'></div></div></td>";
-	ColM2="<td><div class='flbet'><div>+"+($ArrM7[key]!=null ? numFormat.format($ArrM7[key]) : " –")+"</div><div class='logoright text-"+M7dind[1]+" "+M7dind[2]+"'></div></div></td>";
+	ColM2="<td><div class='flbet'>+"+($ArrM7[key]!=null ? numFormat.format($ArrM7[key]) : " –")+"<i class='text-"+M7dind[1]+" fas "+M7dind[2]+"'></i></div></td>";
 	ColM3="<td>"+numFormat.format($ArrMJ[key])+"</td>";
 
-	ColA1="<td><div class='flbet'>"+numFormat.format(PersAktf)+"%<div class='logoright text-"+PAind[1]+" "+PAind[2]+"'></div></div></td>";
+	ColA1="<td><div class='flbet'>"+numFormat.format(PersAktf)+"%<i class='text-"+PAind[1]+" fas "+PAind[2]+"'></i></div></td>";
 	ColA2="<td>"+numFormat.format($ArrKJ[key]-($ArrSJ[key]+$ArrMJ[key]))+"</td>";
 	$("#TP_TblHarian tbody").prepend("<tr>"+Col1+ColK1+ColK2+ColK3+ColS1+ColS2+ColS3+ColM1+ColM2+ColM3+ColA1+ColA2+"</tr>");
 	$day++;
@@ -486,10 +430,10 @@ $.each(Tanggal,function(key,val){
 		var info_tgl = $day<7 ? "<div class='small'>Hanya menampilkan data "+$day+" hari terakhir</div>" : "";
 		ColRMTgl="<td><span class='text-info fw-500'>Pekan ke-"+tgl.getWeek()+" tahun "+tgl.getWeekYear()+"</span>"+info_tgl+"</td>";
 		ColNone="<td class='d-none'></td>";
-		ColRMKB="<td colspan=3><div class='flbet'><strong style='color:#BF9000'>+"+numFormat.format($RMK)+" ks.</strong><div class='flbet text-"+$RMKBavgInd[1]+"'>"+$RMKBavg+"<div class='logoright "+$RMKBavgInd[2]+"'></div></div></div></td>";
-		ColRMSB="<td colspan=3><div class='flbet'><strong style='color:#002060'>+"+numFormat.format($RMS)+" ks.</strong><div class='flbet text-"+$RMSBavgInd[1]+"'>"+$RMSBavg+"<div class='logoright "+$RMSBavgInd[2]+"'></div></div></div></td>";
+		ColRMKB="<td colspan=3><div class='flbet'><strong style='color:#BF9000'>+"+numFormat.format($RMK)+" ks.</strong><div class='text-"+$RMKBavgInd[1]+"'>"+$RMKBavg+" <i class='fas "+$RMKBavgInd[2]+"'></div></div></div></td>";
+		ColRMSB="<td colspan=3><div class='flbet'><strong style='color:#002060'>+"+numFormat.format($RMS)+" ks.</strong><div class='text-"+$RMSBavgInd[1]+"'>"+$RMSBavg+" <i class='fas "+$RMSBavgInd[2]+"'></div></div></div></td>";
 		//"<td colspan=3 style='color:#002060;text-align:left'>+<strong>"+$RMS+"</strong></td>";
-		ColRMMB="<td colspan=3><div class='flbet'><strong style='color:#C00000'>+"+numFormat.format($RMM)+" ks.</strong><div class='flbet text-"+$RMMBavgInd[1]+"'>"+$RMMBavg+"<div class='logoright "+$RMMBavgInd[2]+"'></div></div></div></td>";
+		ColRMMB="<td colspan=3><div class='flbet'><strong style='color:#C00000'>+"+numFormat.format($RMM)+" ks.</strong><div class='text-"+$RMMBavgInd[1]+"'>"+$RMMBavg+" <i class='fas "+$RMMBavgInd[2]+"'></div></div></div></td>";
 		//"<td colspan=3 style='color:#C00000;text-align:left'>+<strong>"+$RMM+"</strong></td>";
 		ColRMA="<td colspan=2 class='fw-500 text-secondary'>"+$RMAS_txt+" ks. aktif</td>";
 
@@ -499,7 +443,6 @@ $.each(Tanggal,function(key,val){
 	}
 	PersAktfYest=PersAktf;
 });
-console.log(BulanTahun);
 }
 </script>
 </body>
