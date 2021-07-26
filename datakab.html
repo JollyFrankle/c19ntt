@@ -14,8 +14,8 @@
 	<meta http-equiv='expires' content='0'>
 	<meta http-equiv='pragma' content='no-cache'>
 	<title>JFP – Data Per Wilayah</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" onload="if(media!='all')media='all'">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" onload="if(media!='all')media='all'">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167603452-2"></script>
 <script>
@@ -283,11 +283,17 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 	</div>
 </div>
 
-<div class="alert alert-info text-center" style="position:sticky;top:0;z-index:9">
-	<div class="d-inline-block">Data harian <strong class="tgl_data">Memuat...</strong>,</div>
-	<div class="d-inline-block">Terakhir diperbarui <strong class="LastMod">Memuat...</strong></div>
+<div class="alert alert-info py-2 px-3 d-block text-center d-md-flex justify-content-between align-items-center" style="position:sticky;top:0;z-index:9;font-size:14px;line-height:1.25;">
+	<div class="text-md-left">
+		<div>Data per tanggal <strong class="tgl_data">Memuat...</strong></div>
+		<div>Pembaruan <strong class="LastMod">Memuat...</strong></div>
+	</div>
+	<div class="text-md-right">
+		Status data: <span id="status_data" class="fw-500 badge badge-light" style="font-size: 1rem">• • •</span>
+	</div>
 </div>
 
+<div class="p-2 m-n2">
 <div class="row">
 	<div class="col-md-6 mb-3">
 		<div class="anchor" id="Bg21_Baru"></div>
@@ -323,10 +329,18 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 		</div>
 	</div>
 </div>
-<div class="small pb-3 text-muted text-center" id="disclaimer_tuntas">Data kasus tuntas yang ditampilkan di halaman ini adalah <strong>gabungan kasus sembuh dan meninggal</strong> (tidak disebutkan jumlah sembuh/meninggal, hanya disebutkan jumlah pasien yang sudah tidak lagi menjalani perawatan). Untuk informasi mengenai jumlah sembuh atau meninggal berdasarkan Kabupaten/Kota, kunjungi <a href="http://covid19.nttprov.go.id/home/data">situs resmi COVID-19 NTT</a> kemudian memilih Kabupaten/Kota sesuai keinginan Anda.</div>
+<div class="small text-muted text-center" id="disclaimer_tuntas">Data kasus tuntas yang ditampilkan di halaman ini adalah <strong>gabungan kasus sembuh dan meninggal</strong> (tidak disebutkan jumlah sembuh/meninggal, hanya disebutkan jumlah pasien yang sudah tidak lagi menjalani perawatan). Untuk informasi mengenai jumlah sembuh atau meninggal berdasarkan Kabupaten/Kota, kunjungi <a href="http://covid19.nttprov.go.id/home/data">situs resmi COVID-19 NTT</a> kemudian memilih Kabupaten/Kota sesuai keinginan Anda.</div>
+
+	<div class="border-top mt-2 px-2 py-1 small mx-n2 mb-n2 bg-dark text-light" id="ffss_footer" style="display: none">
+		<div class="d-flex align-items-center justify-content-between">
+			<strong><i class="fas fa-globe"></i> jollyfrankle.github.io</strong>
+			<span><i class="fab fa-twitter"></i> <i class="fab fa-github"></i> @JollyFrankle</span>
+		</div>
+	</div>
+</div>
 
 <div id="Bg3_Grafik" class="anchor"></div>
-<h4 class="text-center mb-1 mt-2">Perbandingan Kasus Positif</h4>
+<h4 class="text-center mb-1 mt-4">Perbandingan Kasus Positif</h4>
 <p class="text-center text-muted mb-0">Klik pada teks legenda (di atas grafik, di bawah tulisan ini) untuk menyaring data yang tampil.</p>
 <div class="chart-container" style="height:500px;width:600px;">
 	<div class="rounded">Memuat grafik...</div>
@@ -563,7 +577,7 @@ const numFormat = new Intl.NumberFormat('id-ID', {maximumFractionDigits: 2});
 var url = new URL(window.location.href);
 var tgl = url.searchParams.get("tgl");
 val_tgl = moment(tgl, 'YYYY-MM-DD', true).isValid();
-tgl_c = (val_tgl && moment(tgl).isSameOrAfter('2021-02-15')) ? tgl : "terkini";
+tgl_c = (val_tgl && moment(tgl).isSameOrAfter('2021-07-17')) ? tgl : null;
 
 function NolAwal(num, padlen) {
 	var pad_char = '0';
@@ -610,6 +624,11 @@ observer.observe(document.getElementById('MapContainer'), {
 	}
 });
 
+if(url.searchParams.get("ffss")=="true") {
+	$("#ffss_footer").show();
+	$("#TambahanInfo").remove();
+}
+
 $.ajax({
 	url:'https://jf.jollycomp.com/ajax/public.php',
 	data: {action: "datakab", tgl: tgl_c},
@@ -635,7 +654,7 @@ $.ajax({
 				$("#TI_text").html(data.peng.text);
 				$("#TambahanInfo").addClass("alert-"+(data.peng.type ?? "info")).show();
 			}
-			
+			$("#status_data").text(data.status_data.text).addClass("badge-"+data.status_data.color).removeClass("badge-light");
 		}
 		if(data.error) alert("[!] Data tidak dapat diambil:\n\nAlasan: "+data.text+"\n\nHubungi jollyfrankle3@gmail.com apabila Anda yakin ini kesalahan.");
 	},
@@ -785,7 +804,7 @@ const data_src = [
 	"Situs Resmi Satgas Provinsi melalui website (covid19.nttprov.go.id)",
 	"Rilis Satgas Kabupaten/Kota melalui Dinas Kominfo atau lembaga resmi lain",
 	"Rilis Resmi Satgas Kabupaten/Kota (melalui akun atau website Satgas)",
-	"Rilis Resmi Satgas Provinsi melalui Juru Bicara Marius Ardu Jelamu"
+	"<span class='fw-500 text-primary'>Rilis Resmi Satgas Provinsi melalui Juru Bicara Marius Ardu Jelamu</span>"
 ];
 $("#selDati2_show").on("click", function(){
 	var kab_id = $("#selDati2").val();
@@ -950,7 +969,10 @@ const c_label = function(context) {
 	if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y); }
 	return label;
 }
-var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {footer: footer, label: c_label}}}, scales: {x: {stacked: true}, y: {stacked: true, ticks:{beginAtZero: true}}}, maintainAspectRatio: false, aspectRatio: 1.5};
+const ct_y = function(v) {
+	return numFormat.format(v);
+}
+var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {footer: footer, label: c_label}}}, scales: {x: {stacked: true}, y: {stacked: true, ticks:{callback: ct_y, beginAtZero: true}}}, maintainAspectRatio: false, aspectRatio: 1.5};
 
 await delay(500);
 $(".map-fs-toggle").on("click", function() {
