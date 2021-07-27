@@ -5,7 +5,7 @@
 	<meta name="theme-color" content="#343a40">
 	<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
 	<link rel="icon" href="assets/icon.png" type="image/x-icon">
-	<meta name="description" content="Visualisasi data COVID-19 NTT dari 22 Kabupaten/Kota. Halaman ini menyajikan perkembangan data hari ini dari setiap Kabupaten/Kota.">
+	<meta name="description" content="Visualisasi data COVID-19 NTT dari 22 Kabupaten/Kota. Menyajikan trend/laju perkembangan kasus dari 22 Kabupaten/Kota di NTT.">
 	<meta name="keywords" content="Covid, Corona, Covid NTT, Covid19">
 	<meta name="author" content="Jolly Frankle">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,9 +13,15 @@
 	<meta http-equiv='cache-control' content='no-cache'>
 	<meta http-equiv='expires' content='0'>
 	<meta http-equiv='pragma' content='no-cache'>
-	<title>JFP – Penjelajah Data Wilayah</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" onload="if(media!='all')media='all'">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" onload="if(media!='all')media='all'">
+	<meta property="og:title" content="JFP: COVID-19 NTT Tracker – Trend Kasus Wilayah"/>
+	<meta property="og:description" content="Visualisasi data COVID-19 NTT dari 22 Kabupaten/Kota. Menyajikan trend/laju perkembangan kasus dari 22 Kabupaten/Kota di NTT."/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:image" content="https://jf.jollycomp.com/assets/featured.jpg"/>
+	<meta property="og:url" content="https://jollyfrankle.github.io/data-wil.html"/>
+
+	<title>JFP: COVID-19 NTT Tracker – Trend Kasus Wilayah</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap" >
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167603452-2"></script>
 <script>
 window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
@@ -24,39 +30,12 @@ window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(argumen
 body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-7rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday{padding-left:1.25rem;margin-bottom:0}.fw-500{font-weight: 500}.tbl-iti{width:24px;height:24px;margin-left:.25rem}
 #TambahanInfo {z-index: 1079; position: sticky; bottom: 0; max-height: 20vh; overflow-y: auto; margin-bottom: 0;}
 
-#MapContainer{height:500px;max-height:75vh}
-#MapContainer svg{overflow:auto;width:100%}
-#MapContainer svg path{cursor:pointer}
-#MapLegend{z-index:1;position:absolute;left:.5rem;bottom:.5rem;width:250px}
-#MapNav{position:absolute;bottom:.5rem;right:.5rem;width:670px;z-index:0;white-space:nowrap;display:flex}
-#MapHeader{position:absolute;top:.5rem;left:.5rem;right:.5rem;margin-bottom:0;z-index: 1;text-align: center;text-shadow: 2px 2px 2px white;line-height:1.25}
-#MapIndLeg{position: absolute;bottom: 3rem;right: .5rem;width:300px;user-select:none}
-#MapIndLeg>div {line-height:1;display:flex;justify-content:space-between;position:relative;font-size:80%}
-#MapIndLeg>div span:nth-child(2){position:absolute;width:100%;text-align:center}
-#MapIndCol{height:.5rem;border-radius:.25rem}
-#MapMobileNav{display:none}
-/*.ping-shake{animation:shake .75s cubic-bezier(.36,.07,.19,.97)}
-@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}*/
-.chart-container{position:relative; min-width:100%; max-width:100%; margin-bottom:1rem;}
-.chart-container div{position:absolute;width:100%;height:100%;text-align:center;display:flex;align-items:center;justify-content:center;background: var(--light)}
-@media (max-width: 991.98px) {
-	#MapLegend{bottom:3rem}
-}
-@media (max-width: 767.98px) {
-	#MapLegend{position:static;border-radius:0;width:calc(100% + 2px);margin:0 -1px;overflow:hidden}
-	#MapContainer{max-height:275px;height:50vh}
-	#MapIndLeg {position:static;width:calc(100% - 1rem);margin:-1.5rem .5rem .5rem}
-	#MapNav>.btn-group{width:100%}
-	#MapNav{position:static;width:100%;border-radius:0;display:block;white-space:normal}
-	#MapNav .input-group{display:none}
-	#MapMobileNav{display:block;position:absolute;right:.5rem;bottom:320px;width:60px;text-align:right}
-}
-#MapContainer::-webkit-scrollbar{display: none;}
 #tbl_trend_wil td:not(:first-child), #tbl_trend_wil tfoot th:not(:first-child) {text-align: center;} #tbl_trend_wil td:nth-child(1), #tbl_trend_wil td:nth-child(5), #tbl_trend_wil td:nth-child(9) {border-right: 1px solid #dee2e6}
 @media (max-width:576px) {.chart-container{max-height:45vh;}}
 </style>
 </head>
 <body>
+	<div style="opacity: 0; position: absolute; z-index: -1; top: 0; max-width: 1px; overflow: hidden"><img src="https://jf.jollycomp.com/assets/featured.jpg" width="1280" height="720"/></div>
 	<div class="justify-content-center align-items-center position-fixed" style="width:100vw;height:100vh;background:rgba(0,0,0,.5);top:0;left:0;display:flex;z-index:1080;user-select:none" id="spinner_loader">
 		<div class="text-center text-white">
 			<div class="spinner-grow text-white" style="width:5rem; height: 5rem" role="status">
@@ -373,7 +352,7 @@ $.each(data, function(k,v) {
 	$("#tbl_trend_wil tbody").append('<tr>'+Col1+ColP1+ColP2+ColP3+ColP4+ColT1+ColT2+ColT3+ColT4+ColA1+ColA2+'</tr>');
 });
 
-var templateTfoot = "#tbl_trend_wil tfoot th", Ptot_tren = TrendInd(1, total[0][0], total[0][1]), Ttot_tren = TrendInd(1, total[1][0], total[1][1]);
+var templateTfoot = "#tbl_trend_wil tfoot th", Ptot_tren = TrendInd(1, total[0][0], total[0][1]), Ttot_tren = TrendInd(2, total[1][0], total[1][1]);
 
 $("#ntt_pop").text(numFormat.format(totalPop));
 $(templateTfoot+":nth-child(2)").text(indPlusMin(total[0][0]));
