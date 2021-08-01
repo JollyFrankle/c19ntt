@@ -25,14 +25,15 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167603452-2"></script>
 <script>
-window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
+//window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
 </script>
 	<style>
-body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-3.5rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday, #SembCasesToday{padding-left:1.25rem;margin-bottom:0;list-style-type:square}.fw-500{font-weight:500}
+body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet::before{display:inline-block;font-size:14px;margin-right:.25rem}.logoinc::before{content:"▲"}.logodec::before{content:"▼"}.logonet::before{content:"–"}.logoright::before{margin-right:0;margin-left:.25rem;width:1rem;text-align:center}.card{overflow:hidden}.anchor{position:absolute;margin-top:-3.5rem;}#TP_TblHarian td:nth-child(2),#TP_TblHarian td:nth-child(4),#TP_TblHarian td:nth-child(6),#TP_TblHarian td:nth-child(8) {border-left:1px solid #dee2e6}.tbl-iti{width:24px;height:24px;margin-left:.25rem}.flbet{display:flex;justify-content:space-between;align-items:center}.info-kasus small{display:inline-block;width:80px}#ClosedCasesToday,#NewCasesToday, #SembCasesToday{padding-left:1.25rem;margin-bottom:0;list-style-type:square}.fw-500{font-weight:500}.fs-14{font-size: 14px}
 #TambahanInfo {z-index: 1079; position: sticky; bottom: 0; max-height: 20vh; overflow-y: auto; margin-bottom: 0;}
 #MapContainer{height:500px; max-height:75vh; cursor: grab; scrollbar-width: none} #MapContainer:active {cursor: grabbing;}
 #MapContainer svg{overflow:auto; width:100%}
-#MapContainer svg path{cursor:pointer}
+#MapContainer svg path:not(.no-select) {cursor: pointer; transition: .5s;}
+#MapContainer svg path:not(.no-select):not(.kab_selected):hover {filter: brightness(1.1) contrast(1.1);}
 #MapLegend{z-index:1;position:absolute;left:.5rem;bottom:.5rem;width:250px}
 #MapNav .dropdown-item { padding: .2rem .75rem; font-size: .875rem; }
 #MapNav .dropdown-header { padding: .3rem .75rem }
@@ -43,11 +44,16 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 #MapIndLeg>div span:nth-child(2){position:absolute;width:100%;text-align:center}
 #MapIndCol{height:.5rem;border-radius:.25rem}
 #MapMobileNav{display:none}
+.st-btn{display: inline-block!important;}.sharethis-inline-share-buttons{z-index: 1!important}
+.btn-share{display: none; width: 40px; height: 40px; border-radius: 20px; font-size: 14px; margin-left: .5rem}
 /*.ping-shake{animation:shake .75s cubic-bezier(.36,.07,.19,.97)}
 @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}*/
 .chart-container{position:relative; min-width:100%; max-width:100%; margin-bottom:1rem;}
 .chart-container div{position:absolute;width:100%;height:100%;text-align:center;display:flex;align-items:center;justify-content:center;background: var(--light)}
 .outline-white {text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;}
+#meta_dist>div {height: 500px; display: flex; flex-direction: column}
+#tbl_noupdate td:last-child{text-align: right; white-space: nowrap;} #tbl_noupdate td {vertical-align: top; font-size: 14px}
+#tbl_noupdate tr:not(:last-child) {border-bottom: 1px solid #dee2e6 }
 @media (max-width: 767.98px) {
 	#MapLegend{position:static;border-radius:0;width:calc(100% + 2px);margin:0 -1px;overflow:hidden}
 	#MapContainer{max-height:275px;height:50vh}
@@ -66,6 +72,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 	.map-fs #MapContainer {height: calc(100vh - 93px);}
 }
 </style>
+<noscript><style>body{overflow:hidden;}</style></noscript>
 </head>
 <body>
 	<div style="opacity: 0; position: absolute; z-index: -1; top: 0; max-width: 1px; overflow: hidden"><img src="https://jf.jollycomp.com/assets/featured.jpg" width="1280" height="720"/></div>
@@ -346,12 +353,39 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 	</div>
 </div>
 
+<div class="border-top border-bottom my-3 py-2 fs-14 text-center"> <!-- Placeholder for share buttons -->
+	<div class="mb-1">Bagikan informasi ini</div>
+	<div class="d-flex user-select-none justify-content-center">
+		<div class="sharethis-inline-share-buttons"></div>
+		<button class="btn btn-share btn-primary"><i class="fas fa-share-alt"></i></button>
+	</div>
+</div>
+
 <div id="Bg3_Grafik" class="anchor"></div>
-<h4 class="text-center mb-1 mt-4">Perbandingan Kasus Positif</h4>
-<p class="text-center text-muted mb-0">Klik pada teks legenda (di atas grafik, di bawah tulisan ini) untuk menyaring data yang tampil.</p>
-<div class="chart-container" style="height:500px;width:600px;">
-	<div class="rounded">Memuat grafik...</div>
-	<canvas id="c_konf"></canvas>
+<div id="meta_dist" class="form-row">
+	<div class="col-lg-9 col-md-8 mb-3">
+		<h5 class="text-center mb-1">Perbandingan Kasus Positif</h5>
+		<p class="text-center text-muted mb-0 fs-14">Klik pada teks legenda (di atas grafik, di bawah tulisan ini) untuk menyaring data yang tampil.</p>
+		<div class="chart-container mb-0" style="height:500px;width:600px;">
+			<div class="rounded">Memuat grafik...</div>
+			<canvas id="c_konf"></canvas>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-4 mb-3">
+		<h6 class="text-center">Daftar Kab/Kota tanpa pembaruan</h6>
+		<div class="position-relative" style="height: 100%; overflow-y: auto">
+			<table class="w-100" id="tbl_noupdate">
+				<thead class="bg-light" style="border-bottom: 2px solid #dee2e6">
+					<tr>
+						<th class="w-100">Nama</th>
+						<th class="text-nowrap text-right">Data terakhir</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<div class="small text-muted text-center">Catatan: data beberapa Kab/Kota diperbarui setelah rilis perdana. Data "hari ini" adalah data yang dirilis ke publik hingga pkl 07.00 WITA keesokan harinya</div>
+	</div>
 </div>
 
 <div class="text-center d-block d-md-flex justify-content-between align-items-center pb-3">
@@ -377,7 +411,38 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 		<canvas id="c_kont"></canvas>
 	</div>
 </div>
-
+<!--
+<div class="form-row" id="meta_dist">
+	<div class="col-md-6 col-lg-3 mb-3">
+		<h6 class="text-center" id="c_donat1_label">Distribusi kasus positif baru</h6>
+		<div class="chart-container mb-0" style="height:100%; width:300px;">
+			<div>Memuat grafik (berurutan)...</div>
+			<canvas id="c_donat1"></canvas>
+		</div>
+		<div class="small text-center text-muted">Klik/arahkan mouse ke atas grafik untuk melihat nama Kab/Kota.</div>
+		<div class="fs-14">
+			<div class="fw-500">J</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-lg-3 mb-3">
+		<h6 class="text-center" id="c_donat2_label">Distribusi kasus tuntas baru</h6>
+		<div class="chart-container mb-0" style="height:100%; width:300px;">
+			<div>Memuat grafik (berurutan)...</div>
+			<canvas id="c_donat2"></canvas>
+		</div>
+	</div>
+	<div class="col-md-6 col-lg-3 mb-3">
+		<h6 class="text-center" id="c_donat3_label">Distribusi kasus positif baru</h6>
+		<div class="chart-container mb-0" style="height:100%; width:300px;">
+			<div>Memuat grafik (berurutan)...</div>
+			<canvas id="c_donat3"></canvas>
+		</div>
+	</div>
+	<div class="col-md-6 col-lg-3 mb-3">
+		////////////
+	</div>
+</div>
+-->
 <div id="Bg4_Kasus" class="anchor"></div>
 <div class="mt-3 p-3 p-md-4 rounded mb-4 shadow d-block d-sm-flex align-items-center justify-content-between bg-white">
 	<div class="text-center text-sm-left">
@@ -397,7 +462,7 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 	</div>
 </div>
 <section id="iD2_wrapper" class="shadow bg-white rounded position-relative overflow-hidden" style="display: none">
-<div class="position-absolute bg-light align-items-center justify-content-center text-secondary" id="iD2_loader" style="z-index: 1100; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: flex">
+<div class="position-absolute bg-light align-items-center justify-content-center text-secondary" id="iD2_loader" style="z-index: 1078; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: flex">
 	<div class="spinner-border" role="status">
 		<span class="sr-only">Memuat...</span>
 	</div>
@@ -574,7 +639,9 @@ body{font-family:"Roboto",sans-serif;}.logoinc::before,.logodec::before,.logonet
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom-container@0.5.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0/chartjs-plugin-datalabels.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=610360f35e77f700194656e8&product=inline-share-buttons' async='async'></script>
 <script>
 const delay = ms => new Promise(res=>setTimeout(res,ms));
 const NamaBulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
@@ -586,17 +653,33 @@ var tgl = url.searchParams.get("tgl");
 val_tgl = moment(tgl, 'YYYY-MM-DD', true).isValid();
 tgl_c = (val_tgl && moment(tgl).isSameOrAfter('2021-07-17')) ? tgl : null;
 
+if(navigator.share) {
+	$(".btn-share").fadeIn();
+}
+$(".btn-share").on("click", function() {
+	navigator.share({
+		title: $("head>title").text(),
+		url: window.location.href
+	}).then(() => {
+		console.log('Share completed');
+	})
+	.catch(console.error);
+});
+
 function NolAwal(num, padlen) {
 	var pad_char = '0';
 	var pad = new Array(1 + padlen).join(pad_char);
 	return (pad + num).slice(-pad.length);
 }
 function DateIndo(d,mode) {var t=new Date(d);var o="";o=mode==2?NamaHari[t.getDay()]+", " : ""; o+=t.getDate()+" "+NamaBulan[t.getMonth()]+" "+t.getFullYear(); return o;}
+function dateIND_short(d) {var t=new Date(d);return NolAwal(t.getDate(), 2)+"-"+NolAwal(t.getMonth()+1,2)+"-"+t.getFullYear();}
 $.ajax({
 	url: "peta-ntt.svg",
 	dataType: 'html',
 	success: function(data){
 		$("#MapContainer").prepend(data);
+		$("#MapContainer svg path:not(.no-select)").prop("tabindex",0).prop("title", "AAA").data("toggle", "popover").data("trigger", "focus").tooltip();
+
 		var MapCon=document.getElementById('MapContainer');
 		$(".map-zoom").on("click",function() {
 			scale = svgPanZoomContainer.getScale(MapCon);
@@ -637,7 +720,7 @@ if(url.searchParams.get("ffss")=="true") {
 }
 
 $.ajax({
-	url:'https://jf.jollycomp.com/ajax/public.php',
+	url:'https://jf.jollycomp.com/ajax/realtime_public.php',
 	data: {action: "datakab", tgl: tgl_c},
 	method: "POST",
 	dataType: "json",
@@ -749,7 +832,7 @@ if(show_meng) {
 	$("#iD2_box2icon").addClass("fas fa-user-tag");
 }
 
-var arrKonfBaru=[], arrTuntBaru=[], arrMengBaru=[], H_KonfInc=0, H_KonfJlh=0, H_PerAkt=0, H_TuntInc=0, H_AktfJlh=0, preFiltered={"konf":[],"prob":[],"susp":[],"kont":[]}, list_kab=[], H_MengInc=0, H_CRR=0, H_CFR=0;
+var arrKonfBaru=[], arrTuntBaru=[], arrMengBaru=[], arrNoChange=[], H_KonfInc=0, H_KonfJlh=0, H_PerAkt=0, H_TuntInc=0, H_AktfJlh=0, preFiltered={"konf":[],"prob":[],"susp":[],"kont":[]}, list_kab=[], H_MengInc=0, H_CRR=0, H_CFR=0;
 $.each(data.dt_kab, function(k,v) {
 	$("#selDati2").append('<option value="'+k+'">'+v.nama+'</option>');
 	list_kab.push(v.nama);
@@ -772,6 +855,7 @@ $.each(data.dt_kab, function(k,v) {
 		if(SelKonfTun) arrTuntBaru.push([SelKonfTun,v.nama]);
 		preFiltered["konf"].push([v.konf.tot[0], ks_aktif, v.konf.tun[0], v.nama]);
 	}
+	if(v.tgl!=data.tgl_data) $("#tbl_noupdate tbody").append('<tr><td>'+v.nama+'</td><td>'+dateIND_short(v.tgl)+'</td></tr>');
 
 	preFiltered["prob"].push([v.prob.tot[0], v.prob.tot[0]-v.prob.tun[0], v.prob.tun[0], v.nama]);
 	preFiltered["susp"].push([v.susp.tot[0], v.susp.tot[0]-v.susp.tun[0], v.susp.tun[0], v.nama]);
@@ -789,21 +873,21 @@ $("#NewCasesToday, #ClosedCasesToday, #SembCasesToday").html("");
 if(show_meng) {
 	arrMengBaru.sort(compare);
 	$.each(arrMengBaru,function(key,val) {
-		val0 = val[0] < 0 ? val[0] : "+"+val[0];
+		val0 = val[0] < 0 ? numFormat.format(val[0]) : "+"+numFormat.format(val[0]);
 		$("#ClosedCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 	});
 	$.each(arrTuntBaru,function(key,val) {
-		val0 = val[0] < 0 ? val[0] : "+"+val[0];
+		val0 = val[0] < 0 ? numFormat.format(val[0]) : "+"+numFormat.format(val[0]);
 		$("#SembCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 	});
 } else {
 	$.each(arrTuntBaru,function(key,val) {
-		val0 = val[0] < 0 ? val[0] : "+"+val[0];
+		val0 = val[0] < 0 ? numFormat.format(val[0]) : "+"+numFormat.format(val[0]);
 		$("#ClosedCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 	});
 }
 $.each(arrKonfBaru,function(key,val) {
-	val0 = val[0] < 0 ? val[0] : "+"+val[0];
+	val0 = val[0] < 0 ? numFormat.format(val[0]) : "+"+numFormat.format(val[0]);
 	$("#NewCasesToday").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 });
 
@@ -839,7 +923,7 @@ $("#selDati2_show").on("click", function(){
 	var ind = indSelKs(dt.konf.tot[0], dt.konf.tot[1], 1);
 	if(ind[0]==true) {
 		$("#iD2_konf_diff").addClass("text-"+ind[3]);
-		$("#iD2_konf_diff>i").addClass(ind[2]); $("#iD2_konf_diff>span").text(ind[1]);
+		$("#iD2_konf_diff>i").addClass(ind[2]); $("#iD2_konf_diff>span").text(numFormat.format(ind[1]));
 	}
 
 	if(show_meng) {
@@ -848,21 +932,21 @@ $("#selDati2_show").on("click", function(){
 		var ind = indSelKs(dt.konf.tun[0]-dt.konf.men[0], dt.konf.tun[1]-dt.konf.men[1], 2);
 		if(ind[0]==true) {
 			$("#iD2_box1diff").addClass("text-"+ind[3]);
-			$("#iD2_box1diff>i").addClass(ind[2]); $("#iD2_box1diff>span").text(ind[1]);
+			$("#iD2_box1diff>i").addClass(ind[2]); $("#iD2_box1diff>span").text(numFormat.format(ind[1]));
 		}
 		// Box 2 (meninggal)
 		$("#iD2_box2num").text(numFormat.format(dt.konf.men[0]));
 		var ind = indSelKs(dt.konf.men[0], dt.konf.men[1], 1);
 		if(ind[0]==true) {
 			$("#iD2_box2diff").addClass("text-"+ind[3]);
-			$("#iD2_box2diff>i").addClass(ind[2]); $("#iD2_box2diff>span").text(ind[1]);
+			$("#iD2_box2diff>i").addClass(ind[2]); $("#iD2_box2diff>span").text(numFormat.format(ind[1]));
 		}
 		// Box 3 (aktif)
 		$("#iD2_box3num").text(numFormat.format(dt.konf.tot[0]-dt.konf.tun[0]));
 		var ind = indSelKs(dt.konf.tot[0]-dt.konf.tun[0], dt.konf.tot[1]-dt.konf.tun[1], 1);
 		if(ind[0]==true) {
 			$("#iD2_box3diff").addClass("text-"+ind[3]);
-			$("#iD2_box3diff>i").addClass(ind[2]); $("#iD2_box3diff>span").text(ind[1]);
+			$("#iD2_box3diff>i").addClass(ind[2]); $("#iD2_box3diff>span").text(numFormat.format(ind[1]));
 		}
 		// CFR dan CRR
 		$("#iD2_CRR").text(numFormat.format(((dt.konf.tun[0]-dt.konf.men[0])/dt.konf.tot[0])*100)+"%");
@@ -873,14 +957,14 @@ $("#selDati2_show").on("click", function(){
 		var ind = indSelKs(dt.konf.tun[0], dt.konf.tun[1], 1);
 		if(ind[0]==true) {
 			$("#iD2_box1diff").addClass("text-"+ind[3]);
-			$("#iD2_box1diff>i").addClass(ind[2]); $("#iD2_box1diff>span").text(ind[1]);
+			$("#iD2_box1diff>i").addClass(ind[2]); $("#iD2_box1diff>span").text(numFormat.format(ind[1]));
 		}
 		// Box 2
 		$("#iD2_box2num").text(numFormat.format(dt.konf.tot[0]-dt.konf.tun[0]));
 		var ind = indSelKs(dt.konf.tot[0]-dt.konf.tun[0], dt.konf.tot[1]-dt.konf.tun[1], 1);
 		if(ind[0]==true) {
 			$("#iD2_box2diff").addClass("text-"+ind[3]);
-			$("#iD2_box2diff>i").addClass(ind[2]); $("#iD2_box2diff>span").text(ind[1]);
+			$("#iD2_box2diff>i").addClass(ind[2]); $("#iD2_box2diff>span").text(numFormat.format(ind[1]));
 		}
 		// Box 3 & CFR-CRR --> disable
 		$("#iD2_col3").css("display", "none");
@@ -891,19 +975,19 @@ $("#selDati2_show").on("click", function(){
 		var ind = indSelKs(dt[v].tot[0], dt[v].tot[1], 1);
 		if(ind[0]==true) {
 			$("#iD2_"+v+"_diff").addClass("text-"+ind[3]);
-			$("#iD2_"+v+"_diff>i").addClass(ind[2]); $("#iD2_"+v+"_diff>span").text(ind[1]);
+			$("#iD2_"+v+"_diff>i").addClass(ind[2]); $("#iD2_"+v+"_diff>span").text(numFormat.format(ind[1]));
 		}
 		$("#iD2_"+v+"_b1num").text(numFormat.format(dt[v].tot[0]-dt[v].tun[0]));
 		var ind = indSelKs(dt[v].tot[0]-dt[v].tun[0], dt[v].tot[1]-dt[v].tun[1], 1);
 		if(ind[0]==true) {
 			$("#iD2_"+v+"_b1diff").addClass("text-"+ind[3]);
-			$("#iD2_"+v+"_b1diff>i").addClass(ind[2]); $("#iD2_"+v+"_b1diff>span").text(ind[1]);
+			$("#iD2_"+v+"_b1diff>i").addClass(ind[2]); $("#iD2_"+v+"_b1diff>span").text(numFormat.format(ind[1]));
 		}
 		$("#iD2_"+v+"_b2num").text(numFormat.format(dt[v].tun[0]));
 		var ind = indSelKs(dt[v].tun[0], dt[v].tun[1], 2);
 		if(ind[0]==true) {
 			$("#iD2_"+v+"_b2diff").addClass("text-"+ind[3]);
-			$("#iD2_"+v+"_b2diff>i").addClass(ind[2]); $("#iD2_"+v+"_b2diff>span").text(ind[1]);
+			$("#iD2_"+v+"_b2diff>i").addClass(ind[2]); $("#iD2_"+v+"_b2diff>span").text(numFormat.format(ind[1]));
 		}
 	});
 	$.each(dt.src, function(k,v) {
@@ -979,7 +1063,6 @@ const c_label = function(context) {
 const ct_y = function(v) {
 	return numFormat.format(v);
 }
-var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {footer: footer, label: c_label}}}, scales: {x: {stacked: true}, y: {stacked: true, ticks:{callback: ct_y, beginAtZero: true}}}, maintainAspectRatio: false, aspectRatio: 1.5};
 
 await delay(500);
 $(".map-fs-toggle").on("click", function() {
@@ -1019,8 +1102,8 @@ function TmplDataPeta(mode){
 	if(mode===2) {
 		title="Jumlah Kasus Kumulatif";
 		min = 0;
-		mid = (H_KonfJlh/2).toFixed(0); 
-		max = H_KonfJlh;
+		mid = numFormat.format((H_KonfJlh/2).toFixed(0)); 
+		max = numFormat.format(H_KonfJlh);
 		col = [191, 144, 0];
 		$.each(data.dt_kab,function(k,v){
 			per=v.konf.tot[0]/H_KonfJlh, text = numFormat.format(v.konf.tot[0]);
@@ -1038,23 +1121,11 @@ function TmplDataPeta(mode){
 			showDataPerWil(k, per, col, text);
 		});
 	}
-	/*if(mode===5) {
-		title="Persentase Kasus Tuntas";
-		min = numFormat.format((1-H_PerAkt)*100)+"%";
-		mid = numFormat.format((((1-H_PerAkt)/2)+0.5)*100)+"%"; 
-		max = "100%"
-		col = [0,32,96];
-		$.each(data.dt_kab,function(k,v){
-			per=1-(((v.konf.tot[0]-v.konf.tun[0])/v.konf.tot[0])/H_PerAkt);
-			$("#map_style").append("#MapContainer path._data"+k+"{fill:"+rgba2rgb([255, 255, 255],[0,32,96,per])+"!important}");
-			$("#MapContainer path._data"+k).data("kode",k);
-		});
-	}*/
 	if(mode===4) {
 		title="Jumlah Kasus Aktif";
 		min = 0;
-		mid = (H_AktfJlh/2).toFixed(0);
-		max = H_AktfJlh
+		mid = numFormat.format((H_AktfJlh/2).toFixed(0));
+		max = numFormat.format(H_AktfJlh)
 		col = [192,0,0];
 		$.each(data.dt_kab,function(k,v){
 			var per = (v.konf.tot[0]-v.konf.tun[0])/H_AktfJlh, text = numFormat.format(v.konf.tot[0]-v.konf.tun[0]);
@@ -1131,27 +1202,32 @@ $("#spinner_loader").fadeOut();
 
 $(document).on("click","#MapContainer svg path[class*=_data]",function(e){
 	var cldata = $(this).attr("class").match(/(_data)[0-9]*\w/g)[0];
-	if(cldata.slice(5)) {
-		//$("#MapContainer #peta_utama>#tmp_kab_selected").remove();
-		//$("#MapContainer #peta_utama").prepend('<g id="tmp_kab_selected">'+($('#MapContainer svg .'+cldata).prop("outerHTML"))+'</g>');
+	if(cldata.slice(5) && $(this).hasClass("kab_selected")==false) {
+		$("#MapContainer #peta_utama>#svg_selected .kab_selected").remove();
+		$('#MapContainer svg .'+cldata).clone().addClass("kab_selected").appendTo("#svg_selected");
 		var kode = cldata.slice(5);
-		$("#activewil").html("#MapContainer svg ."+cldata+"{filter: drop-shadow(2px 2px 0px var(--warning)) drop-shadow(-2px -2px 0 var(--warning)) drop-shadow(0 6px 0px var(--warning))}");
+		$("#activewil").html("#MapContainer svg ."+cldata+".kab_selected{filter: drop-shadow(-1px 0px 0 #ffc107) drop-shadow(1px -1px 0 #ffc107) drop-shadow(-1px 1px 0 #ffc107) drop-shadow(1px 4px 0 #ffc107);}");
 		var dt=data.dt_kab[kode];
 		$("#ml_kab").text(dt.nama);
 		$("#ml_anchor").data("kab", kode);
 	}
 });
-$("#ml_anchor").on("click", function(e){
+function scroll2view(e){
 	e.preventDefault();
 	$("#peta_supercont").removeClass("map-fs").data("fs", false);
 	$("body").css("overflow", "auto");
 	$('html,body').animate({scrollTop: $("#Bg4_Kasus").offset().top}, 1000);
-	var kode = $(this).data("kab");
+	var kode = $("#ml_anchor").data("kab");
 	if(kode>=0 && kode<=21) {
 		$("#selDati2").val(kode);
 		$("#selDati2_show").click();
 	}
-});
+}
+$("#ml_anchor").on("click", scroll2view);
+//$("#MapContainer svg path[class^='_data']").on("dblclick", scroll2view);
+
+Chart.defaults.font.family = "Roboto";
+var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {footer: footer, label: c_label}}}, scales: {x: {stacked: true}, y: {stacked: true, ticks:{callback: ct_y, beginAtZero: true}}}, maintainAspectRatio: false};
 
 await delay(1500);
 $("#c_konf").siblings("div").remove();
@@ -1164,7 +1240,7 @@ if(show_meng) {
 	];
 } else {
 	data_konf = [
-		{label: "Sembuh", data: ur_dati2.konf[2], backgroundColor: 'rgba(0,32,96,.7)', borderWidth: 0, categoryPercentage: .9},
+		{label: "Tuntas", data: ur_dati2.konf[2], backgroundColor: 'rgba(0,32,96,.7)', borderWidth: 0, categoryPercentage: .9},
 		{label: "Aktif", data: ur_dati2.konf[1], backgroundColor: 'rgba(0,176,80,.7)', borderWidth: 0, categoryPercentage: .9}
 	];
 }
@@ -1173,6 +1249,54 @@ var c_konf = new Chart(document.getElementById("c_konf").getContext("2d"), {
 	data: {labels: ur_dati2.konf[0], datasets: data_konf},
 	options: c_options
 });
+/*
+await delay(1500);
+$("#c_donat1").siblings("div").remove();
+var dt_donat1 = [[],[]], sum_sisa = 0;
+$.each(arrKonfBaru, function(k,v) {
+	if(dt_donat1[0].length<5 || arrKonfBaru.length==6) {
+		dt_donat1[0].push(v[0]);
+		dt_donat1[1].push(v[1]);
+	} else {
+		sum_sisa+=v[0];
+	}
+});
+if(sum_sisa!=0) {
+	dt_donat1[0].push(sum_sisa);
+	dt_donat1[1].push("Lainnya");
+}
+//console.log(dt_donat1);
+new Chart(document.getElementById("c_donat1").getContext("2d"), {
+	type: 'doughnut',
+	plugins: [ChartDataLabels],
+	data: {labels: dt_donat1[1], datasets: [
+		{
+			label: "Jumlah",
+			data: dt_donat1[0],
+			backgroundColor: ['rgba(191,144,0,.7)', 'rgba(191,144,0,.6)', 'rgba(191,144,0,.5)', 'rgba(191,144,0,.4)', 'rgba(191,144,0,.3)', 'rgba(191,144,0,.2)'],
+			datalabels: {
+				labels: {
+					value: {
+						padding: 4,
+						font: {weight: "500"},
+					}
+				}
+			}
+		}
+	]},
+	options: {
+		tooltip: {callbacks: {label: c_label}},
+		plugins: {legend: {display: false}, datalabels: {
+			clamp: true,
+			backgroundColor: '#f8f9fa',
+			padding: 0,
+			font: {family: "Roboto"},
+			color: '#212529',
+			backgroundColor: '#f8f9fa',
+			borderRadius: 4
+		}}, maintainAspectRatio: false
+	}
+});*/
 
 await delay(1500);
 $("#c_prob").siblings("div").remove();
@@ -1249,7 +1373,6 @@ var c_kont = new Chart(document.getElementById("c_kont").getContext("2d"), {
 	options: c_options
 });
 
-$("#TOC").slideDown();
 }
 </script>
 </body>
