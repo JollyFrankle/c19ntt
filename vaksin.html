@@ -893,13 +893,13 @@ $("#selDati2_show").on("click", function(){
 
 	// Batch penyuntikan vaksin + target per batch
 	$.each(dt.vaksin1.kat[0], function(k,v) {
-		console.log(k,v,data.batch);
+		//console.log(k,v,data.batch);
 		var tmp = $("#tmpBatch").html();
 		tmp = tmp.replace("{icon}", data.batch[k][1]).replace("{nama}", data.batch[k][0]).replace("{jumlah}", numFormat.format(v));
 		if(k in dt.target.batch) tmp = tmp.replace("{perc}", numFormat.format((v*100/dt.target.batch[k]))+"%");
 		else tmp = tmp.replace("{perc}", "");
 		if(dt.vaksin1.kat[1]!==null && k in dt.vaksin1.kat[1]) {
-			var ind = indSelKs(v, dt.vaksin1.tot[1][k], 1);
+			var ind = indSelKs(v, dt.vaksin1.kat[1][k], 1);
 			if(ind[0]==true) {
 				tmp = tmp.replace("{ind_color}", "text-"+ind[3])
 				.replace("{ind_class}", ind[2])
@@ -915,7 +915,7 @@ $("#selDati2_show").on("click", function(){
 		if(k in dt.target.batch) tmp = tmp.replace("{perc}", numFormat.format((v*100/dt.target.batch[k]))+"%");
 		else tmp = tmp.replace("{perc}", "");
 		if(dt.vaksin1.kat[1]!==null && k in dt.vaksin1.kat[1]) {
-			var ind = indSelKs(v, dt.vaksin2.tot[1][k], 1);
+			var ind = indSelKs(v, dt.vaksin2.kat[1][k], 1);
 			if(ind[0]==true) {
 				tmp = tmp.replace("{ind_color}", "text-"+ind[3])
 				.replace("{ind_class}", ind[2])
