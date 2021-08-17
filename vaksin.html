@@ -388,11 +388,11 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 </div>
 
 <div id="Bg3_Grafik" class="anchor"></div>
-		<h4 class="text-center mb-1">Perbandingan Kasus Positif</h4>
-		<p class="text-center text-muted mb-0">Klik pada teks legenda (di atas grafik, di bawah tulisan ini) untuk menyaring data yang tampil.</p>
-		<div class="chart-container mb-0" style="height:500px;width:600px;">
-			<div class="rounded">Memuat grafik...</div>
-			<canvas id="c_vax12"></canvas>
+<h4 class="text-center mb-1">Penyuntikan Dosis 1 dan 2 Relatif Target Wilayah</h4>
+<p class="text-center text-muted mb-0">Klik pada teks legenda (di atas grafik, di bawah tulisan ini) untuk menyaring data yang tampil.</p>
+<div class="chart-container mb-0" style="height:500px;width:600px;">
+	<div class="rounded">Memuat grafik...</div>
+	<canvas id="c_vax12"></canvas>
 </div>
 
 <div id="Bg4_Kasus" class="anchor"></div>
@@ -505,6 +505,9 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 	padding: 0;
 	list-style-type: none;
 }
+.list-column li {
+	break-inside: avoid
+}
 .list-batch li:not(:last-child) {
 	margin-bottom: .75rem;
 }
@@ -536,12 +539,58 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 				<ul class="list-batch" id="iD2_batchVax2"></ul>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-6 mb-3">
+		<div class="col-lg-4 mb-3">
 			<div class="rounded overflow-hidden bg-white shadow card-body h-100" style="border-top: .25rem solid #17a2b8;">
 				<h6 class="flbet">Target sasaran <i class="fas fa-user-tag"></i></h6>
 				<hr/>
 				<p class="text-justify">Vaksinasi Gotong–Royong tidak memiliki / mencantumkan target sasaran.</p>
-				<ul class="list-batch" id="iD2_batchTarget"></ul>
+				<ul class="list-batch list-column" style="column-width: 250px; column-gap: 2.5rem;" id="iD2_batchTarget"></ul>
+			</div>
+		</div>
+	</div>
+	<h6 class="my-3 text-center">ANALISIS LANJUTAN</h6>
+	<div class="form-row mb-n3">
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="rounded overflow-hidden bg-white shadow card-body h-100 text-center" style="border-top: .25rem solid #fd7e14;">
+				<div class="display-4 mb-2" id="iD2_al1_num">&ndash;</div>
+				<h6>Persentase penerima vaksin 1 yang telah menerima vaksin 2</h6>
+				<p class="mb-0">Secara kasar, <span id="iD2_al1_tx1"></span> dari 100 penerima vaksin pertama telah menerima juga suntikan kedua.</p>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="rounded overflow-hidden bg-white shadow card-body h-100 text-center" style="border-top: .25rem solid #fd7e14;">
+				<div class="display-4 mb-2" id="iD2_al2_num">&ndash;</div>
+				<h6>Persentase populasi yang telah divaksinasi penuh</h6>
+				<p class="mb-0">Guna mencapai treshold "<em>herd immunity"</em> (70%), dibutuhkan <span id="iD2_al2_tx1"></span> orang lagi yang mendapat vaksinasi lengkap.</p>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="rounded overflow-hidden bg-white shadow card-body h-100 text-center" style="border-top: .25rem solid #fd7e14;">
+				<div class="display-4 mb-2" id="iD2_al3_num">&ndash;</div>
+				<h6>Jumlah vaksin yang telah disuntikkan (dosis 1 & 2)</h6>
+				<p class="mb-0">Dari jumlah ini, sebanyak <span id="iD2_al3_tx1"></span> (<span id="iD2_al3_tx2"></span>) telah diberikan sebagai dosis pertama dan <span id="iD2_al3_tx3"></span> (<span id="iD2_al3_tx4"></span>) telah diberikan sebagai dosis kedua.</p>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="rounded overflow-hidden bg-white shadow card-body h-100 text-center" style="border-top: .25rem solid #fd7e14;">
+				<div class="display-4 mb-2" id="iD2_al4_num">&ndash;</div>
+				<h6>Sumbangan kab/kota terhadap progress vaksin 1 Provinsi NTT</h6>
+				<p class="mb-0">Seberapa banyak dari jumlah vaksinasi pertama yang telah diberikan di Provinsi NTT disumbangkan oleh kab/kota ini.</p>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 mb-3 d-none d-md-block">
+			<div class="d-flex align-items-center justify-content-center h-100 w-100">
+				<div class="text-center">
+					<img src="assets/icon.png" width="72" class="mb-2"/>
+					<div class="fw-500">JOLLYFRANKLE.GITHUB.IO</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="rounded overflow-hidden bg-white shadow card-body h-100 text-center" style="border-top: .25rem solid #fd7e14;">
+				<div class="display-4 mb-2" id="iD2_al5_num">&ndash;</div>
+				<h6>Sumbangan kab/kota terhadap progress vaksin 2 Provinsi NTT</h6>
+				<p class="mb-0">Seberapa banyak dari jumlah vaksinasi kedua yang telah diberikan di Provinsi NTT disumbangkan oleh kab/kota ini.</p>
 			</div>
 		</div>
 	</div>
@@ -660,7 +709,7 @@ if(url.searchParams.get("ffss")=="true") {
 }
 
 $.ajax({
-	url:'https://jf.jollycomp.com/ajax/realtime_public.php',
+	url:'https://jf.jollycomp.com/ajax/public.php',
 	data: {action: "vaksin", tgl: tgl_c},
 	method: "POST",
 	dataType: "json",
@@ -693,7 +742,7 @@ async function AJAX_Complete(data){
 function indSelKs(x,y,mode)
 {
 	var status=false, num=x-y, icon="fas fa-minus", color="muted";
-	if(num!= 0) status = true;
+	if(num!= 0 && !isNaN(num)) status = true;
 	if(num < 0) icon = "fas fa-angle-double-down";
 	if(num > 0) icon = "fas fa-angle-double-up";
 
@@ -727,7 +776,7 @@ function rgba2rgb(background, color) {
 	Math.floor((1 - alpha) * background[2] + alpha * color[2] + 0.5)+")";
 }
 
-var arrVax1inc=[], arrVax2inc=[], arrNoChange=[], H_Vax1inc=0, H_Vax2inc=0, H_AktfJlh=0, preFiltered={"vax":[]}, list_kab=[], totalVax1=0, totalVax2=0, total = {vax: [0, 0], pend: 0, target: 0}, H_vax1rate=0, H_vax2rate=0;
+var arrVax1inc=[], arrVax2inc=[], arrNoChange=[], H_Vax1inc=0, H_Vax2inc=0, H_AktfJlh=0, preFiltered={"vax":[]}, list_kab=[], totalVax1=0, totalVax2=0, total = {vax: [0, 0], pend: 0, target: 0}, H_vax1rate=0, H_vax2rate=0, tot_perc=[0,0];
 $.each(data.dt_kab, function(k,v) {
 	$("#selDati2").append('<option value="'+k+'">'+v.nama+'</option>');
 	list_kab.push(v.nama);
@@ -753,11 +802,12 @@ $.each(data.dt_kab, function(k,v) {
 	H_Vax2inc = newVax2 < H_Vax2inc ? H_Vax2inc : newVax2;
 	H_vax1rate = percVax1 < H_vax1rate ? H_vax1rate : percVax1;
 	H_vax2rate = percVax2 < H_vax2rate ? H_vax2rate : percVax2;
+
+	tot_perc[0]+=percVax1; tot_perc[1]+=percVax2;
 	//H_KonfJlh = v.konf.tot[0] < H_KonfJlh ? H_KonfJlh : v.konf.tot[0];
 	//H_PerAkt = (ks_aktif/v.konf.tot[0]) < H_PerAkt ? H_PerAkt : (ks_aktif/v.konf.tot[0]);
 	//H_AktfJlh = ks_aktif < H_AktfJlh ? H_AktfJlh : ks_aktif;
 });
-
 
 $("#vax1_NTT_sum").text(numFormat.format(total.vax[0]));
 $("#vax2_NTT_sum").text(numFormat.format(total.vax[1]));
@@ -784,11 +834,14 @@ $("#vax2incNTT").text("+"+numFormat.format(totalVax2)+" dosis");
 
 arrVax1inc.sort(compare); arrVax2inc.sort(compare);
 $("#boxVax1, #boxVax2").html("");
-$.each(arrVax1inc,function(key,val) {
+if(arrVax1inc.length==0) $("#boxVax1").append('<div class="bg-light rounded py-4 px-3 text-center">Tidak ada update</div>');
+else $.each(arrVax1inc,function(key,val) {
 	val0 = val[0] < 0 ? numFormat.format(val[0]) : "+"+numFormat.format(val[0]);
 	$("#boxVax1").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 });
-$.each(arrVax2inc,function(key,val) {
+
+if(arrVax2inc.length==0) $("#boxVax2").append('<div class="bg-light rounded py-4 px-3 text-center">Tidak ada update</div>');
+else $.each(arrVax2inc,function(key,val) {
 	val0 = val[0] < 0 ? numFormat.format(val[0]) : "+"+numFormat.format(val[0]);
 	$("#boxVax2").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 });
@@ -834,7 +887,9 @@ $("#selDati2_show").on("click", function(){
 	$("#iD2_target").text(numFormat.format(dt.target.total));
 	$("#iD2_pend").text(numFormat.format(dt.pend));
 
+	// Batch penyuntikan vaksin + target per batch
 	$.each(dt.vaksin1.kat[0], function(k,v) {
+		console.log(k,v,data.batch);
 		var tmp = $("#tmpBatch").html();
 		tmp = tmp.replace("{icon}", data.batch[k][1]).replace("{nama}", data.batch[k][0]).replace("{jumlah}", numFormat.format(v));
 		if(k in dt.target.batch) tmp = tmp.replace("{perc}", numFormat.format((v*100/dt.target.batch[k]))+"%");
@@ -873,11 +928,30 @@ $("#selDati2_show").on("click", function(){
 		$("#iD2_batchTarget").append(tmp);
 	});
 
+	// Analisis Lanjutan
+	$("#iD2_al1_num").text(numFormat.format(dt.vaksin2.tot[0]*100/dt.vaksin1.tot[0])+"%");
+	$("#iD2_al1_tx1").text(numFormat.format((dt.vaksin2.tot[0]*100/dt.vaksin1.tot[0]).toFixed(0)));
+
+	var percV2now = dt.vaksin2.tot[0]/dt.pend;
+	$("#iD2_al2_num").text(numFormat.format(percV2now*100)+"%");
+	if(percV2now < 0.7) // Herd immunity = 70% populasi
+		$("#iD2_al2_tx1").text("dibutuhkan "+numFormat.format(((0.7-percV2now)*dt.pend).toFixed(0)));
+	else $("#iD2_al2_tx1").text(0);
+
+	$("#iD2_al3_num").text(numFormat.format(dt.vaksin1.tot[0]+dt.vaksin2.tot[0]));
+	$("#iD2_al3_tx1").text(numFormat.format(dt.vaksin1.tot[0]));
+	$("#iD2_al3_tx2").text(numFormat.format(dt.vaksin1.tot[0]*100/(dt.vaksin1.tot[0]+dt.vaksin2.tot[0]))+"%");
+	$("#iD2_al3_tx3").text(numFormat.format(dt.vaksin2.tot[0]));
+	$("#iD2_al3_tx4").text(numFormat.format(dt.vaksin2.tot[0]*100/(dt.vaksin1.tot[0]+dt.vaksin2.tot[0]))+"%");
+
+	$("#iD2_al4_num").text(numFormat.format(dt.vaksin1.tot[0]*100/total.vax[0])+"%");
+	$("#iD2_al5_num").text(numFormat.format(dt.vaksin2.tot[0]*100/total.vax[1])+"%");
+
 	$("#iD2_wrapper").slideDown();
 });
 
 preFiltered.vax.sort(compare);
-console.log(preFiltered.vax);
+//console.log(preFiltered.vax);
 var ur_dati2={"vax":[[],[],[],[]]};
 $.each(["vax"], function(k1,v1) {
 	$.each(preFiltered[v1], function(k,v) {
@@ -941,7 +1015,7 @@ function TmplDataPeta(mode){
 	if(mode===2) {
 		title="Persen Telah Divaksinasi Dosis 1";
 		min = "0%";
-		mid = numFormat.format((H_vax1rate*100/2)*100)+"%"; 
+		mid = numFormat.format(H_vax1rate*100/2)+"%"; 
 		max = numFormat.format(H_vax1rate*100)+"%";
 		col = [32,201,151];
 		$.each(data.dt_kab,function(k,v){
@@ -962,9 +1036,9 @@ function TmplDataPeta(mode){
 	}
 	if(mode===4) {
 		title="Persen Telah Divaksinasi Dosis 2";
-		min = 0;
-		mid = numFormat.format((H_vax2rate*100/2).toFixed(0));
-		max = numFormat.format(H_vax2rate*100)
+		min = "0%";
+		mid = numFormat.format(H_vax2rate*100/2)+"%"; 
+		max = numFormat.format(H_vax2rate*100)+"%";
 		col = [0,123,255];
 		$.each(data.dt_kab,function(k,v){
 			per=(v.vaksin2.tot[0]/v.target.total)/H_vax2rate, text = numFormat.format((v.vaksin2.tot[0]/v.target.total)*100)+"%";
@@ -977,7 +1051,7 @@ function TmplDataPeta(mode){
 	$("#MapIndCol").css("background-image","linear-gradient(90deg, white, rgba("+col+"))");
 	$("#MapTitle").text(title);
 }
-//TmplDataPeta(4); // Default untuk peta = mode 3
+TmplDataPeta(2); // Default untuk peta
 $("[data-mapdata]").on("click",function(){
 	TmplDataPeta($(this).data("mapdata"));
 });
