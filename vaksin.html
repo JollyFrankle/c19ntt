@@ -108,7 +108,7 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 <nav class="mb-3 pb-3 border-bottom">
 	<div class="d-block d-md-inline-flex btn-group w-100">
 		<a class="btn btn-block btn-outline-dark mt-2" href="./">Ringkasan, Grafik, Tabel Pekanan</a>
-		<a class="btn btn-block btn-outline-dark">Data hari ini per Kab/Kota</a>
+		<a class="btn btn-block btn-outline-dark" href="datakab.html">Data hari ini per Kab/Kota</a>
 		<a class="btn btn-block btn-outline-dark" href="harian.html">Perkembangan data harian</a>
 		<a class="btn btn-block btn-outline-info" href="data-wil.html"><span class="badge badge-info">Prototype</span> Tren kasus per Wilayah</a>
 	</div>
@@ -850,6 +850,8 @@ else $.each(arrVax2inc,function(key,val) {
 	$("#boxVax2").append("<li><div class='flbet'>"+val[1]+"<strong>"+val0+"</strong></div></li>");
 });
 
+
+
 $("#selDati2_show").on("click", function(){
 	var kab_id = $("#selDati2").val();
 	//console.log(kab_id);
@@ -857,7 +859,10 @@ $("#selDati2_show").on("click", function(){
 		$("#iD2_wrapper").slideUp();
 		return false;
 	}
-	const dt=data.dt_kab[kab_id], dt_ntt=data.ntt;
+	const dt=data.dt_kab[kab_id];
+	document.title = "JFP: Data Vaksinasi "+dt.nama;
+	// Init GA -> ganti Kab = ganti halaman
+	window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-167603452-2');
 	// Inisialisasi
 	$("#iD2_kab").text(dt.nama);
 	$(".diff-ks").removeClass("text-danger text-success text-muted");
