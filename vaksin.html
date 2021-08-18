@@ -725,7 +725,7 @@ $.ajax({
 			$(".tgl_data").text(DateIndo(data.tgl_data));
 			$(".last_data").text(DateIndo(data.last_data));
 			$.each(data.tgl_ok, function(k,v) {
-				$("#sel_tgl").prepend('<a href="datakab.html?tgl='+v+'" class="btn btn-outline-primary m-1 '+(data.tgl_data==v ? "active" : "")+'">'+DateIndo(v)+'</a>');
+				$("#sel_tgl").prepend('<a href="vaksin.html?tgl='+v+'" class="btn btn-outline-primary m-1 '+(data.tgl_data==v ? "active" : "")+'">'+DateIndo(v)+'</a>');
 			});
 			//$("#spinner_loader").fadeOut(); // Pindah ke: SHORT__SPINNER_PETA
 			AJAX_Complete(data);
