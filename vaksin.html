@@ -17,7 +17,7 @@
 	<meta property="og:description" content="Detil informasi penggunaan vaksin di 22 Kab/Kota di NTT. Menyajikan detil perkembangan vaksinasi harian beserta analisis."/>
 	<meta property="og:type" content="website"/>
 	<meta property="og:image" content="https://jf.jollycomp.com/assets/featured.jpg"/>
-	<meta property="og:url" content="https://jollyfrankle.github.io/datakab.html"/>
+	<meta property="og:url" content="https://jollyfrankle.github.io/vaksin.html"/>
 
 	<title>JFP: COVID-19 Vaccine Dashboard</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" />
@@ -46,8 +46,6 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 #MapMobileNav{display:none}
 .st-btn{display: inline-block!important;}.sharethis-inline-share-buttons{z-index: 1!important}
 .btn-share{display: none; width: 40px; height: 40px; border-radius: 20px; font-size: 14px; margin-left: .5rem}
-/*.ping-shake{animation:shake .75s cubic-bezier(.36,.07,.19,.97)}
-@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}*/
 .chart-container{position:relative; min-width:100%; max-width:100%; margin-bottom:1rem;}
 .chart-container div{position:absolute;width:100%;height:100%;text-align:center;display:flex;align-items:center;justify-content:center;background: var(--light)}
 .outline-white {text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;}
@@ -241,7 +239,7 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 						<div><strong id="vax1_NTT_perc_pend">• • •</strong> dari jlh. penduduk</div>
 					</div>
 					<div class="text-center">
-						<div class="fw-500 diff-ks" id="vax1_NTT_diff"> <i></i> <span></span> </div>
+						<div class="fw-500" id="vax1_NTT_diff"> <i></i> <span></span> </div>
 					</div>
 				</div>
 			</div>
@@ -259,7 +257,7 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 						<div><strong id="vax2_NTT_perc_pend">• • •</strong> dari jlh. penduduk</div>
 					</div>
 					<div class="text-center">
-						<div class="fw-500 diff-ks" id="vax2_NTT_diff"> <i></i> <span></span> </div>
+						<div class="fw-500" id="vax2_NTT_diff"> <i></i> <span></span> </div>
 					</div>
 				</div>
 			</div>
@@ -353,7 +351,7 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 			<div class="card-body">
 				<h5 class="card-title mb-1">Penambahan penyuntikan dosis 1</h5>
 				<p class="mb-1 text-muted">Penyuntikan dosis pertama pada <span class="tgl_data">Memuat...</span>.</p>
-				<hr class="my-2"/>
+				<hr />
 				<div class="font-weight-bold flbet" style="color:#20c997">Nusa Tenggara Timur <span id="vax1incNTT"></span></div>
 				<ul id="boxVax1"><div class="bg-light rounded py-4 px-3 text-center">Memuat...</div></ul>
 			</div>
@@ -366,7 +364,7 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 			<div class="card-body">
 				<h5 class="card-title mb-1">Penambahan penyuntikan dosis 2</h5>
 				<p class="mb-1 text-muted">Penyuntikan dosis pertama pada per <span class="tgl_data">Memuat...</span>.</p>
-				<hr class="my-2"/>
+				<hr />
 				<div class="font-weight-bold flbet" style="color:#007bff">Nusa Tenggara Timur <span id="vax2incNTT"></span></div>
 				<ul id="boxVax2"><div class="bg-light rounded py-4 px-3 text-center">Memuat...</div></ul>
 			</div>
@@ -394,6 +392,23 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 <div id="Bg3_Grafik" class="anchor"></div>
 <h4 class="text-center mb-1">Penyuntikan Dosis 1 dan 2 Relatif Target Wilayah</h4>
 <p class="text-center text-muted mb-0">Klik pada teks legenda (di atas grafik, di bawah tulisan ini) untuk menyaring data yang tampil.</p>
+<div class="d-block text-center d-md-flex align-items-center justify-content-between">
+	<div class="mb-2 mb-md-0">
+		<div class="small mb-1">Tampilkan data:</div>
+		<div class="btn-group">
+			<button type="button" class="btn btn-sm btn-outline-primary gr-btn" data-switch="data" data-action="sum">Jumlah</button>
+			<button type="button" class="btn btn-sm btn-outline-primary gr-btn" data-switch="data" data-action="perc">Persentase</button>
+		</div>
+	</div>
+	<div>
+		<div class="small mb-1">Urutkan berdasarkan:</div>
+		<div class="btn-group">
+			<button type="button" class="btn btn-sm btn-outline-primary gr-btn" data-switch="filter" data-action="total">Jumlah</button>
+			<button type="button" class="btn btn-sm btn-outline-primary gr-btn" data-switch="filter" data-action="v1">Vaksin 1</button>
+			<button type="button" class="btn btn-sm btn-outline-primary gr-btn" data-switch="filter" data-action="v2">Vaksin 2</button>
+		</div>
+	</div>
+</div>
 <div class="chart-container mb-0" style="height:500px;width:600px;">
 	<div class="rounded">Memuat grafik...</div>
 	<canvas id="c_vax12"></canvas>
@@ -552,6 +567,21 @@ body{font-family:"Roboto",sans-serif;}.card{overflow:hidden}.anchor{position:abs
 			</div>
 		</div>
 	</div>
+<!--
+	<h6 class="my-3 text-center">GRAFIK PERBANDINGAN</h6>
+	<div class="form-row mb-n3">
+		<div class="col-lg-4 col-md-6 mb-3">
+			<div class="rounded overflow-hidden bg-white shadow card-body h-100" style="border-top: .25rem solid #20c997;">
+				<h6 class="flbet">Dosis pertama <i class="fas fa-check"></i></h6>
+				<hr/>
+				<div class="chart-container mb-0" style="height: 300PX; width:100%;">
+					<div>Memuat grafik (berurutan)...</div>
+					<canvas id="c_donat1"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>-->
+
 	<h6 class="my-3 text-center">ANALISIS LANJUTAN</h6>
 	<div class="form-row mb-n3">
 		<div class="col-lg-4 col-md-6 mb-3">
@@ -780,7 +810,7 @@ function rgba2rgb(background, color) {
 	Math.floor((1 - alpha) * background[2] + alpha * color[2] + 0.5)+")";
 }
 
-var arrVax1inc=[], arrVax2inc=[], arrNoChange=[], H_Vax1inc=0, H_Vax2inc=0, H_AktfJlh=0, preFiltered={"vax":[]}, list_kab=[], totalVax1=0, totalVax2=0, total = {vax: [0, 0], pend: 0, target: 0}, H_vax1rate=0, H_vax2rate=0, tot_perc=[0,0];
+var arrVax1inc=[], arrVax2inc=[], arrNoChange=[], H_Vax1inc=0, H_Vax2inc=0, H_AktfJlh=0, data_vax={"sum": [], "perc": []}, list_kab=[], totalVax1=0, totalVax2=0, total = {vax: [0, 0], pend: 0, target: 0}, H_vax1rate=0, H_vax2rate=0, tot_perc=[0,0];
 $.each(data.dt_kab, function(k,v) {
 	$("#selDati2").append('<option value="'+k+'">'+v.nama+'</option>');
 	list_kab.push(v.nama);
@@ -797,7 +827,12 @@ $.each(data.dt_kab, function(k,v) {
 	
 	if(v.tgl!=data.tgl_data) $("#tbl_noupdate tbody").append('<tr><td>'+v.nama+'</td><td>'+dateIND_short(v.tgl)+'</td></tr>');
 
-	preFiltered["vax"].push([v.vaksin1.tot[0]+v.vaksin2.tot[0], v.vaksin1.tot[0], v.vaksin2.tot[0], v.target.total, v.nama]);
+	//preFiltered["vax"].push([v.vaksin1.tot[0]+v.vaksin2.tot[0], v.vaksin1.tot[0], v.vaksin2.tot[0], v.target.total, v.nama]);
+	var tmp_data = {total: v.vaksin1.tot[0]+v.vaksin2.tot[0], v1: v.vaksin1.tot[0], v2: v.vaksin2.tot[0], target: v.target.total, kab: v.nama};
+	data_vax.sum.push(tmp_data);
+	data_vax.perc.push({total: tmp_data.total*100/v.target.total, v1: tmp_data.v1*100/v.target.total, v2: tmp_data.v2*100/v.target.total, target: 100, kab: tmp_data.kab});
+	delete tmp_data;
+	//data_vax.push([v.vaksin1.tot[0]+v.vaksin2.tot[0], v.vaksin1.tot[0], v.vaksin2.tot[0], v.target.total, v.nama]);
 
 	percVax1 = v.vaksin1.tot[0] / v.target.total;
 	percVax2 = v.vaksin2.tot[0] / v.target.total;
@@ -959,9 +994,9 @@ $("#selDati2_show").on("click", function(){
 	$("#iD2_wrapper").slideDown();
 });
 
-preFiltered.vax.sort(compare);
+//preFiltered.vax.sort(compare);
 //console.log(preFiltered.vax);
-var ur_dati2={"vax":[[],[],[],[]]};
+/*var ur_dati2={"vax":[[],[],[],[]]};
 $.each(["vax"], function(k1,v1) {
 	$.each(preFiltered[v1], function(k,v) {
 		ur_dati2[v1][0].push(v[4]); // Kabupaten 
@@ -969,22 +1004,9 @@ $.each(["vax"], function(k1,v1) {
 		ur_dati2[v1][2].push(v[2]); // Vaksin 2
 		ur_dati2[v1][3].push(v[3]); // Target
 	});
-});
+});*/
+
 //console.log(ur_dati2);
-const footer = (tooltipItems) => {
-	let sum = 0;
-	tooltipItems.forEach(function(tooltipItem) {sum += tooltipItem.parsed.y});
-	return 'Jumlah: ' + numFormat.format(sum);
-}
-const c_label = function(context) {
-	var label = context.dataset.label || '';
-	if (label) { label += ': '; }
-	if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y); }
-	return label;
-}
-const ct_y = function(v) {
-	return numFormat.format(v);
-}
 
 await delay(500);
 $(".map-fs-toggle").on("click", function() {
@@ -1092,22 +1114,92 @@ function scroll2view(e){
 }
 $("#ml_anchor").on("click", scroll2view);
 //$("#MapContainer svg path[class^='_data']").on("dblclick", scroll2view);
-
+const footer = (tooltipItems) => {
+	let sum = 0;
+	tooltipItems.forEach(function(tooltipItem) {sum += tooltipItem.parsed.y});
+	return 'Jumlah: ' + numFormat.format(sum);
+}
+const c_label = function(context) {
+	var label = context.dataset.label || '';
+	if (label) { label += ': '; }
+	if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y); }
+	return label;
+}
+const ct_y = function(v) {
+	return numFormat.format(v);
+}
+const ct_x = function(a,b,c) {
+	console.log(a,b,c);
+}
 Chart.defaults.font.family = "Roboto";
-var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {label: c_label}}}, scales: {x: {stacked: false}, y: {stacked: false, ticks:{callback: ct_y, beginAtZero: true}}}, elements: {line: {tension: 0}}, maintainAspectRatio: false};
-
+var c_options={interaction: {mode: 'index', intersect: false}, plugins: {tooltip: {callbacks: {label: c_label}}}, scales: {x: {stacked: false}, y: {stacked: false, ticks:{callback: ct_y, beginAtZero: true}}}, elements: {line: {tension: 0}}, maintainAspectRatio: false, parsing: {xAxisKey: 'kab'}, borderWidth: 1};
 await delay(1500);
+var gr_obj = [], gr_data = "sum", gr_filter = "total", c_vax12 = null;
+function updateGrafik(el=null) {
+	if(el!==null) {
+		if(el.data("switch")=="data") gr_data = el.data("action");
+		if(el.data("switch")=="filter") gr_filter = el.data("action");
+	}
+	$(".gr-btn").removeClass("active");
+	$(".gr-btn[data-switch='data'][data-action='"+gr_data+"']").addClass("active");
+	$(".gr-btn[data-switch='filter'][data-action='"+gr_filter+"']").addClass("active");
+
+	if(!gr_data || !gr_filter) return false;
+	gr_obj = JSON.parse(JSON.stringify([]));
+	gr_obj = data_vax[gr_data];
+	gr_obj.sort(function(a,b) {
+		if (a[gr_filter] > b[gr_filter]) return -1;
+		if (a[gr_filter] < b[gr_filter]) return 1;
+		return 0;
+	});
+	
+	var avgProv = []; avgProv_arr = [[],[]];
+	if(gr_data=="perc") {
+		avgProv[0] = total.vax[0]*100/total.target; avgProv[1] = total.vax[1]*100/total.target;
+		c_options.plugins.tooltip.callbacks.label = function(context) {
+			var label = context.dataset.label || '';
+			if (label) { label += ': '; }
+			if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y)+"%"; }
+			return label;
+		};
+		c_options.scales.y.ticks.callback = function(v) {return numFormat.format(v)+"%"};
+	} else if(gr_data=="sum") {
+		avgProv[0] = total.vax[0]/22; avgProv[1] = total.vax[1]/22;
+		c_options.plugins.tooltip.callbacks.label = function(context) {
+			var label = context.dataset.label || '';
+			if (label) { label += ': '; }
+			if (context.parsed.y !== null) { label += numFormat.format(context.parsed.y); }
+			return label;
+		};
+		c_options.scales.y.ticks.callback = function(v) {return numFormat.format(v)};
+	}
+	for(i=0; i<list_kab.length; i++) {
+		avgProv_arr[0].push(avgProv[0]);
+		avgProv_arr[1].push(avgProv[1]);
+	}
+	//console.log(avgProv);
+	var clr_v1 = 'rgba(32,201,151,.7)'; clr_v2 = 'rgba(0,123,255,.7)';
+	var cdata_vax = [
+		{label: "Vaksin 1", data: gr_obj, parsing: {yAxisKey: 'v1'}, scales: {x: {ticks: {callback: ct_x}}},backgroundColor: clr_v1, borderWidth: 0, categoryPercentage: .9, borderColor: clr_v1},
+		{label: "Vaksin 2", data: gr_obj, parsing: {yAxisKey: 'v2'}, backgroundColor: clr_v2, borderWidth: 0, categoryPercentage: .9, borderColor: clr_v2},
+		{type: "line", label: "Target", data: gr_obj, parsing: {yAxisKey: 'target'}, borderColor: 'rgba(52,58,64,.7)'},
+		{type: "line", label: "Rata-rata provinsi (vaksin 1)", data: avgProv_arr[0], pointRadius: 0, borderColor: clr_v1},
+		{type: "line", label: "Rata-rata provinsi (vaksin 2)", data: avgProv_arr[1], pointRadius: 0, borderColor: clr_v2}
+	];
+	if(c_vax12 !== null) {
+		c_vax12.data = {labels: [], datasets: cdata_vax};
+		c_vax12.options = c_options;
+		c_vax12.update();
+	}
+	else c_vax12 = new Chart(document.getElementById("c_vax12").getContext("2d"), {
+		type: 'bar',
+		data: {labels: [], datasets: cdata_vax},
+		options: c_options
+	});
+}
+$(".gr-btn").on("click", function(){updateGrafik($(this))});
 $("#c_vax12").siblings("div").remove();
-var data_vax = [
-	{label: "Vaksin 1", data: ur_dati2.vax[1], backgroundColor: 'rgba(32,201,151,.7)', borderWidth: 0, categoryPercentage: .9},
-	{label: "Vaksin 2", data: ur_dati2.vax[2], backgroundColor: 'rgba(0,123,255,.7)', borderWidth: 0, categoryPercentage: .9},
-	{type: "line", label: "Target", data: ur_dati2.vax[3], backgroundColor: 'rgb(52,58,64,.7)'}
-];
-var c_vax12 = new Chart(document.getElementById("c_vax12").getContext("2d"), {
-	type: 'bar',
-	data: {labels: ur_dati2.vax[0], datasets: data_vax},
-	options: c_options
-});
+updateGrafik();
 
 }
 </script>
